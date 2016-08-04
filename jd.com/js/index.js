@@ -18,8 +18,8 @@ function lunbo(){
 	var lBtn = document.getElementById('left');
 	var rBtn = document.getElementById('right');
 	var lunboBox = document.getElementById('lunbo');
-	var lunbos = document.getElementById('one').childNodes;
-	var lunboBtns = document.getElementById('two').childNodes;
+	var lunbos = document.getElementById('one').children;
+	var lunboBtns = document.getElementById('two').children;
 
 	var currentIndex = 0;
 
@@ -85,29 +85,22 @@ function lunbo(){
 
 }
 
-function isElement(el){
-	if(el.nodeType == 1){
-		return true;
-	}
-}
-
 function nextEl(els, index){
-	for (var i = index+1; i < els.length; i++) {
-		if(els[i].nodeType == 1){
-			return i;
-		}else if(i == els.length-1){
-			i = 0;
+	for (var i = index+1; i <= els.length; i++) {
+		if(i == els.length){
+			i = -1;
+			continue;
 		}
+		return i;
 	};
 }
 
 function prevEl(els, index){
-	for (var i = index-1; i >= 0; i--) {
-		if(els[i].nodeType == 1){
-			return i;
-		}else if(i == 0){
+	for (var i = index-1; i >= -1; i--) {
+		if(i == -1){
 			i = els.length-1;
 		}
+		return i;
 	};
 
 }
