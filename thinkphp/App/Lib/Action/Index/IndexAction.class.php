@@ -3,10 +3,34 @@
 class IndexAction extends Action{
 
 	public function index(){
-		echo C('username');
-		//b1($_SERVER);
-		a1($_SERVER);
-	}
+    	$user = M('user')->select();
+    	$this->assign('user',$user)->display();
+
+    }
+    public function add(){
+    	if(!IS_POST){
+    		//halt('no page');
+    		_404('no page');
+    	}
+    	$data = array(
+    		'id' => I('id'),
+    		'username' => I('username'),
+    		'time'=>time()
+    	);
+
+    	if(M('user')->data($data)->add()){
+    		$this->success('success!', 'index');
+    	}else{
+    		$this->error('error!');
+    	}
+    	
+    }
+    public function delete(){
+    	$rs = M('user')->where(array(
+    		'id'=>array('gt',0)
+    		))->delete();
+    	var_dump($rs);
+    }
 }
 
 ?>

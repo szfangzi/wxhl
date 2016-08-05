@@ -3,14 +3,8 @@
 class IndexAction extends Action {
     public function index(){
     	$user = M('user')->select();
-
-    	//echo U('show',array('uid'=>12,'username'=>'asda'), '',false, true);die;
     	$this->assign('user',$user)->display();
-  //   	p($_SERVER);
-  //   	die();
-		// $db = M('user');
-		// $rs = $db->select();
-		// dump($rs);
+
     }
     public function add(){
     	if(!IS_POST){
