@@ -12,6 +12,9 @@ class IndexAction extends Action{
     		//halt('no page');
     		_404('no page');
     	}
+    	if(!IS_AJAX){
+    		halt('no page');
+    	}
     	$data = array(
     		'id' => I('id'),
     		'username' => I('username'),
@@ -19,9 +22,13 @@ class IndexAction extends Action{
     	);
 
     	if(M('user')->data($data)->add()){
-    		$this->success('success!', 'index');
+    		// $this->success('success!', 'index');
+    		// echo json_encode(array('status'=>1, 'data'=>$data));
+    		$this->ajaxReturn(array('status'=>0, 'data'=>$data), 'json');
     	}else{
-    		$this->error('error!');
+    		// $this->error('error!');
+    		// echo json_encode(array('status'=>0));
+    		$this->ajaxReturn(array('status'=>0), 'json');
     	}
     	
     }

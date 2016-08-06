@@ -1,12 +1,12 @@
 <?php
 
-class IndexAction extends Action{
+class IndexAction extends CommonAction{
 
 	public function index(){
-		echo C('username');
-		b1($_SERVER);
-		a1($_SERVER);
+		$this->display();
 	}
+
+
 }
 
 ?>

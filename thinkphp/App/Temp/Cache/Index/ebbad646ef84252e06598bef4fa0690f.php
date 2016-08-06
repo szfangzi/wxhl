@@ -9,7 +9,7 @@
 	<ul>
 		<?php if(is_array($user)): foreach($user as $k=>$v): ?><li><?php echo ($v["id"]); ?> <?php echo ($v["username"]); ?> <?php echo (date('y-m-d H:i',$v["time"])); ?> <?php echo mt_rand(1,5);?></li><?php endforeach; endif; ?>
 	</ul>
-	<form action="<?php echo U('add');?>" method="post">
+	<form action="<?php echo U('Index/add');?>" method="post">
 		<input type="text" name="username">
 		<input type="text" name="id">
 		<label><?php echo ($a); ?></label>

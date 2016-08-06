@@ -7,5 +7,6 @@ return array(
     'DB_PREFIX'             => 'hd_',
     'URL_HTML_SUFFIX'=>'',
 	'TMPL_VAR_IDENTIFY'=>'array',
+	'TMPL_FILE_DEPR'=>'_',
 );
 ?>
