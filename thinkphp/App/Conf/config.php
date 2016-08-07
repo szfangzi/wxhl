@@ -8,5 +8,7 @@ return array(
     'URL_HTML_SUFFIX'=>'',
 	'TMPL_VAR_IDENTIFY'=>'array',
 	'TMPL_FILE_DEPR'=>'_',
+	'SESSION_TYPE'=>'Db',
+	//'SESSION_TYPE'=>'Redis',
 );
 ?>

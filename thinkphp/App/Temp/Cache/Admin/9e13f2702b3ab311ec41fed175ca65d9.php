@@ -1048,7 +1048,40 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT STARTS -->
-								
+								<form class="form-horizontal" role="form" method="post" action="<?php echo U('Admin/Posts/post');?>">
+									<input type="hidden" value="<?php echo ($_GET['id']); ?>" name="id">
+									<input type="hidden" value="<?php echo ($_GET['edit']); ?>" name="edit">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="postTitle"> 标题 </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="postTitle" name="post_title" value="<?php echo ($post["post_title"]); ?>" placeholder="postTitle" class="col-xs-10 col-sm-5">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="postContent"> 文章内容 </label>
+
+										<div class="col-sm-9">
+											<textarea class="form-control" style="max-width:41.666%;" id="postContent" name="post_content" placeholder="postContent"><?php echo ($post["post_content"]); ?></textarea>
+										</div>
+									</div>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Submit
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												Reset
+											</button>
+										</div>
+									</div>
+
+
+								</form>
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->

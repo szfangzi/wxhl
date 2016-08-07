@@ -3,7 +3,12 @@
 class LoginAction extends Action{
 
 	public function index(){
-		$this->display();
+		if(isset($_SESSION['uid']) && isset($_SESSION['username']) ){
+			$this->redirect('Admin/Index/index');
+		}else{
+			$this->display();
+		}
+		
 	}
 
 	public function verify(){
@@ -47,6 +52,12 @@ class LoginAction extends Action{
 			halt('no page');
 		}
 	
+	}
+
+	public function logout(){
+		session_unset();
+		session_destroy();
+		$this->redirect('Admin/Login/index');
 	}
 }
 
