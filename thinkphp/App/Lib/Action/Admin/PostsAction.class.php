@@ -40,7 +40,9 @@ class PostsAction extends CommonAction{
 			}
 
 			if($post){
-				$this->display('index');
+				$posts = M('posts')->where(array('post_author'=>session('uid')))->select();
+				//$this->assign('posts', $posts)->display('index');
+				$this->display();
 			}else{
 				$this->error('error');
 			}

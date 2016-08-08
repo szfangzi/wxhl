@@ -1,0 +1,40 @@
+<extend name="Public:base" />
+
+<block name="main">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet">
+<article>
+  <h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="1/">慢生活</a></h2>
+  <div class="bloglist">
+    <foreach name="posts" item='v' key='k'>
+    <div class="newblog">
+      <ul>
+        <h3><a href="/">{$v.post_title}</a></h3>
+        <div class="autor"><span>作者:{$v.post_author}</span><span>分类<a href="/"><!-- {$v.post_author} --></a></span><span>浏览（<a href="/">{$v.view_count}</a>）</span><span>评论（<a href="/">{$v.comment_count}</a>）</span></div>
+        <p>{$v.post_content}sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss...<a href="/" target="_blank" class="readmore">查看全文</a></p>
+      </ul>
+      <figure><img src="images/001.jpg" ></figure>
+      <div class="dateview">{$v.post_date|date='Y-m-d',###}</div>
+    </div>
+
+    </foreach>
+  </div>
+  <div class="page">
+<script type="text/javascript">
+  var xx = JSON.parse('{$page}');console.log(xx);
+</script>
+    <span title="Total record">共 <b>113</b> 条数据</span> 
+    <a href="javascript:;">&lt;</a><a href="javascript:;">&lt;&lt;</a>
+    <a href="javascript:;" class="on">1</a>
+    <a href="javascript:;">2</a>
+    <a href="javascript:;">3</a>
+    <a href="javascript:;">4</a>
+    <a href="javascript:;">5</a>
+    <a href="javascript:;">&gt;</a><a href="javascript:;">&gt;&gt;</a>
+  </div>
+</article>
+</block>
+<block name="aside"><include file="Public:listAside" /></block>
+
+
+
+
