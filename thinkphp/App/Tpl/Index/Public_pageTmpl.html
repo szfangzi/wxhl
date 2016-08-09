@@ -1,0 +1,42 @@
+<script id="pageTmpl" type="text/template">
+<% if(data){ %>
+<span title="Total record">共 <b><%=data.totalRows%></b> 条数据</span> 
+<% if(data.nowPage > 1){ %>
+<a href="javascript:;" id="firstPage">首页</a>
+<a href="javascript:;" id="prePage">上页</a>
+<% } %>
+<span id="numPage">
+<% 
+  var maxShowPage = 0,
+      minShowPage = 0;
+  if(data.nowPage <= 3){
+    if(data.totalPages <= 5){
+      maxShowPage = data.totalPages;
+    }else{
+      maxShowPage = 5;
+    }
+    minShowPage = 1;
+  }else{
+    maxShowPage = (data.nowPage + 2) > data.totalPages ? data.totalPages : (data.nowPage + 2);
+    if(data.totalPages - data.nowPage < 2){
+      minShowPage = data.totalPages - 4;
+    }else{
+      minShowPage = data.nowPage - 2;
+    }
+  }
+
+%>
+ 
+<% for(var i = minShowPage; i <= maxShowPage; i++){ %>
+    <a href="javascript:;" <% if(i == data.nowPage){ %> class="on" <% } %> p="<%=i%>"><%=i%></a>
+
+<% } %>
+</span>
+
+<% if(data.nowPage < data.totalPages){  %>
+<a href="javascript:;" id="nextPage">下页</a>
+<a href="javascript:;" id="lastPage">尾页</a>
+<% } %>
+
+<% } %>
+</script>

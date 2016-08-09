@@ -1,0 +1,103 @@
+<extend name="Public:base" />
+
+<block name="main">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet">
+<article>
+  <h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="1/">慢生活</a></h2>
+  <div class="bloglist">
+    <foreach name="posts" item='v' key='k'>
+    <div class="newblog">
+      <ul>
+        <h3><a href="/">{$v.post_title}</a></h3>
+        <div class="autor"><span>作者:{$v.post_author}</span><span>分类<a href="/"><!-- {$v.post_author} --></a></span><span>浏览（<a href="/">{$v.view_count}</a>）</span><span>评论（<a href="/">{$v.comment_count}</a>）</span></div>
+        <p>{$v.post_content}sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss...<a href="/" target="_blank" class="readmore">查看全文</a></p>
+      </ul>
+      <figure><img src="images/001.jpg" ></figure>
+      <div class="dateview">{$v.post_date|date='Y-m-d',###}</div>
+    </div>
+
+    </foreach>
+  </div>
+
+  <div id="page" class="page">
+    <span title="Total record">共 <b>{$page['totalRows']}</b> 条数据</span> 
+<if condition="$page.nowPage gt 1">
+<a href="javascript:;" id="firstPage">首页</a>
+<a href="javascript:;" id="prePage">上页</a>
+</if>
+<span id="numPage">
+<?php 
+  if($page['nowPage'] <= 3){  
+    if($page['totalPages'] <= 5){
+      $maxShowPage = $page['totalPages'];
+    }else{
+      $maxShowPage = 5;
+    }
+    $minShowPage = 1;
+  }else{
+    $maxShowPage = ($page['nowPage'] + 2) > $page['totalPages'] ? $page['totalPages'] : ($page['nowPage'] + 2);
+    if($page['totalPages'] - $page['nowPage'] < 2){
+      $minShowPage = $page['totalPages'] - 4;
+    }else{
+      $minShowPage = $page['nowPage'] - 2;
+    }
+    
+  }
+
+
+?>
+  <for start="$minShowPage" end="$maxShowPage+1">
+    <if condition="$i eq $page['nowPage']">
+      <a href="javascript:;" class="on" p="{$i}">{$i}</a>
+    <else />
+      <a href="javascript:;" p="{$i}">{$i}</a>
+    </if>
+  </for>
+</span>
+
+<?php if($page['nowPage'] < $page['totalPages']){  ?>
+<a href="javascript:;" id="nextPage">下页</a>
+<a href="javascript:;" id="lastPage">尾页</a>
+<?php } ?>
+  </div>
+
+</article>
+</block>
+<block name="aside"><include file="Public:listAside" /></block>
+<block name="script">
+  <script type="text/javascript">
+  var nowPage = "{$page['nowPage']}",
+      totalPages = "{$page['totalPages']}";
+
+  $('#page').on('click', '#firstPage', function(){
+    $.get("{:U('Index/List/index')}",{p:1},function(data){
+      console.log(data);
+      var pageTmpl = document.getElementById('pageTmpl').innerHTML;
+      var pageHtml = ejs.render(pageTmpl, { data: data });
+      $('#page').html(pageHtml);
+    });
+  }).on('click', '#lastPage', function(){
+    $.get("{:U('Index/List/index')}",{p:totalPages},function(data){
+      console.log(data);
+    });
+  }).on('click', '#prePage', function(){
+    $.get("{:U('Index/List/index')}",{p:totalPages},function(data){
+      console.log(data);
+    });
+  }).on('click', '#nextPage', function(){
+    $.get("{:U('Index/List/index')}",{p:totalPages},function(data){
+      console.log(data);
+    });
+  }).on('click', '#numPage a', function(){
+    var $this = $(this);
+    $.get("{:U('Index/List/index')}",{p:$this.attr('p')},function(data){
+      console.log(data);
+    });
+  });
+  
+  </script>
+</block>
+
+
+
+

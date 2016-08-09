@@ -18,14 +18,18 @@
     <h1>如影随形</h1>
     <h2>影子是一个会撒谎的精灵，它在虚空中流浪和等待被发现之间;在存在与不存在之间....</h2>
     <div class="logo"><a href="/"></a></div>
-    <nav id="topnav"><a href="{:U('Index/Index/index')}">首页</a><a href="about.html">关于我</a><a href="{:U('Index/List/index')}">慢生活</a></nav>
+    <nav id="topnav"><a href="{:U('Index/Index/index')}">首页</a><a href="{:U('Index/Index/about')}">关于我</a><a href="{:U('Index/List/index')}">慢生活</a></nav>
   </header>
 
 <block name="main"></block>
 <block name="aside"><include file="Public:aside" /></block>
-
-  <script src="__PUBLIC__/js/silder.js"></script>
-  <div class="clear"></div>
+	
+  	<div class="clear"></div>
+  	<script src="__PUBLIC__/js/jquery.min.js"></script>
+  	<script src="__PUBLIC__/js/ejs.min.js"></script>
+  	<script src="__PUBLIC__/js/common.js"></script>
+  	<script src="__PUBLIC__/js/silder.js"></script>
+  	<block name="script"></block>
 </div>
 </body>
 </html>

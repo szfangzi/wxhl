@@ -4,36 +4,93 @@
 <link href="__PUBLIC__/css/style.css" rel="stylesheet">
 <article>
   <h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="1/">慢生活</a></h2>
-  <div class="bloglist">
-    <foreach name="posts" item='v' key='k'>
-    <div class="newblog">
-      <ul>
-        <h3><a href="/">{$v.post_title}</a></h3>
-        <div class="autor"><span>作者:{$v.post_author}</span><span>分类<a href="/"><!-- {$v.post_author} --></a></span><span>浏览（<a href="/">{$v.view_count}</a>）</span><span>评论（<a href="/">{$v.comment_count}</a>）</span></div>
-        <p>{$v.post_content}sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss...<a href="/" target="_blank" class="readmore">查看全文</a></p>
-      </ul>
-      <figure><img src="images/001.jpg" ></figure>
-      <div class="dateview">{$v.post_date|date='Y-m-d',###}</div>
-    </div>
+  <div id="bloglist" class="bloglist"></div>
+  <div id="page" class="page"></div>
 
-    </foreach>
-  </div>
-  <div class="page">
-<script type="text/javascript">
-  var xx = JSON.parse('{$page}');console.log(xx);
-</script>
-    <span title="Total record">共 <b>113</b> 条数据</span> 
-    <a href="javascript:;">&lt;</a><a href="javascript:;">&lt;&lt;</a>
-    <a href="javascript:;" class="on">1</a>
-    <a href="javascript:;">2</a>
-    <a href="javascript:;">3</a>
-    <a href="javascript:;">4</a>
-    <a href="javascript:;">5</a>
-    <a href="javascript:;">&gt;</a><a href="javascript:;">&gt;&gt;</a>
-  </div>
 </article>
 </block>
 <block name="aside"><include file="Public:listAside" /></block>
+
+
+<block name="script">
+<include file="Public:listTmpl" />
+<include file="Public:pageTmpl" />
+
+  <script type="text/javascript">
+
+  var info = JSON.parse('{$info}');
+  var page = info.page,
+      nowPage = page.nowPage,
+      totalPages = page.totalPages;
+
+  getList(info);
+
+  function refreshPageData(newPage){
+    page = newPage;
+    nowPage = page.nowPage,
+    totalPages = page.totalPages;
+  }
+
+  function getList(data){
+    
+    var page = data.page,
+        posts = data.posts;
+
+    refreshPageData(page);
+
+    var listTmpl = document.getElementById('listTmpl').innerHTML;
+    var listHtml = ejs.render(listTmpl, { data: posts });
+    $('#bloglist').html(listHtml);
+
+    var pageTmpl = document.getElementById('pageTmpl').innerHTML;
+    var pageHtml = ejs.render(pageTmpl, { data: page });
+    $('#page').html(pageHtml);
+
+    $('body,html').animate({ scrollTop: 0 }, 800);
+  }
+
+  $('#page').on('click', '#firstPage', function(){
+    $.get("{:U('Index/List/index')}",{p:1},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#lastPage', function(){
+    $.get("{:U('Index/List/index')}",{p:totalPages},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#prePage', function(){
+    if(nowPage > 1){
+      var newPage = nowPage - 1;  
+    }
+    $.get("{:U('Index/List/index')}",{p:newPage},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#nextPage', function(){
+    if(nowPage < totalPages){
+      var newPage = nowPage + 1;
+    }
+    $.get("{:U('Index/List/index')}",{p:newPage},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#numPage a', function(){
+    var $this = $(this);
+    $.get("{:U('Index/List/index')}",{p:$this.attr('p')},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+      
+    });
+  });
+  
+  </script>
+</block>
 
 
 

@@ -8,6 +8,11 @@ class IndexAction extends Action{
 
     }
 
+    public function about(){
+
+		$this->display('about');
+	}
+
 }
 
 ?>

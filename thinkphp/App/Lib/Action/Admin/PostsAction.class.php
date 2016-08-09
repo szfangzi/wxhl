@@ -71,6 +71,22 @@ class PostsAction extends CommonAction{
 		}
 	}
 
+	public function post100(){
+		$now = time();
+		$post = M('posts');
+		for ($i=0; $i < 100; $i++) { 
+			$data = array(
+				'post_author'=>session('uid'),
+				'post_title'=>'asdasda'.mt_rand(1,1000000),
+				'post_content'=>'vvvvvvvvvvvvvvvvvvvvvvvvvvv'.mt_rand(1,1000000),
+				'post_date'=>$now,
+				'post_modified'=>$now,
+				);
+		
+			$post->add($data);
+		}
+	}
+
 }
 
 ?>

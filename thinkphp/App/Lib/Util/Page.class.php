@@ -23,15 +23,15 @@ class Page {
     // 起始行数
     public $firstRow    ;
     // 分页总页面数
-    protected $totalPages  ;
+    public $totalPages  ;
     // 总行数
-    protected $totalRows  ;
+    public $totalRows  ;
     // 当前页数
-    protected $nowPage    ;
+    public $nowPage    ;
     // 分页的栏的总页数
-    protected $coolPages   ;
+    public $coolPages   ;
     // 分页显示定制
-    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'最后一页','theme'=>' %totalRow% %header% %nowPage%/%totalPage% 页 %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+    protected $config  =    array('prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'最后一页','theme'=>'%header% %nowPage%/%totalPage% 页 %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
     // 默认分页变量名
     protected $varPage;
 
@@ -58,7 +58,7 @@ class Page {
             $this->nowPage  =   $this->totalPages;
         }
         $this->firstRow     =   $this->listRows*($this->nowPage-1);
-        if(!empty($url))    $this->url  =   $url; 
+        if(!empty($url))    $this->url  =   $url;
     }
 
     public function setConfig($name,$value) {
@@ -97,6 +97,9 @@ class Page {
             $parameter[$p]  =   '__PAGE__';
             $url            =   U('',$parameter);
         }
+
+        $header = '<span title="Total record">共'.$this->totalRows.'<b>页';
+
         //上下翻页字符串
         $upRow          =   $this->nowPage-1;
         $downRow        =   $this->nowPage+1;
@@ -147,7 +150,7 @@ class Page {
         }
         $pageStr     =   str_replace(
             array('%header%','%nowPage%','%totalRow%','%totalPage%','%upPage%','%downPage%','%first%','%prePage%','%linkPage%','%nextPage%','%end%'),
-            array($this->config['header'],$this->nowPage,$this->totalRows,$this->totalPages,$upPage,$downPage,$theFirst,$prePage,$linkPage,$nextPage,$theEnd),$this->config['theme']);
+            array($header,$this->nowPage,$this->totalRows,$this->totalPages,$upPage,$downPage,$theFirst,$prePage,$linkPage,$nextPage,$theEnd),$this->config['theme']);
         return $pageStr;
     }
 

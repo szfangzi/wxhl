@@ -191,8 +191,10 @@ _display: block;
 
 .w{width:1210px;margin:0 auto;position:relative;}
 .w .logo{width:360px;height:60px;padding:20px 0;float:left;}
-.w .search{float:left;margin-top:30px;}
-.w .search .text{float:left;height:24px;line-height:24px;padding:4px;border-width:2px 0 2px 2px;border-color:#b61d1d;border-style:solid;font-size:14px;font-family:"microsoft yahei";width:455px;outline:0;color: rgb(153, 153, 153);}
+.w .search{float:left;margin-top:30px;position: relative;}
+.w .search .text{float:left;height:24px;line-height:24px;padding:4px;border-width:2px 0 2px 2px;border-color:#b61d1d;border-style:solid;font-size:14px;font-family:"microsoft yahei";width:455px;outline:0;}
+.w .search .text.adText{color: rgb(153, 153, 153);}
+#searchInputLabel{cursor:text;color: rgb(153, 153, 153);position: absolute;left: 10px;top: 10px;}
 .w .search .button{float:left;width:82px;height:36px;background:#b61d1d;border:none;color:#fff;font-size:16px;}
 .w .right{width:75px;height:34px;border:1px solid #dfdfdf;padding:0 28px 0 34px;text-align:center;line-height:34px;float:right;margin-right:65px;margin-top:30px;font-size:12px;position:relative;}
 .w .right .gw-left{position:absolute;top:8px;left:17px;}

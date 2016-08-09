@@ -25,7 +25,7 @@ a.readmore { color: #f55f77; margin-left: 10px; font-weight: bold }
 .page a b { color: #999; }
 .page>b, .page a { margin: 0 2px; height: 26px; line-height: 26px; border-radius: 50%; width: 26px; text-align: center; display: inline-block }
 .page a { margin: 0 2px; height: 26px; line-height: 26px; border-radius: 50%; width: 26px; text-align: center; display: inline-block }/* Õë¶ÔIE6 */
-.page>b, .page a:hover { background: #333; color: #FFF; }
+.page>b, .page a:hover, .page #numPage a.on{ background: #333; color: #FFF; }
 .page a { color: #F33; border: #999 1px solid; }
 .rnav { width: 120px; margin: 20px auto; overflow: hidden; }
 .rnav li { width: 120px; text-align: center; display: inline-block; margin-bottom: 2px; height: 40px; line-height: 40px }

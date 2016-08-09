@@ -18,49 +18,28 @@
     <h1>如影随形</h1>
     <h2>影子是一个会撒谎的精灵，它在虚空中流浪和等待被发现之间;在存在与不存在之间....</h2>
     <div class="logo"><a href="/"></a></div>
-    <nav id="topnav"><a href="<?php echo U('Index/Index/index');?>">首页</a><a href="about.html">关于我</a><a href="<?php echo U('Index/List/index');?>">慢生活</a></nav>
+    <nav id="topnav"><a href="<?php echo U('Index/Index/index');?>">首页</a><a href="<?php echo U('Index/Index/about');?>">关于我</a><a href="<?php echo U('Index/List/index');?>">慢生活</a></nav>
   </header>
 
 
 <link href="__PUBLIC__/css/style.css" rel="stylesheet">
 <article>
   <h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="1/">慢生活</a></h2>
-  <div class="bloglist">
-    <?php if(is_array($posts)): foreach($posts as $k=>$v): ?><div class="newblog">
-      <ul>
-        <h3><a href="/"><?php echo ($v["post_title"]); ?></a></h3>
-        <div class="autor"><span>作者:<?php echo ($v["post_author"]); ?></span><span>分类<a href="/"><!-- <?php echo ($v["post_author"]); ?> --></a></span><span>浏览（<a href="/"><?php echo ($v["view_count"]); ?></a>）</span><span>评论（<a href="/"><?php echo ($v["comment_count"]); ?></a>）</span></div>
-        <p><?php echo ($v["post_content"]); ?>sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss...<a href="/" target="_blank" class="readmore">查看全文</a></p>
-      </ul>
-      <figure><img src="images/001.jpg" ></figure>
-      <div class="dateview"><?php echo (date('Y-m-d',$v["post_date"])); ?></div>
-    </div><?php endforeach; endif; ?>
-  </div>
-  <div class="page">
-<script type="text/javascript">
-  var xx = JSON.parse('<?php echo ($page); ?>');console.log(xx);
-</script>
-    <span title="Total record">共 <b>113</b> 条数据</span> 
-    <a href="javascript:;">&lt;</a><a href="javascript:;">&lt;&lt;</a>
-    <a href="javascript:;" class="on">1</a>
-    <a href="javascript:;">2</a>
-    <a href="javascript:;">3</a>
-    <a href="javascript:;">4</a>
-    <a href="javascript:;">5</a>
-    <a href="javascript:;">&gt;</a><a href="javascript:;">&gt;&gt;</a>
-  </div>
+  <div id="bloglist" class="bloglist"></div>
+  <div id="page" class="page"></div>
+
 </article>
 
 <aside>
     <div class="rnav">
-      <li class="rnav1 "><a href="/">ÈÕ¼Ç</a></li>
-      <li class="rnav2 "><a href="/">ÐÀÉÍ</a></li>
-      <li class="rnav3 "><a href="/">³ÌÐòÈËÉú</a></li>
-      <li class="rnav4 "><a href="/">¾­µäÓïÂ¼</a></li>
+      <li class="rnav1 "><a href="/">日记</a></li>
+      <li class="rnav2 "><a href="/">欣赏</a></li>
+      <li class="rnav3 "><a href="/">程序人生</a></li>
+      <li class="rnav4 "><a href="/">经典语录</a></li>
     </div>
     <div class="ph_news">
       <h2>
-        <p>µã»÷ÅÅÐÐ</p>
+        <p>点击排行</p>
       </h2>
       <ul class="ph_n">
         <li><span class="num1">1</span><a href="/">ÓÐÒ»ÖÖË¼Äî£¬ÊÇµ­µ­µÄÐÒ¸£,Ò»¸öÐÄÇéÒ»ÐÐÎÄ×Ö</a></li>
@@ -74,7 +53,7 @@
         <li><span>9</span><a href="/">»¨ÆøÏ®ÈËÊÇ¾ÆÏã¡ª¸öÈËÍøÕ¾Ä£°å</a></li>
       </ul>
       <h2>
-        <p>À¸Ä¿ÍÆ¼ö</p>
+        <p>栏目推荐</p>
       </h2>
       <ul>
         <li><a href="/">ÓÐÒ»ÖÖË¼Äî£¬ÊÇµ­µ­µÄÐÒ¸£,Ò»¸öÐÄÇéÒ»ÐÐÎÄ×Ö</a></li>
@@ -88,7 +67,7 @@
         <li><a href="/">»¨ÆøÏ®ÈËÊÇ¾ÆÏã¡ª¸öÈËÍøÕ¾Ä£°å</a></li>
       </ul>
       <h2>
-        <p>×îÐÂÆÀÂÛ</p>
+        <p>最新评论</p>
       </h2>
       <ul class="pl_n">
         <dl>
@@ -133,23 +112,161 @@
         </dl>
       </ul>
       <h2>
-        <p>×î½ü·Ã¿Í</p>
+        <p>最近访客</p>
         <ul>
-          <img src="__PUBLIC__/images/vis.jpg"><!-- Ö±½ÓÊ¹ÓÃ¡°¶àËµ¡±²å¼þµÄµ÷ÓÃ´úÂë -->
+          <img src="__PUBLIC__/images/vis.jpg">
         </ul>
       </h2>
     </div>
     <div class="copyright">
       <ul>
         <p> Design by <a href="/">DanceSmile</a></p>
-        <p>ÊñICP±¸11002373ºÅ-1</p>
+        <p>蜀ICP备11002373号-1</p>
         </p>
       </ul>
     </div>
   </aside>
+	
+  	<div class="clear"></div>
+  	<script src="__PUBLIC__/js/jquery.min.js"></script>
+  	<script src="__PUBLIC__/js/ejs.min.js"></script>
+  	<script src="__PUBLIC__/js/common.js"></script>
+  	<script src="__PUBLIC__/js/silder.js"></script>
+  	
+<script id="listTmpl" type="text/template">
+<% if(data.length){ %>
+<% data.forEach(function(v,k){ %>
+<div class="newblog">
+  <ul>
+    <h3><a href="/"><%=v.post_title%></a></h3>
+    <div class="autor"><span>作者:<%=v.post_author%></span><span>分类<a href="/"><!-- <%=v.post_author%> --></a></span><span>浏览（<a href="/"><%=v.view_count%></a>）</span><span>评论（<a href="/"><%=v.comment_count%></a>）</span></div>
+    <p><%=v.post_content%>sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss...<a href="/" target="_blank" class="readmore">查看全文</a></p>
+  </ul>
+  <figure><img src="images/001.jpg" ></figure>
+  <div class="dateview"><%=Util.toDate(v.post_date*1000)%></div>
+</div>
+<% }); %>
+<% } %>
+</script>
+<script id="pageTmpl" type="text/template">
+<% if(data){ %>
+<span title="Total record">共 <b><%=data.totalRows%></b> 条数据</span> 
+<% if(data.nowPage > 1){ %>
+<a href="javascript:;" id="firstPage">首页</a>
+<a href="javascript:;" id="prePage">上页</a>
+<% } %>
+<span id="numPage">
+<% 
+  var maxShowPage = 0,
+      minShowPage = 0;
+  if(data.nowPage <= 3){
+    if(data.totalPages <= 5){
+      maxShowPage = data.totalPages;
+    }else{
+      maxShowPage = 5;
+    }
+    minShowPage = 1;
+  }else{
+    maxShowPage = (data.nowPage + 2) > data.totalPages ? data.totalPages : (data.nowPage + 2);
+    if(data.totalPages - data.nowPage < 2){
+      minShowPage = data.totalPages - 4;
+    }else{
+      minShowPage = data.nowPage - 2;
+    }
+  }
 
-  <script src="__PUBLIC__/js/silder.js"></script>
-  <div class="clear"></div>
+%>
+ 
+<% for(var i = minShowPage; i <= maxShowPage; i++){ %>
+    <a href="javascript:;" <% if(i == data.nowPage){ %> class="on" <% } %> p="<%=i%>"><%=i%></a>
+
+<% } %>
+</span>
+
+<% if(data.nowPage < data.totalPages){  %>
+<a href="javascript:;" id="nextPage">下页</a>
+<a href="javascript:;" id="lastPage">尾页</a>
+<% } %>
+
+<% } %>
+</script>
+
+
+  <script type="text/javascript">
+
+  var info = JSON.parse('<?php echo ($info); ?>');
+  var page = info.page,
+      nowPage = page.nowPage,
+      totalPages = page.totalPages;
+
+  getList(info);
+
+  function refreshPageData(newPage){
+    page = newPage;
+    nowPage = page.nowPage,
+    totalPages = page.totalPages;
+  }
+
+  function getList(data){
+    
+    var page = data.page,
+        posts = data.posts;
+
+    refreshPageData(page);
+
+    var listTmpl = document.getElementById('listTmpl').innerHTML;
+    var listHtml = ejs.render(listTmpl, { data: posts });
+    $('#bloglist').html(listHtml);
+
+    var pageTmpl = document.getElementById('pageTmpl').innerHTML;
+    var pageHtml = ejs.render(pageTmpl, { data: page });
+    $('#page').html(pageHtml);
+
+    $('body,html').animate({ scrollTop: 0 }, 800);
+  }
+
+  $('#page').on('click', '#firstPage', function(){
+    $.get("<?php echo U('Index/List/index');?>",{p:1},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#lastPage', function(){
+    $.get("<?php echo U('Index/List/index');?>",{p:totalPages},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#prePage', function(){
+    if(nowPage > 1){
+      var newPage = nowPage - 1;  
+    }
+    $.get("<?php echo U('Index/List/index');?>",{p:newPage},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#nextPage', function(){
+    if(nowPage < totalPages){
+      var newPage = nowPage + 1;
+    }
+    $.get("<?php echo U('Index/List/index');?>",{p:newPage},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#numPage a', function(){
+    var $this = $(this);
+    $.get("<?php echo U('Index/List/index');?>",{p:$this.attr('p')},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+      
+    });
+  });
+  
+  </script>
+
 </div>
 </body>
 </html>
