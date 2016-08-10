@@ -21,7 +21,7 @@ class ListAction extends Action{
         			$this->error();
         		}
         	}else{
-        		$this->info = json_encode(array('posts'=>$posts, 'page'=>$page));//p($this->info);die;
+        		$this->info = json_encode(array('posts'=>$posts, 'page'=>$page));
         		$this->display();
         	}
     	}else{
@@ -30,6 +30,21 @@ class ListAction extends Action{
 
     }
 
+    public function detail(){
+
+        //$post = M('posts')->where( array('id'=>I('id')))->find();
+
+        $id = I('id');
+        //本页 上一页 下一页
+        $sqlText = '(SELECT * from hd_posts where post_modified > (SELECT post_modified FROM hd_posts where id = '.$id.') order by post_modified ASC limit 1) UNION (SELECT * from hd_posts where id = '.$id.' order by post_modified DESC limit 1) UNION (SELECT * from hd_posts where post_modified < (SELECT post_modified FROM hd_posts where id = '.$id.') order by post_modified DESC limit 1)';
+        $posts = M()->query('call getPreNextPosts('.$id.')');//p($posts);die;
+        $this->post = $posts[1];
+        $this->postPre = $posts[0]['id'] == $posts[1]['id'] ? false : $posts[0];
+        $this->postNext = $posts[2]['id'] == $posts[1]['id'] ? false : $posts[2];//p($posts[2]->id == $posts[1]->id ? false : $posts[2]);die;
+        $this->display();
+    }
+
 }
 
 ?>
+
