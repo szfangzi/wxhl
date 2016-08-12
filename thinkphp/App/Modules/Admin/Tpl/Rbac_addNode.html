@@ -1,0 +1,85 @@
+<extend name="Public:base" />
+<block name="main">
+<div class="page-header">
+	<h1>
+		权限管理
+		<small>
+			<i class="ace-icon fa fa-angle-double-right"></i>
+			添加节点
+		</small>
+	</h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT STARTS -->
+		<form class="form-horizontal" role="form" method="post" action="{:U('Admin/Rbac/addNode')}">
+			<input type="hidden" value="{$id}" name="id">
+			<input type="hidden" value="{$pid}" name="pid">
+			<input type="hidden" value="{$level}" name="level">
+			<input type="hidden" value="{$edit}" name="edit">
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="name"> {$type}名称 </label>
+
+				<div class="col-sm-9">
+					<input type="text" id="name" name="name" value="{$node.name}" placeholder="nodeName" class="col-xs-10 col-sm-5">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="nodeTitle"> {$type}描述 </label>
+
+				<div class="col-sm-9">
+					<textarea class="form-control" style="max-width:41.666%;" id="nodeTitle" name="title" placeholder="nodeTitle">{$node.title}</textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"> 是否开启 </label>
+
+				<div class="col-sm-9">
+					<label class="pull-left inline">
+						<input id="nodeSwitchBtn" type="checkbox" class="ace ace-switch ace-switch-5" name="status">
+						<span class="lbl middle"></span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="nodeSort"> 排序 </label>
+
+				<div class="col-sm-9">
+					<input type="text" id="nodeSort" name="sort" value="{$node.sort}" placeholder="nodeSort" class="col-xs-10 col-sm-5">
+				</div>
+			</div>
+			<div class="clearfix form-actions">
+				<div class="col-md-offset-3 col-md-9">
+					<button class="btn btn-info" type="submit">
+						<i class="ace-icon fa fa-check bigger-110"></i>
+						Submit
+					</button>
+
+					&nbsp; &nbsp; &nbsp;
+					<button class="btn" type="reset">
+						<i class="ace-icon fa fa-undo bigger-110"></i>
+						Reset
+					</button>
+				</div>
+			</div>
+
+
+		</form>
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+</block>
+
+<block name="script">
+
+  <script type="text/javascript">
+
+	if("{$node['status']}" == 1 || "{$node['status']}" == ''){
+		$('#nodeSwitchBtn').attr('checked' , 'checked');
+  	}else{
+  		$('#nodeSwitchBtn').removeAttr('checked');
+  	}
+ 
+  </script>
+</block>

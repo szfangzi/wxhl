@@ -1,0 +1,364 @@
+<!-- 左侧导航 start -->
+<ul class="nav nav-list">
+	<li <?php if(MODULE_NAME=='Posts'){ ?> class="active" <?php } ?> >
+		<a href="index.html" class="dropdown-toggle">
+			<i class="menu-icon fa fa-tachometer"></i>
+			<span class="menu-text"> 文章管理 </span>
+
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+
+		<b class="arrow"></b>
+
+		<ul class="submenu">
+			<li <?php if(MODULE_NAME=='Posts' && ACTION_NAME=='index'){ ?> class="active" <?php } ?> >
+				<a href="{:U('Admin/Posts/index')}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					所有文章
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li <?php if(MODULE_NAME=='Posts' && ACTION_NAME=='post'){ ?> class="active" <?php } ?> >
+				<a href="{:U('Admin/Posts/post')}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					写文章
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
+	</li>
+
+	<li <?php if(MODULE_NAME=='Rbac'){ ?> class="active" <?php } ?> >
+		<a href="#" class="dropdown-toggle">
+			<i class="menu-icon fa fa-desktop"></i>
+			<span class="menu-text">权限管理</span>
+
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+
+		<b class="arrow"></b>
+
+		<ul class="submenu">
+			
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='index'){ ?> class="active" <?php } ?> >
+				<a href="{:U('Admin/Rbac/index')}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					用户列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='role'){ ?> class="active" <?php } ?> >
+				<a href="{:U('Admin/Rbac/role')}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					角色列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='node'){ ?> class="active" <?php } ?> >
+				<a href="{:U('Admin/Rbac/node')}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					节点列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='addUser'){ ?> class="active" <?php } ?> >
+				<a href="{:U('Admin/Rbac/addUser')}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					添加用户
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='addRole'){ ?> class="active" <?php } ?> >
+				<a href="{:U('Admin/Rbac/addRole')}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					添加角色
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='addNode'){ ?> class="active" <?php } ?> >
+				<a href="{:U('Admin/Rbac/addNode')}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					添加节点
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			
+		</ul>
+	</li>
+
+	<li class="">
+		<a href="#" class="dropdown-toggle">
+			<i class="menu-icon fa fa-list"></i>
+			<span class="menu-text"> Tables </span>
+
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+
+		<b class="arrow"></b>
+
+		<ul class="submenu">
+			<li class="">
+				<a href="tables.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Simple &amp; Dynamic
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="jqgrid.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					jqGrid plugin
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
+	</li>
+
+	<li class="">
+		<a href="#" class="dropdown-toggle">
+			<i class="menu-icon fa fa-pencil-square-o"></i>
+			<span class="menu-text"> Forms </span>
+
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+
+		<b class="arrow"></b>
+
+		<ul class="submenu">
+			<li class="">
+				<a href="form-elements.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Form Elements
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="form-wizard.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Wizard &amp; Validation
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="wysiwyg.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Wysiwyg &amp; Markdown
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="dropzone.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Dropzone File Upload
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
+	</li>
+
+	<li class="">
+		<a href="widgets.html">
+			<i class="menu-icon fa fa-list-alt"></i>
+			<span class="menu-text"> Widgets </span>
+		</a>
+
+		<b class="arrow"></b>
+	</li>
+
+	<li class="">
+		<a href="calendar.html">
+			<i class="menu-icon fa fa-calendar"></i>
+
+			<span class="menu-text">
+				Calendar
+
+				<!-- #section:basics/sidebar.layout.badge -->
+				<span class="badge badge-transparent tooltip-error" title="2 Important Events">
+					<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
+				</span>
+
+				<!-- /section:basics/sidebar.layout.badge -->
+			</span>
+		</a>
+
+		<b class="arrow"></b>
+	</li>
+
+	<li class="">
+		<a href="gallery.html">
+			<i class="menu-icon fa fa-picture-o"></i>
+			<span class="menu-text"> Gallery </span>
+		</a>
+
+		<b class="arrow"></b>
+	</li>
+
+	<li class="">
+		<a href="#" class="dropdown-toggle">
+			<i class="menu-icon fa fa-tag"></i>
+			<span class="menu-text"> More Pages </span>
+
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+
+		<b class="arrow"></b>
+
+		<ul class="submenu">
+			<li class="">
+				<a href="profile.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					User Profile
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="inbox.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Inbox
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="pricing.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Pricing Tables
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="invoice.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Invoice
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="timeline.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Timeline
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="email.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Email Templates
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="login.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Login &amp; Register
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
+	</li>
+
+	<li class="">
+		<a href="#" class="dropdown-toggle">
+			<i class="menu-icon fa fa-file-o"></i>
+
+			<span class="menu-text">
+				Other Pages
+
+				<!-- #section:basics/sidebar.layout.badge -->
+				<span class="badge badge-primary">5</span>
+
+				<!-- /section:basics/sidebar.layout.badge -->
+			</span>
+
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+
+		<b class="arrow"></b>
+
+		<ul class="submenu">
+			<li class="">
+				<a href="faq.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					FAQ
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="error-404.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Error 404
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="error-500.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Error 500
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="grid.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Grid
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="blank.html">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Blank Page
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
+	</li>
+</ul>
+
+<!-- 左侧导航 end -->

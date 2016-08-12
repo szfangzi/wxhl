@@ -1,0 +1,98 @@
+<extend name="Public:base" />
+<block name="main">
+<div class="page-header">
+	<h1>
+		权限管理
+		<small>
+			<i class="ace-icon fa fa-angle-double-right"></i>
+			角色列表
+		</small>
+	</h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT STARTS -->
+		<if condition="$roles neq NULL">
+			<table id="rolesList" class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="center">
+							<label class="position-relative">
+								<input type="checkbox" class="ace">
+								<span class="lbl"></span>
+							</label>
+						</th>
+						<th>角色名称</th>
+						<th>角色描述</th>
+						<th>开启状态</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<foreach item='v' key='k' name='roles'>
+					<tr class="item">
+						<td class="center">
+							<input type="hidden" value="{$v.id}" class="roleId" />
+							<label class="position-relative">
+								<input type="checkbox" class="ace">
+								<span class="lbl"></span>
+							</label>
+						</td>
+
+						<td>
+							{$v.name}
+						</td>
+						<td>{$v.remark}</td>
+						<td><?php if($v['status']){ ?>启用<?php }else{ ?>停用<?php } ?></td>
+
+						<td>
+							<div class="hidden-sm hidden-xs action-buttons">
+								<!-- <button class="btn btn-xs btn-success">
+									<i class="ace-icon fa fa-check bigger-120"></i>
+								</button> -->
+
+								<a href="{:U('Admin/Rbac/addRole', array('id'=>$v['id'], 'edit'=>1))}" class="green">
+									<i class="ace-icon fa fa-pencil bigger-120"></i>
+								</a>
+
+								<!-- <a href="javascript:;" class="red roleDelBtn">
+									<i class="ace-icon fa fa-trash-o bigger-120"></i>
+								</a> -->
+
+								<a href="{:U('Admin/Rbac/access', array('rid'=>$v['id']) )}" class="blue" title="配置权限">
+									<i class="ace-icon fa fa-search-plus bigger-130"></i>
+								</a>
+							</div>
+
+						</td>
+					</tr>
+				</foreach>
+				</tbody>
+			</table>
+
+		<else />
+			<div style="text-align: center;">暂无数据！</div>
+		</if>
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+</block>
+
+<block name="script">
+
+  <script type="text/javascript">
+  	var roleDelUrl = "{:U('Admin/Rbac/delRole')}";
+	$('.roleDelBtn').click(function(){
+		var $this = $(this);
+		var id = $this.parents('.item').find('.roleId').val();
+		$.post(roleDelUrl,{id:id},function(data){
+			if(data.status == 1){
+				$this.parents('.item').remove();
+			}
+		});
+	});
+ 
+  </script>
+</block>

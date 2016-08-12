@@ -9,6 +9,7 @@ return array(
 	'TMPL_VAR_IDENTIFY'=>'array',
 	'TMPL_FILE_DEPR'=>'_',
 	'SESSION_TYPE'=>'Db',
+	'APP_GROUP_MODE'=>1,
 	//'SESSION_TYPE'=>'Redis',
 );
 ?>

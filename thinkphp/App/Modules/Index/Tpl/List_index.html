@@ -1,0 +1,98 @@
+<extend name="Public:base" />
+
+<block name="main">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet">
+<article>
+  <h2 class="about_h">您现在的位置是：<a href="{:U('Index/Index/index')}">首页</a>> <span>慢生活</span></h2>
+  <div id="bloglist" class="bloglist"></div>
+  <div id="page" class="page"></div>
+
+</article>
+</block>
+<block name="aside"><include file="Public:listAside" /></block>
+
+
+<block name="script">
+<include file="Public:listTmpl" />
+<include file="Public:pageTmpl" />
+
+  <script type="text/javascript">
+
+  var info = JSON.parse('{$info}');
+  var page = info.page,
+      nowPage = page.nowPage,
+      totalPages = page.totalPages,
+      detailUrl = "{:U('Index/List/detail')}";
+
+  getList(info);
+
+  function refreshPageData(newPage){
+    page = newPage;
+    nowPage = page.nowPage,
+    totalPages = page.totalPages;
+  }
+
+  function getList(data){
+    
+    var page = data.page,
+        posts = data.posts;
+
+    refreshPageData(page);
+
+    var listTmpl = document.getElementById('listTmpl').innerHTML;
+    var listHtml = ejs.render(listTmpl, { data: posts });
+    $('#bloglist').html(listHtml);
+
+    var pageTmpl = document.getElementById('pageTmpl').innerHTML;
+    var pageHtml = ejs.render(pageTmpl, { data: page });
+    $('#page').html(pageHtml);
+
+    $('body,html').animate({ scrollTop: 0 }, 800);
+  }
+
+  $('#page').on('click', '#firstPage', function(){
+    $.get("{:U('Index/List/index')}",{p:1},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#lastPage', function(){
+    $.get("{:U('Index/List/index')}",{p:totalPages},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#prePage', function(){
+    if(nowPage > 1){
+      var newPage = nowPage - 1;  
+    }
+    $.get("{:U('Index/List/index')}",{p:newPage},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#nextPage', function(){
+    if(nowPage < totalPages){
+      var newPage = nowPage + 1;
+    }
+    $.get("{:U('Index/List/index')}",{p:newPage},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+    });
+  }).on('click', '#numPage a', function(){
+    var $this = $(this);
+    $.get("{:U('Index/List/index')}",{p:$this.attr('p')},function(data){
+      if(data.status==1){
+        getList(data.info);
+      }
+      
+    });
+  });
+  
+  </script>
+</block>
+
+
+
+

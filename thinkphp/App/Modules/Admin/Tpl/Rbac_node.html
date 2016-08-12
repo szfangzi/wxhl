@@ -1,0 +1,113 @@
+<extend name="Public:base" />
+<block name="main">
+<div class="page-header">
+	<h1>
+		权限管理
+		<small>
+			<i class="ace-icon fa fa-angle-double-right"></i>
+			节点列表
+		</small>
+	</h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT STARTS -->
+		<if condition="$nodes neq NULL">
+			<table id="nodesList" class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="center">
+							<label class="position-relative">
+								<input type="checkbox" class="ace">
+								<span class="lbl"></span>
+							</label>
+						</th>
+						<th>id</th>
+						<th>pid</th>
+						<th>类型</th>
+						<th>名称</th>
+						<th>描述</th>
+						<th>开启状态</th>
+						<th>排序</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<foreach item='app' key='k' name='nodes'>
+					<tr class="item">
+						<td class="center">
+							<input type="hidden" value="{$app.id}" class="nodeId" />
+							<label class="position-relative">
+								<input type="checkbox" class="ace">
+								<span class="lbl"></span>
+							</label>
+						</td>
+						<td>
+							{$app.id}
+						</td>
+						<td>
+							{$app.pid}
+						</td>
+						<td>
+							<?php if($app['level']==1){ ?>应用<?php }else if($app['level']==2){ ?>控制器<?php }else if($app['level']==3){ ?>动作方法<?php } ?>
+						</td>
+						<td>
+							{$app.name}
+						</td>
+						<td>{$app.title}</td>
+						<td><?php if($app['status']){ ?>启用<?php }else{ ?>停用<?php } ?></td>
+						<td>
+							{$app.sort}
+						</td>
+						<td>
+							<div class="hidden-sm hidden-xs action-buttons">
+								<!-- <button class="btn btn-xs btn-success">
+									<i class="ace-icon fa fa-check bigger-120"></i>
+								</button> -->
+
+								<a href="{:U('Admin/Rbac/addNode', array('id'=>$app['id'], 'edit'=>1, 'level'=>($app['level']) ))}" class="green">
+									<i class="ace-icon fa fa-pencil bigger-130"></i>
+								</a>
+
+								<!-- <a href="javascript:;" class="red nodeDelBtn">
+									<i class="ace-icon fa fa-trash-o bigger-120"></i>
+								</a> -->
+								<?php if($app['level'] != 3){ ?>
+								<a href="{:U('Admin/Rbac/addNode', array('pid'=>$app['id'], 'level'=>($app['level']+1) ))}" class="blue" title="添加控制器">
+									<i class="ace-icon fa fa-search-plus bigger-130"></i>
+								</a>
+								<?php } ?>
+							</div>
+
+						</td>
+					</tr>
+				</foreach>
+				</tbody>
+			</table>
+
+		<else />
+			<div style="text-align: center;">暂无数据！</div>
+		</if>
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+</block>
+
+<block name="script">
+
+  <script type="text/javascript">
+  	var nodeDelUrl = "{:U('Admin/Rbac/delNode')}";
+	$('.nodeDelUrl').click(function(){
+		var $this = $(this);
+		var id = $this.parents('.item').find('.roleId').val();
+		$.post(nodeDelUrl,{id:id},function(data){
+			if(data.status == 1){
+				$this.parents('.item').remove();
+			}
+		});
+	});
+ 
+  </script>
+</block>

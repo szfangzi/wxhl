@@ -1,0 +1,48 @@
+<extend name="Public:base" />
+
+<block name="main">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet">
+<article>
+  <h2 class="about_h">您现在的位置是：<a href="/">首页</a> > <span>{$post['post_title']}</span></h2>
+  <div class="index_about">
+    <h2 class="c_titile">{$post['post_title']}</h2>
+    <p class="box_c"><span class="d_time">发布时间：{$post['post_date']|date='Y-m-d',###}</span><span>编辑：{$post['post_author']}</span><span>浏览：{$post['view_count']}</span><span>评论：{$post['comment_count']}</span></p>
+    <div class="infos">
+      {$post['post_content']}
+    </div>
+    <div class="keybq">
+      <p><span>关键字词:</span>£ººÚÉ«,¸öÈË²©¿Í_,Ê±¼äÖá,ÏìÓ¦Ê½</p>
+    </div>
+    <div class="nextinfo">
+      <p>上一篇：<?php if($postPre!=false){ ?><a href="{:U('Index/List/detail/id')}/{$postPre['id']}">{$postPre['post_title']}</a><?php }else{ ?>没有了！<?php } ?></p>
+      <p>下一篇：<?php if($postNext!=false){ ?><a href="{:U('Index/List/detail/id')}/{$postNext['id']}">{$postNext['post_title']}</a><?php }else{ ?>没有了！<?php } ?></p>
+    </div>
+    <div class="otherlink">
+      <h2>相关文章</h2>
+      <ul>
+        <li><a href="/news/s/2013-07-25/524.html" title="ÏÖÔÚ£¬ÎÒÏàÐÅ°®Çé£¡">ÏÖÔÚ£¬ÎÒÏàÐÅ°®Çé£¡</a></li>
+        <li><a href="/newstalk/mood/2013-07-24/518.html" title="ÎÒÏ£ÍûÎÒµÄ°®ÇéÊÇÕâÑùµÄ">ÎÒÏ£ÍûÎÒµÄ°®ÇéÊÇÕâÑùµÄ</a></li>
+        <li><a href="/newstalk/mood/2013-07-02/335.html" title="ÓÐÖÖÇéÒê£¬²»ÊÇ°®Çé£¬Ò²Ëã²»µÃÓÑÇé">ÓÐÖÖÇéÒê£¬²»ÊÇ°®Çé£¬Ò²Ëã²»µÃÓÑÇé</a></li>
+        <li><a href="/newstalk/mood/2013-07-01/329.html" title="ÊÀÉÏ×îÃÀºÃµÄ°®Çé">ÊÀÉÏ×îÃÀºÃµÄ°®Çé</a></li>
+        <li><a href="/news/read/2013-06-11/213.html" title="°®ÇéÃ»ÓÐÓÀÔ¶£¬µØÀÏÌì»ÄÒ²×ß²»Íê">°®ÇéÃ»ÓÐÓÀÔ¶£¬µØÀÏÌì»ÄÒ²×ß²»Íê</a></li>
+        <li><a href="/news/s/2013-06-06/24.html" title="°®ÇéµÄ±³ÅÑÕß">°®ÇéµÄ±³ÅÑÕß</a></li>
+      </ul>
+    </div>
+  </div>
+
+</article>
+</block>
+<block name="aside"><include file="Public:listAside" /></block>
+
+
+<block name="script">
+
+  <script type="text/javascript">
+
+ 
+  </script>
+</block>
+
+
+
+
