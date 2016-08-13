@@ -925,7 +925,7 @@
 		权限管理
 		<small>
 			<i class="ace-icon fa fa-angle-double-right"></i>
-			添加节点
+			用户列表
 		</small>
 	</h1>
 </div><!-- /.page-header -->
@@ -933,59 +933,69 @@
 <div class="row">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT STARTS -->
-		<form class="form-horizontal" role="form" method="post" action="<?php echo U('Admin/Rbac/addNode');?>">
-			<input type="hidden" value="<?php echo ($id); ?>" name="id">
-			<input type="hidden" value="<?php echo ($pid); ?>" name="pid">
-			<input type="hidden" value="<?php echo ($level); ?>" name="level">
-			<input type="hidden" value="<?php echo ($edit); ?>" name="edit">
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right" for="name"> <?php echo ($type); ?>名称 </label>
+		<?php if($users != NULL): ?><table id="usersList" class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="center">
+							<label class="position-relative">
+								<input type="checkbox" class="ace">
+								<span class="lbl"></span>
+							</label>
+						</th>
+						<th>用户名称</th>
+						<th>上一次登录时间</th>
+						<th>上一次登录IP</th>
+						<th>用户所属别组</th>
+						<th>开启状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<?php if(is_array($users)): foreach($users as $k=>$v): ?><tr class="item">
+						<td class="center">
+							<input type="hidden" value="<?php echo ($v["id"]); ?>" class="userId" />
+							<label class="position-relative">
+								<input type="checkbox" class="ace">
+								<span class="lbl"></span>
+							</label>
+						</td>
 
-				<div class="col-sm-9">
-					<input type="text" id="name" name="name" value="<?php echo ($node["name"]); ?>" placeholder="nodeName" class="col-xs-10 col-sm-5">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right" for="nodeTitle"> <?php echo ($type); ?>描述 </label>
+						<td>
+							<?php echo ($v["username"]); ?>
+						</td>
+						<td><?php echo (date('Y-m-d H:i',$v["logintime"])); ?></td>
+						<td><?php echo ($v["loginip"]); ?></td>
+						<td>
+						<?php if(is_array($v['role'])): foreach($v['role'] as $rk=>$rv): ?><span rid="<?php echo ($rv['id']); ?>" class="rid" style="margin-right:5px;"><?php echo ($rv['name']); ?>(<?php echo ($rv['remark']); ?>)</span><?php endforeach; endif; ?>
+						</td>
+						<td><?php if(!$v['lock']){ ?>启用<?php }else{ ?>停用<?php } ?></td>
+						<td>
+							<div class="hidden-sm hidden-xs action-buttons">
+								<!-- <button class="btn btn-xs btn-success">
+									<i class="ace-icon fa fa-check bigger-120"></i>
+								</button> -->
 
-				<div class="col-sm-9">
-					<textarea class="form-control" style="max-width:41.666%;" id="nodeTitle" name="title" placeholder="nodeTitle"><?php echo ($node["title"]); ?></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"> 是否开启 </label>
+								<a href="<?php echo U('Admin/Rbac/addUser', array('id'=>$v['id'], 'edit'=>1));?>" class="green">
+									<i class="ace-icon fa fa-pencil bigger-120"></i>
+								</a>
 
-				<div class="col-sm-9">
-					<label class="pull-left inline">
-						<input id="nodeSwitchBtn" type="checkbox" class="ace ace-switch ace-switch-5" name="status">
-						<span class="lbl middle"></span>
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right" for="nodeSort"> 排序 </label>
+								<!-- <a href="javascript:;" class="red userDelBtn">
+									<i class="ace-icon fa fa-trash-o bigger-120"></i>
+								</a> -->
 
-				<div class="col-sm-9">
-					<input type="text" id="nodeSort" name="sort" value="<?php echo ($node["sort"]); ?>" placeholder="nodeSort" class="col-xs-10 col-sm-5">
-				</div>
-			</div>
-			<div class="clearfix form-actions">
-				<div class="col-md-offset-3 col-md-9">
-					<button class="btn btn-info" type="submit">
-						<i class="ace-icon fa fa-check bigger-110"></i>
-						Submit
-					</button>
+								<!-- <a href="<?php echo U('Admin/Rbac/access', array('rid'=>$v['id']) );?>" class="blue" title="配置角色">
+									<i class="ace-icon fa fa-search-plus bigger-130"></i>
+								</a> -->
+							</div>
 
-					&nbsp; &nbsp; &nbsp;
-					<button class="btn" type="reset">
-						<i class="ace-icon fa fa-undo bigger-110"></i>
-						Reset
-					</button>
-				</div>
-			</div>
+						</td>
+					</tr><?php endforeach; endif; ?>
+				</tbody>
+			</table>
 
-
-		</form>
+		<?php else: ?>
+			<div style="text-align: center;">暂无数据！</div><?php endif; ?>
 		<!-- PAGE CONTENT ENDS -->
 	</div><!-- /.col -->
 </div><!-- /.row -->
@@ -1067,12 +1077,16 @@
 		
 
   <script type="text/javascript">
-
-	if("<?php echo ($node['status']); ?>" == 1 || "<?php echo ($node['status']); ?>" == ''){
-		$('#nodeSwitchBtn').prop('checked', true);
-  	}else{
-  		$('#nodeSwitchBtn').prop('checked', false);
-  	}
+  	var userDelUrl = "<?php echo U('Admin/Rbac/delUser');?>";
+	$('.userDelBtn').click(function(){
+		var $this = $(this);
+		var id = $this.parents('.item').find('.userId').val();
+		$.post(userDelUrl,{id:id},function(data){
+			if(data.status == 1){
+				$this.parents('.item').remove();
+			}
+		});
+	});
  
   </script>
 

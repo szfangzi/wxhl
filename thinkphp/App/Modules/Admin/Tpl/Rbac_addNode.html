@@ -76,9 +76,9 @@
   <script type="text/javascript">
 
 	if("{$node['status']}" == 1 || "{$node['status']}" == ''){
-		$('#nodeSwitchBtn').attr('checked' , 'checked');
+		$('#nodeSwitchBtn').prop('checked', true);
   	}else{
-  		$('#nodeSwitchBtn').removeAttr('checked');
+  		$('#nodeSwitchBtn').prop('checked', false);
   	}
  
   </script>

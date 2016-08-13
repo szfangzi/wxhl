@@ -422,7 +422,7 @@
 
 				<!-- 左侧导航 start -->
 <ul class="nav nav-list">
-	<li class="active">
+	<li <?php if(MODULE_NAME=='Posts'){ ?> class="active" <?php } ?> >
 		<a href="index.html" class="dropdown-toggle">
 			<i class="menu-icon fa fa-tachometer"></i>
 			<span class="menu-text"> 文章管理 </span>
@@ -433,7 +433,7 @@
 		<b class="arrow"></b>
 
 		<ul class="submenu">
-			<li class="">
+			<li <?php if(MODULE_NAME=='Posts' && ACTION_NAME=='index'){ ?> class="active" <?php } ?> >
 				<a href="<?php echo U('Admin/Posts/index');?>">
 					<i class="menu-icon fa fa-caret-right"></i>
 					所有文章
@@ -442,7 +442,7 @@
 				<b class="arrow"></b>
 			</li>
 
-			<li class="">
+			<li <?php if(MODULE_NAME=='Posts' && ACTION_NAME=='post'){ ?> class="active" <?php } ?> >
 				<a href="<?php echo U('Admin/Posts/post');?>">
 					<i class="menu-icon fa fa-caret-right"></i>
 					写文章
@@ -453,7 +453,7 @@
 		</ul>
 	</li>
 
-	<li class="">
+	<li <?php if(MODULE_NAME=='Rbac'){ ?> class="active" <?php } ?> >
 		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-desktop"></i>
 			<span class="menu-text">权限管理</span>
@@ -465,8 +465,8 @@
 
 		<ul class="submenu">
 			
-			<li class="">
-				<a href="typography.html">
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='index'){ ?> class="active" <?php } ?> >
+				<a href="<?php echo U('Admin/Rbac/index');?>">
 					<i class="menu-icon fa fa-caret-right"></i>
 					用户列表
 				</a>
@@ -474,8 +474,8 @@
 				<b class="arrow"></b>
 			</li>
 
-			<li class="">
-				<a href="elements.html">
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='role'){ ?> class="active" <?php } ?> >
+				<a href="<?php echo U('Admin/Rbac/role');?>">
 					<i class="menu-icon fa fa-caret-right"></i>
 					角色列表
 				</a>
@@ -483,8 +483,8 @@
 				<b class="arrow"></b>
 			</li>
 
-			<li class="">
-				<a href="treeview.html">
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='node'){ ?> class="active" <?php } ?> >
+				<a href="<?php echo U('Admin/Rbac/node');?>">
 					<i class="menu-icon fa fa-caret-right"></i>
 					节点列表
 				</a>
@@ -492,8 +492,8 @@
 				<b class="arrow"></b>
 			</li>
 
-			<li class="">
-				<a href="buttons.html">
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='addUser'){ ?> class="active" <?php } ?> >
+				<a href="<?php echo U('Admin/Rbac/addUser');?>">
 					<i class="menu-icon fa fa-caret-right"></i>
 					添加用户
 				</a>
@@ -501,7 +501,7 @@
 				<b class="arrow"></b>
 			</li>
 
-			<li class="">
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='addRole'){ ?> class="active" <?php } ?> >
 				<a href="<?php echo U('Admin/Rbac/addRole');?>">
 					<i class="menu-icon fa fa-caret-right"></i>
 					添加角色
@@ -510,8 +510,8 @@
 				<b class="arrow"></b>
 			</li>
 
-			<li class="">
-				<a href="treeview.html">
+			<li <?php if(MODULE_NAME=='Rbac' && ACTION_NAME=='addNode'){ ?> class="active" <?php } ?> >
+				<a href="<?php echo U('Admin/Rbac/addNode');?>">
 					<i class="menu-icon fa fa-caret-right"></i>
 					添加节点
 				</a>
@@ -922,10 +922,10 @@
 					
 <div class="page-header">
 	<h1>
-		文章管理
+		权限管理
 		<small>
 			<i class="ace-icon fa fa-angle-double-right"></i>
-			所有文章
+			添加角色
 		</small>
 	</h1>
 </div><!-- /.page-header -->
@@ -933,7 +933,62 @@
 <div class="row">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT STARTS -->
-		asdas
+		<form class="form-horizontal" role="form" method="post" action="<?php echo U('Admin/Rbac/addUser');?>">
+			<input type="hidden" value="<?php echo ($id); ?>" name="id">
+			<input type="hidden" value="<?php echo ($edit); ?>" name="edit">
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="username"> 用户名称 </label>
+
+				<div class="col-sm-9">
+					<input type="text" id="username" name="username" value="<?php echo ($user["username"]); ?>" placeholder="username" class="col-xs-10 col-sm-5">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="password"> 用户密码 </label>
+
+				<div class="col-sm-9">
+					<input type="password" name="password" id="password" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="username"> 所属角色 </label>
+				<div class="col-sm-9">
+				<?php if(is_array($roles)): foreach($roles as $k=>$v): ?><!-- 					<label class="" for="role_<?php echo ($v['id']); ?>"><?php echo ($v['name']); ?></label><input type="checkbox" name="roles[]" class="roleCheck" value="" id="role_<?php echo ($v['id']); ?>" > -->
+					<label class="middle" style="margin-right:5px;margin-top:3px;">
+						<input class="ace" type="checkbox" id="id-disable-check" name="roles[]" value="<?php echo ($v['id']); ?>">
+						<span class="lbl">
+							<?php echo ($v['name']); ?>
+						</span>
+					</label><?php endforeach; endif; ?>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="postContent"> 是否开启 </label>
+
+				<div class="col-sm-9">
+					<label class="pull-left inline">
+						<input id="userSwitchBtn" type="checkbox" class="ace ace-switch ace-switch-5" name="lock" >
+						<span class="lbl middle"></span>
+					</label>
+				</div>
+			</div>
+			<div class="clearfix form-actions">
+				<div class="col-md-offset-3 col-md-9">
+					<button class="btn btn-info" type="submit">
+						<i class="ace-icon fa fa-check bigger-110"></i>
+						Submit
+					</button>
+
+					&nbsp; &nbsp; &nbsp;
+					<button class="btn" type="reset">
+						<i class="ace-icon fa fa-undo bigger-110"></i>
+						Reset
+					</button>
+				</div>
+			</div>
+
+
+		</form>
 		<!-- PAGE CONTENT ENDS -->
 	</div><!-- /.col -->
 </div><!-- /.row -->
@@ -997,6 +1052,7 @@
 		<script src="__PUBLIC__/assets/js/bootstrap.min.js"></script>
 
 		<!-- page specific plugin scripts -->
+		
 
 		<!--[if lte IE 8]>
 		  <script src="__PUBLIC__/assets/js/excanvas.min.js"></script>
@@ -1015,6 +1071,11 @@
 
   <script type="text/javascript">
 
+	if("<?php echo ($user['lock']); ?>" == 0 || "<?php echo ($user['lock']); ?>" == ''){
+		$('#userSwitchBtn').prop('checked', true);
+  	}else{
+  		$('#userSwitchBtn').prop('checked', false);
+  	}
  
   </script>
 

@@ -935,24 +935,25 @@
 		<!-- PAGE CONTENT STARTS -->
 		<?php if($nodes != NULL): ?><form class="form-horizontal" role="form" method="post" action="<?php echo U('Admin/Rbac/access') ;?>">
 			<input type="hidden" value="<?php echo ($rid); ?>" name="rid">
+			<input type="hidden" value=" " name="xx">
 			<div class="dd" id="nestable">
 				<ol class="dd-list">
 				<?php if(is_array($nodes)): foreach($nodes as $k=>$v): ?><li class="dd-item item1">
 						<div class="dd-handle handle1">
 							<?php echo ($v['title']); ?>
-							<input type="checkbox" value="<?php echo ($v['id']); ?>_1" name="access[]" level="1" />
+							<input type="checkbox" value="<?php echo ($v['id']); ?>_1" name="access[]" level="1" <?php if($v['access']){ ?>checked<?php } ?> />
 						</div>
 						<?php if($v['child'] != NULL): ?><ol class="dd-list">
 							<?php if(is_array($v['child'])): foreach($v['child'] as $k2=>$v2): ?><li class="dd-item item2">
 								<div class="dd-handle handle2">
 									<?php echo ($v2['title']); ?>
-									<input type="checkbox" value="<?php echo ($v2['id']); ?>_2" name="access[]" level="2" />
+									<input type="checkbox" value="<?php echo ($v2['id']); ?>_2" name="access[]" level="2" <?php if($v2['access']){ ?>checked<?php } ?> />
 								</div>
 								<?php if($v['child'] != NULL): ?><ol class="dd-list">
 									<?php if(is_array($v2['child'])): foreach($v2['child'] as $k3=>$v3): ?><li class="dd-item item3">
 										<div class="dd-handle handle3">
 											<?php echo ($v3['title']); ?>
-											<input type="checkbox" value="<?php echo ($v3['id']); ?>_3" name="access[]" level="3" />
+											<input type="checkbox" value="<?php echo ($v3['id']); ?>_3" name="access[]" level="3" <?php if($v3['access']){ ?>checked<?php } ?> />
 										</div>
 									</li><?php endforeach; endif; ?>
 								</ol><?php endif; ?>
@@ -1061,9 +1062,24 @@
 
 		
 
-  <script type="text/javascript">
+  	<script type="text/javascript">
 
-  	//$('#nestable').nestable({});
+  	// var nidArr = JSON.parse('<?php echo ($nidArr); ?>');
+
+  	// //初始化权限数据
+  	// $('#nestable [type=checkbox]').each(function(){
+  	// 	var $this = $(this);
+  	// 	var tmp = $this.val().split('_');
+
+  	// 	for(var k in nidArr){
+  	// 		if(tmp[0] == nidArr[k]){
+  	// 			$this.prop('checked', true);
+  	// 		}
+  	// 	}
+
+  	// });
+
+  	$('#nestable').nestable();
 
   	$('#nestable').on('click', 'input[type=checkbox]', function(){
   		var $this = $(this),
@@ -1072,20 +1088,16 @@
   			$this.closest('.dd-item').find('input[type=checkbox]').prop('checked', true);
   		}else{
   			$this.closest('.dd-item').find('input[type=checkbox]').prop('checked', false);
-  			// if(level == 2){
-  			// 	$this.closest('.item1').find('.handle1 input[type=checkbox]').prop('checked', false);
-  			// }else if(level == 3){
-  			// 	$this.closest('.item1').find('.handle1 input[type=checkbox]').prop('checked', false);
-  			// 	$this.closest('.item2').find('.handle2 input[type=checkbox]').prop('checked', false);
-  			// }
-  			
   		}
   		
   	});
 
+  	function isJsonStr(str){
+		var isJson = Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;    
+		return isJson;
+	}
 
- 
-  </script>
+  	</script>
 
 	</body>
 </html>
