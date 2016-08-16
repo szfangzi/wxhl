@@ -1,0 +1,296 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+	<style type="text/css">
+		*{
+	    	margin: 0;
+	    	padding: 0;
+	    }
+        #box{
+            width:420px;
+            height:300px;
+            float: left;
+            position: relative;
+            border: 1px solid #ccc;
+            margin-left: 100px;
+            margin-top: 100px;
+            overflow: hidden;
+        }
+        #content{
+			width:400px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #scroll{
+            width:18px;
+            border-left: 1px solid #ccc;
+            height: 300px;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #drag{
+            position: absolute;
+            top: 0px;
+            left: 1px;
+            width: 16px;
+            height: 30px;
+            border-radius:10px;
+            background-color: gray;
+
+        }
+	</style>
+
+	<div id="box">
+		<div id="content">
+			asdasdddddddddddddddddddddddddddddddddddddddddddd
+			ddddddddddddddddddddddddddddddddddddddddddddddddd
+			asdasdddddddddddddddddddddddddddddddddddddddddddd
+			ddddddddddddddddddddddddddddddddddddddddddddddddd
+			asdasdddddddddddddddddddddddddddddddddddddddddddd
+			ddddddddddddddddddddddddddddddddddddddddddddddddd
+			asdasdddddddddddddddddddddddddddddddddddddddddddd
+			ddddddddddddddddddddddddddddddddddddddddddddddddd
+			asdasdddddddddddddddddddddddddddddddddddddddddddd
+			ddddddddddddddddddddddddddddddddddddddddddddddddd
+			asdasdddddddddddddddddddddddddddddddddddddddddddd
+			ddddddddddddddddddddddddddddddddddddddddddddddddd
+			asdasdddddddddddddddddddddddddddddddddddddddddddd
+			ddddddddddddddddddddddddddddddddddddddddddddddddd
+			asdasdddddddddddddddddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			rrdasdddddddddasdasdddddddddddddddddddddddddddddd
+			rrddddddddddddasdasdddddddddddddddddddddddddddddd
+			asdasdddddddddasdasdddddddddddddddddddddddddddddd
+			ddddddddddddddasdasdddddddddddddddddddddddddddddd
+		</div>
+		<div id="scroll">
+			<div id="drag"></div>
+		</div>
+	</div>
+
+		<script type="text/javascript">
+
+		var $box = $('box');
+		var $content = $('content');
+		var $scroll = $('scroll');
+		var $drag = $('drag');
+
+		$drag.style.height =  $box.offsetHeight * $box.offsetHeight / $content.offsetHeight;
+
+		$drag.onmousedown = function(e){
+			
+			var eDown = e || window.e;
+			var that = this;
+			
+			var fixedY = eDown.clientY - that.offsetTop;
+			document.onmousemove = function(e){
+				
+				var eMove = e || window.event;
+
+				if(eMove.clientY-fixedY <= 0){
+					that.style.top = 0;
+					$content.style.top = 0;
+				}else if(eMove.clientY-fixedY < $box.offsetHeight-$drag.offsetHeight 
+					&& $box.offsetHeight>(eMove.clientY-fixedY)+$drag.offsetHeight){
+					that.style.top = eMove.clientY - fixedY;
+					$content.style.top = -parseInt(that.style.top) * $content.offsetHeight / $box.offsetHeight;
+				}else{
+					that.style.top = $box.offsetHeight - $drag.offsetHeight;
+					$content.style.top = -parseInt(that.style.top) * $content.offsetHeight / $box.offsetHeight;
+				}
+
+				
+			}
+
+
+		}
+
+		document.onmouseup = function(){
+			document.onmousemove = null;
+
+			
+		}
+
+		function $(id){ return document.getElementById(id);}
+
+// var num = 10;
+// alert(1);
+// num = 20;
+// alert(2);
+
+// // setTimeout(function(){
+// // 	alert(num);
+// // },0);
+// //setTimeout("alert(num)",0);
+// //1 2 3 30
+// //setTimeout(alert(num),0);
+// //setTimeout(fun(),0);
+// //1 2 20 3
+
+// setTimeout(fun,0);
+// //1 2 3 20
+// num = 30;
+// alert(3);
+
+// function fun(){
+// 	alert(num);
+// }
+// 512 1470
+//获取元素
+       
+//        var num = 0;  //给top一个起始值   0   记录top的值改变
+//        var timer = null;//用来存储定时器   不能给0  因为定时器是一个对象
+//        var pic = $('pic');
+
+//        $('picUp').onmouseenter = function(){
+//        		timer = setInterval(function(){
+//        			if(num > -1070){
+//        				pic.style.top = --num;
+//        			}
+//        		},1);
+//        }
+
+//        $('picUp').onmouseleave = function(){
+//        		clearInterval(timer);
+//        }
+
+//        $('picDown').onmouseenter = function(){
+//        		timer = setInterval(function(){
+//        			if(num < 0){
+//        				pic.style.top = ++num;
+//        			}
+//        		},1);
+//        }
+
+//        $('picDown').onmouseleave = function(){
+//        		clearInterval(timer);
+//        }
+
+
+
+
+
+
+
+// function getClass(cls){
+// 	if(document.getElementsByClassName){
+// 		return document.getElementsByClassName(cls);
+// 	}else{
+// 		var tags = document.getElementsByTagName('*');
+// 		var arr = [];
+// 		for (var i = 0; i < tags.length; i++){
+// 			if(hasClass(tags[i], cls)){
+// 				arr.push(tags[i]);
+// 			}
+// 		}
+// 		return arr;
+// 	}
+// }
+
+// function trim(str){
+// 	return str.replace(/(^\s*)|(\s*$)/g, "");
+// }
+// function addClass(el, className){
+// 	if(!hasClass(el, className)){
+// 		el.className += ' ' + className;
+// 	}
+// 	el.className = prettyClass(el.className);
+// }
+// function prettyClass(cls){
+// 	var classReg = /[\t\r\n\f\s]+/g;
+// 	return trim(cls.replace(classReg, " "));
+// }
+
+// function removeClass(el, className){
+// 	if(hasClass(el, className)){
+// 		var reg = new RegExp(className,"g");
+// 		el.className = el.className.replace(reg, '');
+// 	}
+// 	el.className = prettyClass(el.className);
+// }
+// function hasClass(el, className){
+// 	var classReg = /[\t\r\n\f]/g;
+// 	return (" " + el.className + " ").replace(classReg, " ").indexOf( className ) >= 0;
+// }
+
+
+		</script>
+	</body>
+</html>

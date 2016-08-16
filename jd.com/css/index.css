@@ -357,7 +357,7 @@ _display: block;
 #one li{float:left;width:0;display: none;}
 #one .on{width:720px;display: list-item;}
 #two .on{background:red;}
-#two{position:absolute;right:295px;bottom:10px}
+#two{position:absolute;right:295px;bottom:10px;padding-right: 10px;}
 #two li{float:left;padding:1px  6px;border:1px solid #fff;margin-left:10px;background:#666;border-radius:20px;color:#fff;cursor: pointer;text-align:center;}
 /*轮播图左右箭头*/
 

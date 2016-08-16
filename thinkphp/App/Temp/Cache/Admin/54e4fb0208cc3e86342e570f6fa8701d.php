@@ -943,6 +943,7 @@
 					<input type="text" id="username" name="username" value="<?php echo ($user["username"]); ?>" placeholder="username" class="col-xs-10 col-sm-5">
 				</div>
 			</div>
+			<?php if(!$edit){ ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="password"> 用户密码 </label>
 
@@ -950,12 +951,12 @@
 					<input type="password" name="password" id="password" />
 				</div>
 			</div>
+			<?php } ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="username"> 所属角色 </label>
 				<div class="col-sm-9">
-				<?php if(is_array($roles)): foreach($roles as $k=>$v): ?><!-- 					<label class="" for="role_<?php echo ($v['id']); ?>"><?php echo ($v['name']); ?></label><input type="checkbox" name="roles[]" class="roleCheck" value="" id="role_<?php echo ($v['id']); ?>" > -->
-					<label class="middle" style="margin-right:5px;margin-top:3px;">
-						<input class="ace" type="checkbox" id="id-disable-check" name="roles[]" value="<?php echo ($v['id']); ?>">
+				<?php if(is_array($roles)): foreach($roles as $k=>$v): ?><label class="middle" style="margin-right:5px;margin-top:3px;">
+						<input class="ace" type="checkbox"  name="roles[]" value="<?php echo ($v['id']); ?>">
 						<span class="lbl">
 							<?php echo ($v['name']); ?>
 						</span>
@@ -1071,11 +1072,25 @@
 
   <script type="text/javascript">
 
+  	var roleUsers = JSON.parse('<?php echo ($roleUsers); ?>');
+
 	if("<?php echo ($user['lock']); ?>" == 0 || "<?php echo ($user['lock']); ?>" == ''){
 		$('#userSwitchBtn').prop('checked', true);
   	}else{
   		$('#userSwitchBtn').prop('checked', false);
   	}
+
+  	$('input[name="roles[]"]').each(function(k, v){
+		var $v = $(v);
+		for(var i in roleUsers){console.log(roleUsers[i]['role_id'],$v.val());
+			if(roleUsers[i]['role_id'] == $v.val()){
+				$v.prop('checked', true);
+				break;
+			}else{
+				$v.prop('checked', false);
+			}
+		}
+  	});
  
   </script>
 

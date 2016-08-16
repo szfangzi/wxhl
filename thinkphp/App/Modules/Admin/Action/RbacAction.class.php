@@ -24,18 +24,31 @@ class RbacAction extends CommonAction{
 		
 		$this->edit = I('edit', 0, 'intval');
 		$this->roles = M('role')->select();
+		$roleUserDb = M('role_user');
+
 
 		if(IS_POST){
 			if($this->edit){
 				$this->id = I('id');
 
 				$data = array(
-					'name'=>I('name'),
-					'remark'=>I('remark'),
-					'status'=>I('status')=='on'?1:0
+					'username'=>I('username'),
+					'lock'=>I('lock')=='on'?0:1
 				);
+				$rs = M('user')->where('id='.$this->id)->save($data);
 
-				$role = M('role')->where('id='.$this->id)->save($data);
+				$arr = [];
+				foreach (I('roles') as $k => $v) {
+					$arr[] = array(
+						'role_id'=>$v,
+						'user_id'=>$this->id
+						);
+				}
+
+				$roleUserDb->where(array('user_id'=>$this->id))->delete();
+				$roleUserDb->addAll($arr);
+				
+				
 			}else{
 				
 				$data = array(
@@ -47,14 +60,14 @@ class RbacAction extends CommonAction{
 				);
 				if($this->id = M('user')->add($data)){
 					$arr = [];
-					foreach ($this->roles as $k => $v) {
+					foreach (I('roles') as $k => $v) {
 						$arr[] = array(
-							'role_id'=>$v['id'],
+							'role_id'=>$v[$k],
 							'user_id'=>$this->id
 							);
 					}
-					
-					M('role_user')->addAll($arr);
+					$roleUserDb->where(array('user_id'=>$this->id))->delete();
+					$roleUserDb->addAll($arr);
 				}
 			}
 
@@ -68,8 +81,8 @@ class RbacAction extends CommonAction{
 		}else if(IS_GET){
 			if($this->edit){
 				$this->id = I('id');
-				$role = M('user')->where('id='.$this->id)->find();
-				$this->assign('user', $user);
+				$this->user = M('user')->where('id='.$this->id)->find();
+				$this->roleUsers = json_encode($roleUserDb->where(array('user_id'=>$this->id))->select());
 			}
 			$this->display();
 

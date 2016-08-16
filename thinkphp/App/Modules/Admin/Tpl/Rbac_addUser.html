@@ -23,6 +23,7 @@
 					<input type="text" id="username" name="username" value="{$user.username}" placeholder="username" class="col-xs-10 col-sm-5">
 				</div>
 			</div>
+			<?php if(!$edit){ ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="password"> 用户密码 </label>
 
@@ -30,13 +31,13 @@
 					<input type="password" name="password" id="password" />
 				</div>
 			</div>
+			<?php } ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="username"> 所属角色 </label>
 				<div class="col-sm-9">
 				<foreach name="roles" item="v" key="k">
-<!-- 					<label class="" for="role_{$v['id']}">{$v['name']}</label><input type="checkbox" name="roles[]" class="roleCheck" value="" id="role_{$v['id']}" > -->
 					<label class="middle" style="margin-right:5px;margin-top:3px;">
-						<input class="ace" type="checkbox" id="id-disable-check" name="roles[]" value="{$v['id']}">
+						<input class="ace" type="checkbox"  name="roles[]" value="{$v['id']}">
 						<span class="lbl">
 							{$v['name']}
 						</span>
@@ -80,11 +81,25 @@
 
   <script type="text/javascript">
 
+  	var roleUsers = JSON.parse('{$roleUsers}');
+
 	if("{$user['lock']}" == 0 || "{$user['lock']}" == ''){
 		$('#userSwitchBtn').prop('checked', true);
   	}else{
   		$('#userSwitchBtn').prop('checked', false);
   	}
+
+  	$('input[name="roles[]"]').each(function(k, v){
+		var $v = $(v);
+		for(var i in roleUsers){console.log(roleUsers[i]['role_id'],$v.val());
+			if(roleUsers[i]['role_id'] == $v.val()){
+				$v.prop('checked', true);
+				break;
+			}else{
+				$v.prop('checked', false);
+			}
+		}
+  	});
  
   </script>
 </block>

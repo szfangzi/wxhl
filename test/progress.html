@@ -1,0 +1,183 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+	<style type="text/css">
+		*{
+	    	margin: 0;
+	    	padding: 0;
+	    }
+	    .scroll{
+			width: 400px;
+			height: 10px;
+			background-color: #CCCCCC;
+			margin: 200px;
+			position: relative;	
+		}
+		
+		.bar{
+			
+			 width: 10px;
+			 height: 20px;
+			 background-color: #336699;
+			 cursor: pointer;
+			 position: absolute;
+			 top: -5px;
+			 left: 0px;
+		}
+		.mask{
+			background-color: #336699;
+			width: 0px;
+			height: 10px;
+		}
+		/*#progress{}*/
+	</style>
+
+<div class="scroll" id="scrollBar">
+    <div class="bar" id="bar"></div>
+    <div class="mask" id="mask"></div>
+</div>
+<div id="progress">0%</div>
+
+		<script type="text/javascript">
+
+		var $scrollBar = $('scrollBar');
+		var $bar = $('bar');
+		var $mask = $('mask');
+		var $progress = $('progress');
+
+		$bar.onmousedown = function(e){
+			var eDown = e || window.e;
+			var that = this;
+			document.onmousemove = function(e){
+				var eMove = e || window.event; //console.log(eMove.clientX||eMove.x);
+				if(eMove.clientX > $scrollBar.offsetLeft && eMove.clientX < $scrollBar.offsetLeft + $scrollBar.offsetWidth){
+					$bar.style.left = eMove.clientX - $scrollBar.offsetLeft;
+					$mask.style.width = $bar.style.left;
+				}else if(eMove.clientX < $scrollBar.offsetLeft){
+					$bar.style.left = '0px';
+					$mask.style.width = '0px';
+				}else if(eMove.clientX > $scrollBar.offsetLeft + $scrollBar.offsetWidth){
+					$bar.style.left = $scrollBar.offsetWidth;
+					$mask.style.width = $scrollBar.offsetWidth;
+				}
+				$progress.innerHTML = parseInt((parseInt($bar.style.left)/$scrollBar.offsetWidth)*100) + '%';
+				
+			}
+
+
+		}
+
+		document.onmouseup = function(){
+			document.onmousemove = null;
+
+			
+		}
+
+		function $(id){ return document.getElementById(id);}
+
+// var num = 10;
+// alert(1);
+// num = 20;
+// alert(2);
+
+// // setTimeout(function(){
+// // 	alert(num);
+// // },0);
+// //setTimeout("alert(num)",0);
+// //1 2 3 30
+// //setTimeout(alert(num),0);
+// //setTimeout(fun(),0);
+// //1 2 20 3
+
+// setTimeout(fun,0);
+// //1 2 3 20
+// num = 30;
+// alert(3);
+
+// function fun(){
+// 	alert(num);
+// }
+// 512 1470
+//获取元素
+       
+//        var num = 0;  //给top一个起始值   0   记录top的值改变
+//        var timer = null;//用来存储定时器   不能给0  因为定时器是一个对象
+//        var pic = $('pic');
+
+//        $('picUp').onmouseenter = function(){
+//        		timer = setInterval(function(){
+//        			if(num > -1070){
+//        				pic.style.top = --num;
+//        			}
+//        		},1);
+//        }
+
+//        $('picUp').onmouseleave = function(){
+//        		clearInterval(timer);
+//        }
+
+//        $('picDown').onmouseenter = function(){
+//        		timer = setInterval(function(){
+//        			if(num < 0){
+//        				pic.style.top = ++num;
+//        			}
+//        		},1);
+//        }
+
+//        $('picDown').onmouseleave = function(){
+//        		clearInterval(timer);
+//        }
+
+
+
+
+
+
+
+// function getClass(cls){
+// 	if(document.getElementsByClassName){
+// 		return document.getElementsByClassName(cls);
+// 	}else{
+// 		var tags = document.getElementsByTagName('*');
+// 		var arr = [];
+// 		for (var i = 0; i < tags.length; i++){
+// 			if(hasClass(tags[i], cls)){
+// 				arr.push(tags[i]);
+// 			}
+// 		}
+// 		return arr;
+// 	}
+// }
+
+// function trim(str){
+// 	return str.replace(/(^\s*)|(\s*$)/g, "");
+// }
+// function addClass(el, className){
+// 	if(!hasClass(el, className)){
+// 		el.className += ' ' + className;
+// 	}
+// 	el.className = prettyClass(el.className);
+// }
+// function prettyClass(cls){
+// 	var classReg = /[\t\r\n\f\s]+/g;
+// 	return trim(cls.replace(classReg, " "));
+// }
+
+// function removeClass(el, className){
+// 	if(hasClass(el, className)){
+// 		var reg = new RegExp(className,"g");
+// 		el.className = el.className.replace(reg, '');
+// 	}
+// 	el.className = prettyClass(el.className);
+// }
+// function hasClass(el, className){
+// 	var classReg = /[\t\r\n\f]/g;
+// 	return (" " + el.className + " ").replace(classReg, " ").indexOf( className ) >= 0;
+// }
+
+
+		</script>
+	</body>
+</html>

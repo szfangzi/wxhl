@@ -16,22 +16,6 @@ window.onload=function(){
 
 function searchBox(){
 	var searchInput = $('textt');
-	// var adText = searchInput.getAttribute('ad');
-
-	// searchInput.onfocus = function(e){
-	// 	var va = this.getAttribute('va');
-	// 	this.className = 'text';
-	// 	this.value = va;
-		
-	// }
-	// searchInput.onblur = function(e){
-	// 	this.setAttribute('va', this.value);
-	// 	var va = this.getAttribute('va');
-	// 	if(va==''){
-	// 		this.value = adText;
-	// 		this.className = 'text adText';
-	// 	}
-	// }
 
 	searchInput.oninput = searchInput.onpropertychange = function(e){ //兼容IE searchInput.onpropertychange
 		if(this.value == ''){
@@ -39,7 +23,6 @@ function searchBox(){
 		}else{
 			hide($('searchInputLabel'));
 		}
-	// searchInputLabel
 	}
 }
 
@@ -49,11 +32,25 @@ function lunbo(){
 	var lBtn = $('left');
 	var rBtn = $('right');
 	var lunboBox = $('lunbo');
+	var lunboBtnsBox = $('two');
 	var lunbos = $('one').children;
-	var lunboBtns = $('two').children;
+	
+	//生成轮播圆点
+	for (var i = 0; i < lunbos.length; i++) {
+		var btn = document.createElement('li');
+		if(i==0){
+			btn.className = 'on';
+		}
+		btn.innerHTML = i+1;
+		lunboBtnsBox.appendChild(btn);
+	};
+
+	var lunboBtns = lunboBtnsBox.children;
+	//轮播圆点居中
+	lunboBtnsBox.style.right = (lunboBox.clientWidth - lunboBtnsBox.clientWidth)/2 + 'px';
 
 	var currentIndex = 0;
-
+	//初始化圆点事件
 	for (var i = 0; i < lunboBtns.length; i++) {
 		
 		lunboBtns[i].onmouseover = function(){
@@ -70,7 +67,7 @@ function lunbo(){
 
 		}
 	}
-
+	//初始化左右按钮事件
 	rBtn.onclick = lBtn.onclick = function(){
 		lrBtn(this);
 	}
@@ -108,7 +105,7 @@ function lunbo(){
 		
 	}
 
-	lunboBox.onmouseenter = function(e){
+	lunboBox.onmouseenter = function(){
 		clearInterval(autoInterval);
 	}
 	lunboBox.onmouseleave = function(){
@@ -137,6 +134,10 @@ function prevEl(els, index){
 
 }
 
+
+
+
+
 function $(id){
 	return document.getElementById(id);
 }
@@ -150,7 +151,20 @@ function show(el){
 function hide(el){
 	el.style.display = 'none';
 }
-
+function getElsByClass(cls){
+	if(document.getElementsByClassName){
+		return document.getElementsByClassName(cls);
+	}else{
+		var tags = document.getElementsByTagName('*');
+		var arr = [];
+		for (var i = 0; i < tags.length; i++){
+			if(hasClass(tags[i], cls)){
+				arr.push(tags[i]);
+			}
+		}
+		return arr;
+	}
+}
 function trim(str){
 	return str.replace(/(^\s*)|(\s*$)/g, "");
 }

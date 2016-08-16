@@ -1,0 +1,210 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+	<style type="text/css">
+		*{
+	    	margin: 0;
+	    	padding: 0;
+	    }
+	    #box{
+	    	position: relative;
+	    	float: left;
+	    }
+	    #s{
+	    	float: left;
+	    	width: 300px;
+	    	height: 300px;
+	    	overflow: hidden;
+	    	margin-left: 50px;
+	    	margin-top: 50px;
+	    	border: 1px solid #000;
+	    	position: relative;
+	    }
+	    #s:hover{cursor: crosshair;}
+	    #s img{
+	    	float: left;
+	    	width: 300px;
+	    }
+	    #mask{
+	    	background-color: yellow;
+	    	opacity: 0.3;
+	    	width: 80px;
+	    	height: 80px;
+	    	position: absolute;
+	    	top: 0;
+	    	left: 0;
+	    	visibility: hidden;
+	    }
+	    #b{
+	    	position: absolute;
+	    	left: 400px;
+	    	top: 0;
+	    	width: 500px;
+	    	height: 500px;
+	    	overflow: hidden;
+	    	border: 1px solid #000;
+	    }
+	    #b img{
+	    	position: absolute;
+	    	left: 0;
+	    	top: 0;
+	    	width: 600px;
+	    	visibility: hidden;
+	    }
+	</style>
+
+<div id="box">
+	<div id="s">
+		<img src="images/watch.jpg" id="sImg">
+		<div id="mask"></div>
+	</div>
+	<div id="b">
+		<img src="images/watch.jpg" id="bImg">
+	</div>
+</div>
+
+		<script type="text/javascript">
+
+		var maskW = $('mask').offsetWidth;
+		var maskH = $('mask').offsetHeight;
+		var bW = $('b').offsetWidth;
+		var bH = $('b').offsetHeight;
+		$('s').onmousemove = function(e){
+			var x = e.clientX - this.offsetLeft;
+			var y = e.clientY - this.offsetTop;
+
+			if(x<=maskW/2){
+				$('mask').style.left = 0;
+			}else if(x >= this.offsetWidth-maskW/2){
+				$('mask').style.left = this.offsetWidth-maskW;
+			}else{
+				$('mask').style.left = x-maskW/2;
+			}
+			if(y<=maskH/2){
+				$('mask').style.top = 0;
+			}else if(y >= this.offsetHeight-maskH/2){
+				$('mask').style.top = this.offsetHeight-maskH;
+			}else{
+				$('mask').style.top = y-maskH/2;
+			}
+			$('mask').style.visibility = 'visible';
+
+			$('bImg').style.left = -(x*2-bW/2);
+			$('bImg').style.top = -(y*2-bH/2);
+			$('bImg').style.visibility = 'visible';
+			
+		}
+
+		$('s').onmouseleave = function(e){
+			$('mask').style.visibility = 'hidden';
+			$('bImg').style.visibility = 'hidden';
+		}
+
+		function $(id){ return document.getElementById(id);}
+
+// var num = 10;
+// alert(1);
+// num = 20;
+// alert(2);
+
+// // setTimeout(function(){
+// // 	alert(num);
+// // },0);
+// //setTimeout("alert(num)",0);
+// //1 2 3 30
+// //setTimeout(alert(num),0);
+// //setTimeout(fun(),0);
+// //1 2 20 3
+
+// setTimeout(fun,0);
+// //1 2 3 20
+// num = 30;
+// alert(3);
+
+// function fun(){
+// 	alert(num);
+// }
+// 512 1470
+//获取元素
+       
+//        var num = 0;  //给top一个起始值   0   记录top的值改变
+//        var timer = null;//用来存储定时器   不能给0  因为定时器是一个对象
+//        var pic = $('pic');
+
+//        $('picUp').onmouseenter = function(){
+//        		timer = setInterval(function(){
+//        			if(num > -1070){
+//        				pic.style.top = --num;
+//        			}
+//        		},1);
+//        }
+
+//        $('picUp').onmouseleave = function(){
+//        		clearInterval(timer);
+//        }
+
+//        $('picDown').onmouseenter = function(){
+//        		timer = setInterval(function(){
+//        			if(num < 0){
+//        				pic.style.top = ++num;
+//        			}
+//        		},1);
+//        }
+
+//        $('picDown').onmouseleave = function(){
+//        		clearInterval(timer);
+//        }
+
+
+
+
+
+
+
+// function getClass(cls){
+// 	if(document.getElementsByClassName){
+// 		return document.getElementsByClassName(cls);
+// 	}else{
+// 		var tags = document.getElementsByTagName('*');
+// 		var arr = [];
+// 		for (var i = 0; i < tags.length; i++){
+// 			if(hasClass(tags[i], cls)){
+// 				arr.push(tags[i]);
+// 			}
+// 		}
+// 		return arr;
+// 	}
+// }
+
+// function trim(str){
+// 	return str.replace(/(^\s*)|(\s*$)/g, "");
+// }
+// function addClass(el, className){
+// 	if(!hasClass(el, className)){
+// 		el.className += ' ' + className;
+// 	}
+// 	el.className = prettyClass(el.className);
+// }
+// function prettyClass(cls){
+// 	var classReg = /[\t\r\n\f\s]+/g;
+// 	return trim(cls.replace(classReg, " "));
+// }
+
+// function removeClass(el, className){
+// 	if(hasClass(el, className)){
+// 		var reg = new RegExp(className,"g");
+// 		el.className = el.className.replace(reg, '');
+// 	}
+// 	el.className = prettyClass(el.className);
+// }
+// function hasClass(el, className){
+// 	var classReg = /[\t\r\n\f]/g;
+// 	return (" " + el.className + " ").replace(classReg, " ").indexOf( className ) >= 0;
+// }
+
+
+		</script>
+	</body>
+</html>
