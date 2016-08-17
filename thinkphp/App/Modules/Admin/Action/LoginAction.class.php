@@ -1,6 +1,6 @@
 <?php
 
-class LoginAction extends Action{
+class LoginAction extends CommonAction{
 
 	public function index(){
 		if(isset($_SESSION['uid']) && isset($_SESSION['username']) ){
@@ -41,10 +41,17 @@ class LoginAction extends Action{
 				);
 
 			M('user')->save($data);
-			session('uid', $user[id]);
+			session(C('USER_AUTH_KEY'), $user['id']);
 			session('username', $user['username']);
 			session('logintime',date('y-m-d H:i:s'));
 			session('loginip', $user['loginip']);
+			//超级管理员识别
+			if($user['username'] == C('RBAC_SUPER_ADMIN')){
+				session(C('ADMIN_AUTH_KEY'), true);
+			}
+			//读取用户权限
+			import('ORG.Util.RBAC');
+			RBAC::saveAccessList();
 
 			$this->redirect('Admin/Index/index');
 

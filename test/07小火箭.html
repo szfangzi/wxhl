@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		 <style>
+        body {
+            width: 2000px;
+        }
+       .top{
+           position: fixed;
+           right:50px;
+           bottom:100px;
+           display: none;
+       }
+
+    </style>
+    
+
+    <script type="text/javascript">
+    function $(id){ return document.getElementById(id);}
+    function show(obj) { obj.style.display = "block";}
+function hide(obj) { obj.style.display = "none";}
+
+    	 window.onload = function(){
+    	 	var goTop = $("gotop");
+    	 	
+    	 	// leader 起始位置  target  目标位置
+    	 	var leader = 0; var target = 0; var timer = null;
+    	 	//滚动事件
+    	 	window.onscroll = function(){
+    	 		
+    	 		document.body.scrollTop > 0 ? show(goTop) : hide(goTop);
+    	 		
+    	 		//将卷走的头部位置作为起始位置
+    	 		leader = document.body.scrollTop;  
+//  	 		console.log(scroll().top);
+    	 		
+    	 	}
+    	 	
+    	 	//点击事件
+    	 	
+    	
+    	 	goTop.onclick = function(){
+    	 		
+//  	 		回来的时候,目标位置的坐标为零
+//  	 		target = 0;
+    	 		timer = setInterval(function(){
+//  	 			某一个值 ===> 0   衰减                      
+    	 			leader = leader + (target - leader)/10;
+    	 			console.log(leader);  //正值
+    	 			
+//  	 			指定滚动到某一个位置
+    	 			window.scrollTo(0,leader);
+    	 			
+    	 			if(leader == target){
+    	 				
+    	 				clearInterval(timer);
+    	 			}
+    	 			
+    	 		},30);
+    	 		
+    	 		
+    	 	}
+    	 	
+    	 }
+    </script>
+	</head>
+	<body>
+	  <div id="gotop" class="top">
+       <img src="images/Top.jpg" alt=""/>
+      </div>
+    <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+            <p>人在江湖漂，哪能不挨饿</p>
+</body>
+	</body>
+</html>

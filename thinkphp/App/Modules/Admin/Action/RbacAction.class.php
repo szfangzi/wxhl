@@ -3,7 +3,8 @@
 class RbacAction extends CommonAction{
 
 	public function index(){
-
+// p($_SESSION);
+// 			die;
 		$this->users = D('UserRelation')->field('password',true)->relation(true)->select();
 		$this->display();
 	}

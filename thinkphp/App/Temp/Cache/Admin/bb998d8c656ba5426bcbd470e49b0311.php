@@ -967,7 +967,11 @@
 						<td><?php echo (date('Y-m-d H:i',$v["logintime"])); ?></td>
 						<td><?php echo ($v["loginip"]); ?></td>
 						<td>
+						<?php if($v['username'] == C('RBAC_SUPER_ADMIN')){ ?>
+							超级管理员
+						<?php }else{ ?>
 						<?php if(is_array($v['role'])): foreach($v['role'] as $rk=>$rv): ?><span rid="<?php echo ($rv['id']); ?>" class="rid" style="margin-right:5px;"><?php echo ($rv['name']); ?>(<?php echo ($rv['remark']); ?>)</span><?php endforeach; endif; ?>
+						<?php } ?>
 						</td>
 						<td><?php if(!$v['lock']){ ?>启用<?php }else{ ?>停用<?php } ?></td>
 						<td>

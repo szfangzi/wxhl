@@ -49,9 +49,13 @@
 						<td>{$v.logintime|date='Y-m-d H:i',###}</td>
 						<td>{$v.loginip}</td>
 						<td>
+						<?php if($v['username'] == C('RBAC_SUPER_ADMIN')){ ?>
+							超级管理员
+						<?php }else{ ?>
 						<foreach item='rv' key='rk' name="v['role']">
 							<span rid="{$rv['id']}" class="rid" style="margin-right:5px;">{$rv['name']}({$rv['remark']})</span>
 						</foreach>
+						<?php } ?>
 						</td>
 						<td><?php if(!$v['lock']){ ?>启用<?php }else{ ?>停用<?php } ?></td>
 						<td>

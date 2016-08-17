@@ -1064,21 +1064,6 @@
 
   	<script type="text/javascript">
 
-  	// var nidArr = JSON.parse('<?php echo ($nidArr); ?>');
-
-  	// //初始化权限数据
-  	// $('#nestable [type=checkbox]').each(function(){
-  	// 	var $this = $(this);
-  	// 	var tmp = $this.val().split('_');
-
-  	// 	for(var k in nidArr){
-  	// 		if(tmp[0] == nidArr[k]){
-  	// 			$this.prop('checked', true);
-  	// 		}
-  	// 	}
-
-  	// });
-
   	$('#nestable').nestable();
 
   	$('#nestable').on('click', 'input[type=checkbox]', function(){
@@ -1086,16 +1071,18 @@
   			level = $this.attr('level');
   		if($this.is(':checked')){
   			$this.closest('.dd-item').find('input[type=checkbox]').prop('checked', true);
+  			if(level == 3){
+  				$this.closest('.item1').find('.handle1 input[type=checkbox]').prop('checked', true);
+  				$this.closest('.item2').find('.handle2 input[type=checkbox]').prop('checked', true);
+  			}else if(level == 2){
+  				$this.closest('.item1').find('.handle1 input[type=checkbox]').prop('checked', true);
+  			}
   		}else{
   			$this.closest('.dd-item').find('input[type=checkbox]').prop('checked', false);
   		}
   		
   	});
 
-  	function isJsonStr(str){
-		var isJson = Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;    
-		return isJson;
-	}
 
   	</script>
 

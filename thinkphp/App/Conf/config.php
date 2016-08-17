@@ -5,7 +5,7 @@ return array(
 	'DEFAULT_GROUP'=>'Index',
 	'DB_NAME'               => 'think',          // 数据库名
     'DB_PREFIX'             => 'hd_',
-    'URL_HTML_SUFFIX'=>'',
+    'URL_HTML_SUFFIX'=>'', //URL伪静态后缀设置
 	'TMPL_VAR_IDENTIFY'=>'array',
 	'TMPL_FILE_DEPR'=>'_',
 	'SESSION_TYPE'=>'Db',

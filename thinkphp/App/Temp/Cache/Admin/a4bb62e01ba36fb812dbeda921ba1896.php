@@ -1054,6 +1054,7 @@
 		<script src="__PUBLIC__/assets/js/bootstrap.min.js"></script>
 
 		<!-- page specific plugin scripts -->
+		
 
 		<!--[if lte IE 8]>
 		  <script src="__PUBLIC__/assets/js/excanvas.min.js"></script>
