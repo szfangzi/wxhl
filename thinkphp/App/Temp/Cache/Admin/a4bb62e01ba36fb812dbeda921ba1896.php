@@ -962,7 +962,7 @@
 							<td>
 								<?php echo ($v["post_title"]); ?>
 							</td>
-							<td><?php echo ($v["post_author"]); ?></td>
+							<td><?php echo ($v["username"]); ?></td>
 							<td><?php echo ($v["post_date"]); ?></td>
 
 							<td>

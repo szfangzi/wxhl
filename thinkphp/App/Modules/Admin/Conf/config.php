@@ -11,7 +11,7 @@ return array(
 	'USER_AUTH_TYPE'=>1,    //自定义-验证类型（1：登录验证，2：实时验证）
 	'USER_AUTH_KEY'=>'uid', //自定义-用户认证识别号
 	'NOT_AUTH_MODULE'=>'Login',    //自定义-无需验证的控制器
-	'NOT_AUTH_ACTION'=>'',    //自定义-无需验证的动作方法 Login/index,Login/verify,Login/login,Login/logout
+	'NOT_AUTH_ACTION'=>'Index/index',    //自定义-无需验证的动作方法 Login/index,Login/verify,Login/login,Login/logout
 	'RBAC_ROLE_TABLE'=>'hd_role',    //自定义-角色表名称
 	'RBAC_USER_TABLE'=>'hd_role_user',    //自定义-角色与用户中间表名称
 	'RBAC_ACCESS_TABLE'=>'hd_access', //自定义-权限表名称

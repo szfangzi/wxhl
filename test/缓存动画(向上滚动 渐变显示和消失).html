@@ -199,9 +199,9 @@
 					var opacity = 0;
 					//缓冲动画
 					showTimer = setInterval(function(){
-						opacity+=0.1
+						opacity+=0.1;
 						pic.style.opacity = opacity;
-					},30);
+					},10);
 				}else{
 					clearInterval(showTimer);
 				}
@@ -213,9 +213,9 @@
 					var opacity = 1;
 					//缓冲动画
 					hideTimer = setInterval(function(){
-						opacity-=0.1
+						opacity-=0.1;
 						pic.style.opacity = opacity;
-					},30);
+					},10);
 				}else{
 					clearInterval(hideTimer);
 				}
@@ -231,8 +231,7 @@
 				var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 				//确定目标位置
 				target = 0;//核心代码
-				//leader = scrollTop - (scrollTop - target)/10;
-				leader = scrollTop - (scrollTop - 0)/10;console.log(1,leader,document.body.scrollTop);
+				leader = scrollTop - (scrollTop - 0)/10;
 				document.body.scrollTop = leader ;
 				
 			},30);

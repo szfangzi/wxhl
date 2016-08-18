@@ -1,18 +1,17 @@
 .demo { 
-	color: red;/*所有现代浏览器*/ 
+	color: gray;/*所有现代浏览器*/ 
+	+color: blue;/*IE7浏览器 */
 	*color: red;/*IE6-7浏览器*/ 
-	+color: blue;/*IE7浏览器*/ 
 	_color: orange;/*IE6浏览器*/ 
 } 
 @media all and (min-width:0px){ 
-	color: #000;/*Webkit和Opera浏览器*/ 
-} 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-	color: #f36;/*Webkit内核浏览器*/ 
-} 
-@media all and (-wekit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) { 
-	head~body .demo {color: #369;} /*Opera*/ 
+	.demo {color: #000;/*Webkit内核浏览器*/ }
 } 
 @-moz-document url-prefix(){ 
-	.demo{color:#ccc;}/* all firefox */ 
+	.demo{color:yellow;}/* all firefox */ 
 }
+
+/*
+filter:alpha(opacity=50);
+opacity: 0.5;
+*/

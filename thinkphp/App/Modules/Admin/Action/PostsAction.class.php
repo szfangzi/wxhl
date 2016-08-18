@@ -4,7 +4,8 @@ class PostsAction extends CommonAction{
 	
 	public function index(){
 
-		$posts = M('posts')->where(array('post_author'=>session('uid')))->select();
+		$sql = 'select * from hd_posts as p LEFT JOIN hd_user as u ON u.id = p.post_author';
+		$posts = M('posts')->query($sql);
 		$this->assign('posts', $posts)->display();
 	}
 
