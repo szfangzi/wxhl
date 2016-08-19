@@ -6,182 +6,69 @@
 	</head>
 	<body id="body">
 	<style type="text/css">
-/*		*{
-	    	margin: 0;
-	    	padding: 0;
-	    	list-style: none;
-	    	text-decoration: none;
-	    }*/
-	   /*轮播图*/
-/*#lunbo{clear:both;position:absolute;top:63px;left:220px;width:730px;height: 457px;}
-#imgs{width:730px;overflow:hidden;height:457px;}
-#imgs li{float:left;width:0;display: none;}
-#imgs .on{width:720px;display: list-item;}
-#dots .on{background:red;}
-#dots{position:absolute;right:295px;bottom:10px;padding-right: 10px;}
-#dots li{float:left;padding:1px  6px;border:1px solid #fff;margin-left:10px;background:#666;border-radius:20px;color:#fff;cursor: pointer;text-align:center;}*/
-/*轮播图左右箭头*/
-
-/*.sliderPage{display:none;}
-.sliderPage a{display:block;width:28px;height:62px;line-height:62px;background: rgba(0,0,0,.2);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#32000000, endColorstr=#32000000);color: #fff;text-align: center;font-size: 22px;font-weight: 400;margin-top: -31px;font-family: simsun;}
-#prev{position:absolute;left:0px;top:215px;}
-#next{position:absolute;right:0px;top:215px;}
-#lunbo:hover .sliderPage{display:block;}*/
-
-
-.unslider{overflow:auto;margin:0;padding:0}
-.unslider-wrap{position:relative}
-.unslider-wrap.unslider-carousel>li{float:left}
-.unslider-vertical>ul{height:100%}
-.unslider-vertical li{float:none;width:100%}
-.unslider-fade{position:relative}
-.unslider-fade .unslider-wrap li{position:absolute;left:0;top:0;right:0;z-index:8}
-.unslider-fade .unslider-wrap li.unslider-active{z-index:10}
-.unslider li,.unslider ol,.unslider ul{list-style:none;margin:0;padding:0;border:none}
-.unslider-arrow{position:absolute;left:20px;z-index:2;cursor:pointer}
-.unslider-arrow.next{left:auto;right:20px}
-
+.slider{overflow:auto;margin:0;padding:0}
+.slider-wrap{position:relative}
+.slider-wrap>li{float:left}
+.slider-vertical>ul{height:100%}
+.slider-vertical li{float:none;width:100%}
+.slider li,.slider ol,.slider ul{list-style:none;margin:0;padding:0;border:none}
+.slider-arrow{position:absolute;left:20px;z-index:2;cursor:pointer}
+.slider-arrow.next{left:auto;right:20px}
 	</style>
 
-
-<div class="unslider">
-	<div class="banner unslider-horizontal" style="position: relative; overflow: hidden;">
-	    <ul class="unslider-wrap unslider-carousel" style="width: 300%; left: -200%;">
-	        <li class="" style="width: 33.3333%;">This is a slide.</li>
-	        <li class="" style="width: 33.3333%;">This is another slide.</li>
-	        <li class="unslider-active" style="width: 33.3333%;">This is a final slide.</li>
-	    </ul>
-	</div>
-	<a class="unslider-arrow next">Next</a>
-	<a class="unslider-arrow prev">Prev</a>
-	<nav class="unslider-nav">
-		<ol>
-			<li data-slide="0" class="">1</li>
-			<li data-slide="1" class="">2</li>
-			<li data-slide="2" class="unslider-active">3</li>
-		</ol>
-	</nav>
-</div>
-
-<!-- <div class="banner">
+<div class="banner">
     <ul>
         <li>This is a slide.</li>
         <li>This is another slide.</li>
         <li>This is a final slide.</li>
     </ul>
-</div> -->
-<!-- <script type="text/javascript" src="js/slider.js"></script>
+</div>
+
 <script type="text/javascript">
-	$('.banner').unslider();
-</script>
- -->
-
-<!-- <div id="lunbo">
-	<ul id="imgs">
-		<li class="on"><a href="javascript:;"><img src="./images/11.jpg"></a></li>
-		<li><a href="javascript:;"><img src="./images/22.jpg"></a></li>
-		<li><a href="javascript:;"><img src="./images/33.jpg"></a></li>
-		<li><a href="javascript:;"><img src="./images/44.jpg"></a></li>
-		<li><a href="javascript:;"><img src="./images/55.jpg"></a></li>
-		<li><a href="javascript:;"><img src="./images/33.jpg"></a></li>
-		<li><a href="javascript:;"><img src="./images/22.jpg"></a></li>
-		<li><a href="javascript:;"><img src="./images/44.jpg"></a></li>
-	</ul>
-	<ul id="dots">
-		<li index="0" class="on">1</li>
-		<li index="1">2</li>
-		<li index="2">3</li>
-		<li index="3">4</li>
-		<li index="4">5</li>
-		<li index="5">6</li>
-		<li index="6">7</li>
-		<li index="7">8</li>
-	</ul>
-	<div class="sliderPage">
-		<a href="javascript:void(0)" id="prev"><</a>
-		<a href="javascript:void(0)" id="next">></a>
-	</div>
-</div> -->
-
-<script>
-
-$.fn.lunbo = function(options){
-    var defaults = {
-        lBtn:'#prev',
-        rBtn:'#next',
-        dotsBox:'#dots',
-        imgsBox:'#imgs'
-    };
-    //Extends out defaults options with those privided 扩展我们默认的设置
-    $.extend(defaults,options);
-
-    var $lunbo = $(this),
-    	$dotsBox = $(defaults.dotsBox),
-    	$imgsBox = $(defaults.imgsBox),
-    	$btns = $dotsBox.find('li'),
-    	$imgs = $imgsBox.find('li'),
-    	$lBtn = $(defaults.lBtn),
-    	$rBtn = $(defaults.rBtn),
-    	currentIndex = 0;
-
-    $dotsBox.css('right', ($lunbo.width() - $dotsBox.width())/2 );
-    $btns.on('mouseenter', function(e){
-    	var $this = $(this),
-    		newIndex = $this.attr('index');
-
-    	$btns.removeClass('on');
-    	$imgs.removeClass('on');
-    	$this.addClass('on');
-    	$imgs.eq(newIndex).addClass('on');
-    	currentIndex = newIndex;
-    });
-
-    $lunbo.on('click', defaults.lBtn+','+defaults.rBtn, function(e){
-    	var $this = $(this);
-		var currentLi = $dotsBox.find('li.on');
-		var liIndex = parseInt(currentLi.attr('index'));
-		$btns.eq(liIndex).removeClass('on');
-		$imgs.eq(liIndex).removeClass('on');
-
-		if('#'+$this[0].id == defaults.lBtn){
-			if(liIndex <= 0){
-				currentIndex = $btns.length - 1;
-			}else{
-				currentIndex = liIndex - 1;
-			}
-		}else if('#'+$this[0].id == defaults.rBtn){
-			if(liIndex >= $btns.length - 1){
-				currentIndex = 0;
-			}else{
-				currentIndex = liIndex + 1;
-			}
-		}
-
-		$btns.eq(currentIndex).addClass('on');
-		$imgs.eq(currentIndex).addClass('on');
-    });
-
-    	// 自动轮播
-	var autoInterval = null;
-	autoPlay();
-
-	function autoPlay(){
-		autoInterval = setInterval(function(){
-			$rBtn.click();
-		}, 1000);
+(function($) {
+	//  Don't throw any errors when jQuery
+	if(!$) {
+		return console.warn('Slider needs jQuery');
 	}
-	$lunbo.on('mouseenter', function(){
-		clearInterval(autoInterval);
-	});
-	$lunbo.on('mouseleave', function(){
-		autoPlay();
-	});
+	$.Slider = function(context, options){
+		var self = this;
+		self._ = 'slider';
+	
+		self.defaults = {
+			autoplay: false,
+			selectors: {
+				container: 'ul:first',
+				slides: 'li'
+			}
+		};
 
-};
-//$('#lunbo').lunbo();
+		//  Set defaults
+		self.$context = context;
+		self.options = {};
+	    
+	    self.init = function(options){
+	    	//Extends out defaults options with those privided 扩展我们默认的设置
+	    	self.options = $.extend({}, self.defaults, options);
+	    	//console.log(self.options,self.defaults);
+	    }
+
+		return self.init(options);
+	};
+
+	//  And set up our jQuery plugin
+	$.fn.slider = function(opts) {
+		return this.each(function() {
+			var $this = $(this);console.log(1,$this);
+
+			return $this.data('slider', new $.Slider($this, opts));
+		});
+	};
+
+}(window.jQuery));
+
+$('.banner').slider({a:1});
 
 </script>
-
 
 	</body>
 </html>

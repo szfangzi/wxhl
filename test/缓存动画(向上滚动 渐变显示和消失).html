@@ -192,33 +192,26 @@
 			if(scrollTop == 0){
 				clearInterval(timer);
 			}
-			if(scrollTop > 50){
+			if(scrollTop > 100){
 				clearInterval(hideTimer);
-				if(pic.style.opacity < 1){
-					clearInterval(showTimer);
-					var opacity = 0;
-					//缓冲动画
-					showTimer = setInterval(function(){
-						opacity+=0.1;
-						pic.style.opacity = opacity;
-					},10);
-				}else{
-					clearInterval(showTimer);
-				}
+				clearInterval(showTimer);
+				var opacity = pic.style.opacity || 0;
+				//缓冲动画
+				showTimer = setInterval(function(){
+					opacity=(parseFloat(opacity)+0.1)<1?(parseFloat(opacity)+0.1):1;
+					pic.style.opacity = opacity;
+				},10);
 				
 			}else{
 				clearInterval(showTimer);
-				if(pic.style.opacity > 0){
-					clearInterval(hideTimer);
-					var opacity = 1;
-					//缓冲动画
-					hideTimer = setInterval(function(){
-						opacity-=0.1;
-						pic.style.opacity = opacity;
-					},10);
-				}else{
-					clearInterval(hideTimer);
-				}
+				clearInterval(hideTimer);
+				var opacity = pic.style.opacity;console.log(opacity);
+				//缓冲动画
+				hideTimer = setInterval(function(){
+					opacity=(parseFloat(opacity)-0.1)>=0?(parseFloat(opacity)-0.1):0;console.log(opacity);
+					pic.style.opacity = opacity;
+				},10);
+
 			}
 			  
 		}

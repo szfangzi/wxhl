@@ -159,7 +159,7 @@
 			self.calculateSlides();
 
 			//  Listen to a ready event
-			self.$context.trigger(self._ + '.ready');
+			self.$context.trigger(self._ + '.ready');console.log(self);
 
 			//  Everyday I'm chainin'
 			return self.animate(self.options.index || self.current, 'init');

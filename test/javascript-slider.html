@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="js/jquery.js"></script>
+	</head>
+	<body id="body">
+	<style type="text/css">
+		*{
+	    	margin: 0;
+	    	padding: 0;
+	    	list-style: none;
+	    	text-decoration: none;
+	    }
+	   /*轮播图*/
+#lunbo{clear:both;position:absolute;top:63px;left:220px;width:730px;height: 457px;}
+#imgs{width:730px;overflow:hidden;height:457px;}
+#imgs li{float:left;width:0;opacity:0}
+#imgs .on{width:720px;opacity: 1;}
+#dots .on{background:red;}
+#dots{position:absolute;right:295px;bottom:10px;padding-right: 10px;}
+#dots li{float:left;padding:1px  6px;border:1px solid #fff;margin-left:10px;background:#666;border-radius:20px;color:#fff;cursor: pointer;text-align:center;}
+/*轮播图左右箭头*/
+
+.sliderPage{display:none;}
+.sliderPage a{display:block;width:28px;height:62px;line-height:62px;background: rgba(0,0,0,.2);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#32000000, endColorstr=#32000000);color: #fff;text-align: center;font-size: 22px;font-weight: 400;margin-top: -31px;font-family: simsun;}
+#prev{position:absolute;left:0px;top:215px;}
+#next{position:absolute;right:0px;top:215px;}
+#lunbo:hover .sliderPage{display:block;}
+
+	</style>
+
+<!------------------------------------轮播图------------------------------------>
+<div id="lunbo">
+	<ul id="imgs">
+		<li class="on"><a href="javascript:;"><img src="./images/11.jpg"></a></li>
+		<li><a href="javascript:;"><img src="./images/22.jpg"></a></li>
+		<li><a href="javascript:;"><img src="./images/33.jpg"></a></li>
+		<li><a href="javascript:;"><img src="./images/44.jpg"></a></li>
+		<li><a href="javascript:;"><img src="./images/55.jpg"></a></li>
+		<li><a href="javascript:;"><img src="./images/33.jpg"></a></li>
+		<li><a href="javascript:;"><img src="./images/22.jpg"></a></li>
+		<li><a href="javascript:;"><img src="./images/44.jpg"></a></li>
+	</ul>
+	<ul id="dots">
+
+	</ul>
+	<!-- ----------------------------------轮播图左右箭头------------------------>
+	<div class="sliderPage">
+		<a href="javascript:void(0)" id="prev"><</a>
+		<a href="javascript:void(0)" id="next">></a>
+	</div>
+</div>
+
+<script>
+
+function lunbo(){
+	
+	
+	var lBtn = $('prev');
+	var rBtn = $('next');
+	var lunboBox = $('lunbo');
+	var lunboBtnsBox = $('dots');
+	var lunbos = $('imgs').children;
+	
+	//生成轮播圆点
+	for (var i = 0; i < lunbos.length; i++) {
+		var btn = document.createElement('li');
+		if(i==0){
+			btn.className = 'on';
+		}
+		btn.innerHTML = i+1;
+		lunboBtnsBox.appendChild(btn);
+	};
+
+	var lunboBtns = lunboBtnsBox.children;
+	//轮播圆点居中
+	lunboBtnsBox.style.right = (lunboBox.clientWidth - lunboBtnsBox.clientWidth)/2 + 'px';
+
+	var currentIndex = 0;
+	//初始化圆点事件
+	for (var i = 0; i < lunboBtns.length; i++) {
+		
+		lunboBtns[i].onmouseover = function(){
+			e = this;
+			for (var i = 0; i < lunboBtns.length; i++) {
+				if(lunboBtns[i].innerHTML == e.innerHTML){
+					currentIndex = i;
+				}
+				lunboBtns[i].className = '';
+				lunbos[i].className = '';
+			};
+			e.className = 'on';
+			lunbos[currentIndex].className = 'on';
+
+		}
+	}
+	//初始化左右按钮事件
+	rBtn.onclick = lBtn.onclick = function(){
+		lrBtn(this);
+	}
+
+	function lrBtn(e){
+		var currentIndex = 0, newIndex = 0;
+
+		for (var i = 0; i < lunboBtns.length; i++) {
+			if(lunboBtns[i].className == 'on'){
+				currentIndex = i;
+			}
+			lunboBtns[i].className = '';
+			lunbos[i].className = '';
+		};
+		
+		if(e.id == 'prev'){
+			newIndex = prevEl(lunbos, currentIndex);
+		}else{
+			newIndex = nextEl(lunbos, currentIndex);
+		}
+		var showTimer = null;
+		//var hideTimer = null;
+		showTimer = setInterval(function(){
+			var opacity = lunbos[newIndex].style.opacity || 0;
+			opacity = (parseFloat(opacity) + 0.1)<=1?(parseFloat(opacity) + 0.1):clearInterval(showTimer);
+			lunbos[newIndex].style.opacity = opacity;
+		},60);
+		lunbos[currentIndex].style.opacity = 0;
+		// hideTimer = setInterval(function(){
+		// 	var opacity = lunbos[currentIndex].style.opacity;
+		// 	opacity = (parseFloat(opacity) - 0.1)>=0?(parseFloat(opacity) - 0.1):clearInterval(hideTimer);
+		// 	lunbos[currentIndex].style.opacity = opacity;
+		// },30);
+		lunbos[newIndex].className = 'on';
+		lunboBtns[newIndex].className = 'on';
+	}
+
+
+	// 自动轮播
+	var autoInterval = null;
+	autoPlay();
+
+	function autoPlay(){
+		autoInterval = setInterval(function(){
+			rBtn.click();
+		}, 2000);
+		
+	}
+
+	lunboBox.onmouseenter = function(){
+		clearInterval(autoInterval);
+	}
+	lunboBox.onmouseleave = function(){
+		autoPlay();
+	}
+
+}
+
+function nextEl(els, index){
+	for (var i = index+1; i <= els.length; i++) {
+		if(i == els.length){
+			i = -1;
+			continue;
+		}
+		return i;
+	};
+}
+
+function prevEl(els, index){
+	for (var i = index-1; i >= -1; i--) {
+		if(i == -1){
+			i = els.length-1;
+		}
+		return i;
+	};
+
+}
+
+
+
+
+
+function $(id){
+	return document.getElementById(id);
+}
+
+lunbo();
+
+</script>
+
+
+	</body>
+</html>

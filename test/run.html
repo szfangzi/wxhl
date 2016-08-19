@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		  <style type="text/css">
+			
+			div{
+				
+				width: 100px;
+				height: 100px;
+				background-color: darkcyan;
+				position: absolute;
+				top: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="but200">200短跑</button>
+		<button id="but400">400长跑</button>
+		<div id="run"></div>
+		<!--<div id="run1"></div>-->
+	</body>
+</html>
+<script type="text/javascript">
+	
+	  function $(id){return document.getElementById(id);}
+	  
+	  $("but200").onclick = function(){
+	  	
+	  	   move1($("run"),200);     //谁运动    目标位置
+	  }
+	  
+	   $("but400").onclick = function(){
+	  	
+	  	    move1($("run"),400);
+	  }
+	    
+//	   var index = 10;  //变量   谁都可以用
+//	   arr.index = 1;  //属性    名花有主
+//	   for(var i= 0;i<.length;i++){
+//	   	
+//	   	    lis[i].index = i;
+//	   }
+	  function move1(obj,target){
+	  	console.log(obj);
+	  	clearInterval(obj.timer);
+	  	//开启定时器
+	  obj.timer = setInterval(function(){
+	  	    
+	  	     if(obj.offsetLeft > target){
+	  	     	
+	  	     	clearInterval(obj.timer);
+	  	     	
+	  	     	
+	  	     }
+	  		
+	  		 obj.style.left = obj.offsetLeft  + 10 +"px";
+	  	},30)
+	  	 
+	  	
+	  }
+</script>
