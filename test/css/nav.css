@@ -21,7 +21,7 @@ html { overflow-x: hidden; }
 .fl { float: left; }
 .fr { float: right; }
 /*style by zns*/
-body { background: url(../images/bodyBg.jpg) center top no-repeat #000; }
+body { /*background: url(../images/bodyBg.jpg) center top no-repeat #000;*/background-color: #000; }
 /*nav*/
 .nav { width: 1000px; height: 96px; margin: 0 auto;}
 .logo { width: 220px; float: left; overflow: hidden; padding-left: 36px; /*padding-top: 8px;*/ }

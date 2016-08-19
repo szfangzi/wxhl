@@ -3,14 +3,14 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="css/nav.css">
-		<script type="text/javascript" src="js/jquery.js"></script>
+		<!--<script type="text/javascript" src="js/jquery.js"></script>-->
 	</head>
 	<body id="body">
 
 <div class="navTxt" id="navTxt">
-	<div class="hover" id="hover" style="left:28px;"></div>
+	<div class="hover" id="hover"></div>
 	<a hover="28" href="index.html">首&nbsp;页</a><span></span>
-	<a hover="128" href="css01_desc.html" target="_blank">CSS课程</a><span></span>
+	<a hover="128" class="on" href="css01_desc.html" target="_blank">CSS课程</a><span></span>
 	<a hover="230" href="js02_desc.html" target="_blank">JS课程</a><span></span>
 	<a hover="334" href="html5_01_desc.html" target="_blank">HTML5课程</a><span></span>
 	<a hover="438" href="video.html" target="_blank">视频教程</a><span></span>
@@ -25,51 +25,66 @@ var $navTxt = $('navTxt'),
 	$hover = $('hover');
 
 var timer = null;
-
+var startHover = 0;
+for(var i in $links){
+	if($links[i].className == 'on'){
+		startHover = parseInt($links[i].getAttribute('hover'));
+		$hover.style.left = startHover + 'px';
+	}
+	
+}
 for (var i = 0; i < $links.length; i++) {
 	$links[i].onmouseenter = function(){
-		var start = parseInt(getCss($hover, 'left'));
 		var target = parseInt(this.getAttribute('hover'));
-		var flag = '';
-		var fixed = 40;
-		if(start>target){
-			flag = 'toLeft';
-		}else{
-			flag = 'toRight';
-		}
-		clearInterval(timer);
-		timer = setInterval(function(){
-			var now = parseInt(getCss($hover, 'left'));
-			
-			if(flag == 'toRight' && now<=target+fixed){
-				$hover.style.left = now + (target-now)/5 + fixed + 'px';
-				now = parseInt(getCss($hover, 'left'));
-				if(now>=target+fixed){
-					flag = 'toLeft';
-					fixed /= 2;
-					if(fixed <= 1){
-						clearInterval(timer);
-						$hover.style.left = target + 'px';
-					}
-				}
-			}else if(flag == 'toLeft' && now>target-fixed){
-				$hover.style.left = now - (now-target)/5 - fixed + 'px';
-				now = parseInt(getCss($hover, 'left'));
-				if(now<=target-fixed){
-					flag = 'toRight';
-					fixed /= 2;
-					if(fixed <= 1){
-						clearInterval(timer);
-						$hover.style.left = target + 'px';
-					}
+		hoverMove(target);
+	}
+};
+
+$navTxt.onmouseleave = function(){
+	var target = startHover;
+	hoverMove(target);
+}
+
+function hoverMove(target){
+	var start = parseInt(getCss($hover, 'left'));
+	
+	var flag = '';
+	var fixed = 40;
+	if(start>target){
+		flag = 'toLeft';
+	}else{
+		flag = 'toRight';
+	}
+	clearInterval(timer);
+	timer = setInterval(function(){
+		var now = parseInt(getCss($hover, 'left'));
+		
+		if(flag == 'toRight' && now<=target+fixed){
+			$hover.style.left = now + (target-now)/5 + fixed + 'px';
+			now = parseInt(getCss($hover, 'left'));
+			if(now>=target+fixed){
+				flag = 'toLeft';
+				fixed /= 2;
+				if(fixed <= 1){
+					clearInterval(timer);
+					$hover.style.left = target + 'px';
 				}
 			}
+		}else if(flag == 'toLeft' && now>target-fixed){
+			$hover.style.left = now - (now-target)/5 - fixed + 'px';
+			now = parseInt(getCss($hover, 'left'));
+			if(now<=target-fixed){
+				flag = 'toRight';
+				fixed /= 2;
+				if(fixed <= 1){
+					clearInterval(timer);
+					$hover.style.left = target + 'px';
+				}
+			}
+		}
 
-		},30);
-		
-	}
-
-};
+	},30);
+}
 // $links
 function getCss(el, css){
 	if(window.getComputedStyle){
