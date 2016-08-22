@@ -47,3 +47,62 @@ function stopDefault(e) {
         window.event.returnValue = false; 
     }
 }
+
+function getCss(el, css){
+	if(window.getComputedStyle){
+		return window.getComputedStyle(el, null)[css];
+	}else{
+		return el.currentStyle[css];
+	}
+}
+
+/* ie未验证 start*/
+function $(id){
+	return document.getElementById(id);
+}
+function show(el){
+	el.style.display = 'block';
+}
+function hide(el){
+	el.style.display = 'none';
+}
+function getElsByClass(cls){
+	if(document.getElementsByClassName){
+		return document.getElementsByClassName(cls);
+	}else{
+		var tags = document.getElementsByTagName('*');
+		var arr = [];
+		for (var i = 0; i < tags.length; i++){
+			if(hasClass(tags[i], cls)){
+				arr.push(tags[i]);
+			}
+		}
+		return arr;
+	}
+}
+function trim(str){
+	return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+function addClass(el, className){
+	if(!hasClass(el, className)){
+		el.className += ' ' + className;
+	}
+	el.className = prettyClass(el.className);
+}
+function prettyClass(cls){
+	var classReg = /[\t\r\n\f\s]+/g;
+	return trim(cls.replace(classReg, " "));
+}
+
+function removeClass(el, className){
+	if(hasClass(el, className)){
+		var reg = new RegExp(className,"g");
+		el.className = el.className.replace(reg, '');
+	}
+	el.className = prettyClass(el.className);
+}
+function hasClass(el, className){
+	var classReg = /[\t\r\n\f]/g;
+	return (" " + el.className + " ").replace(classReg, " ").indexOf( className ) >= 0;
+}
+/* ie未验证 end*/

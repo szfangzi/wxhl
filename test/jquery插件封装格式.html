@@ -1,9 +1,39 @@
-/**
- *   Unslider
- *   version 2.0
- *   by @idiot and friends
- */
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<!--<script type="text/javascript" src="js/jquery.event.move.js"></script>
+		<script type="text/javascript" src="js/jquery.event.swipe.js"></script>-->
+	</head>
+	<body id="body">
+	<style type="text/css">
+.slider{margin:0;padding:0;position: relative}
+.slider-wrap{position:relative;}
+.slider-wrap>li{float:left}
+.slider-vertical>ul{height:100%}
+.slider-vertical li{float:none;width:100%;}
+.slider li,.slider ol,.slider ul{list-style:none;margin:0;padding:0;border:none}
+.slider-arrow{position:absolute;left:20px;z-index:2;cursor:pointer}
+.slider-arrow.next{left:auto;right:20px}
+.slider-nav{position: absolute;left: 0;right: 0;bottom: 20px;}
+.slider-nav ol{text-align: center;}
+.slider-nav ol li{display: inline-block;width: 10px;height: 10px;margin: 0 4px;text-indent: -999em;border: 2px solid #fff;border-radius: 6px;cursor: pointer;opacity: .4;-webkit-transition: background .5s, opacity .5s;-moz-transition: background .5s, opacity .5s;transition: background .5s, opacity .5s;}
+.slider-nav ol li.slider-active{background: #fff;opacity: 1;}
+.banner{max-height: 300px;}
+	</style>
 
+
+
+<div class="banner">
+    <ul>
+        <li><img src="images/1.jpg"></li>
+        <li><img src="images/2.jpg"></li>
+        <li><img src="images/3.jpg"></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
 (function(factory) {
 	if (typeof module === 'object' && typeof module.exports === 'object') {
 		factory(require('jquery'));
@@ -16,28 +46,18 @@
 }(function($) {
 	//  Don't throw any errors when jQuery
 	if(!$) {
-		return console.warn('Unslider needs jQuery');
+		return console.warn('Slider needs jQuery');
 	}
-
-	$.Unslider = function(context, options) {
+	$.Slider = function(context, options){
 		var self = this;
-
-		//  Create an Unslider reference we can use everywhere
-		self._ = 'unslider';
-
-		//  Store our default options in here
-		//  Everything will be overwritten by the jQuery plugin though
+		self._ = 'slider';
+	
 		self.defaults = {
-			//  Should the slider move on its own or only when
-			//  you interact with the nav/arrows?
-			//  Only accepts boolean true/false.
 			autoplay: false,
-
-			//  3 second delay between slides moving, pass
-			//  as a number in milliseconds.
+			//  元素切换延迟时间(毫秒)
 			delay: 3000,
 
-			//  Animation speed in millseconds
+			//  动画速度(毫秒)
 			speed: 750,
 
 			//  An easing string to use. If you're using Velocity, use a
@@ -63,25 +83,16 @@
 			//  a callback function per item to generate.
 			nav: true,
 
-			//  Should there be left/right arrows to go back/forth?
-			//   -> This isn't keyboard support.
-			//  Either set true/false, or an object with the HTML
-			//  elements for each arrow like below:
+			// 上下页html
 			arrows: {
 				prev: '<a class="' + self._ + '-arrow prev">Prev</a>',
 				next: '<a class="' + self._ + '-arrow next">Next</a>'
 			},
 
-			//  How should Unslider animate?
-			//  It can do one of the following types:
-			//  "fade": each slide fades in to each other
-			//  "horizontal": each slide moves from left to right
-			//  "vertical": each slide moves from top to bottom
+			//  动画切换类型
+			//  "horizontal": 横向切换
+			//  "vertical": 垂直切换
 			animation: 'horizontal',
-
-			//  If you don't want to use a list to display your slides,
-			//  you can change it here. Not recommended and you'll need
-			//  to adjust the CSS accordingly.
 			selectors: {
 				container: 'ul:first',
 				slides: 'li'
@@ -91,24 +102,21 @@
 			//  it moves
 			animateHeight: false,
 
-			//  Active class for the nav
+			//  当前圆点导航
 			activeClass: self._ + '-active',
 
 			//  Have swipe support?
 			//  You can set this here with a boolean and always use
 			//  initSwipe/destroySwipe later on.
-			swipe: true,
+			swipe: false,
 			// Swipe threshold -
 			// lower float for enabling short swipe
 			swipeThreshold: 0.2
 		};
 
-		//  Set defaults
 		self.$context = context;
 		self.options = {};
 
-		//  Leave our elements blank for now
-		//  Since they get changed by the options, we'll need to
 		//  set them in the init method.
 		self.$parent = null;
 		self.$container = null;
@@ -116,96 +124,71 @@
 		self.$nav = null;
 		self.$arrows = [];
 
-		//  Set our indexes and totals
+		// 轮播元素总数 以及 当前元素位置
 		self.total = 0;
 		self.current = 0;
 
-		//  Generate a specific random ID so we don't dupe events
+		// 命名前缀 以及 事件随机命名空间后缀
 		self.prefix = self._ + '-';
 		self.eventSuffix = '.' + self.prefix + ~~(Math.random() * 2e3);
 
-		//  In case we're going to use the autoplay
+		//声明自动播放定时器
 		self.interval = null;
+	    
+	    self.init = function(options){
+	    	//扩展我们默认的设置
+	    	self.options = $.extend({}, self.defaults, options);
 
-		//  Get everything set up innit
-		self.init = function(options) {
-			//  Set up our options inside here so we can re-init at
-			//  any time
-			self.options = $.extend({}, self.defaults, options);
+	    	self.$container = self.$context.find(self.options.selectors.container).addClass(self.prefix + 'wrap');
+	    	self.$slides = self.$container.children(self.options.selectors.slides);
 
-			//  Our elements
-			self.$container = self.$context.find(self.options.selectors.container).addClass(self.prefix + 'wrap');
-			self.$slides = self.$container.children(self.options.selectors.slides);
-
-			//  We'll manually init the container
+	    	// 初始化容器的基本html和css调整
 			self.setup();
 
-			//  We want to keep this script as small as possible
-			//  so we'll optimise some checks
-			$.each(['nav', 'arrows', 'keys', 'infinite'], function(index, module) {
+			// 根据参数, 初始化圆点导航、上下页功能、键盘上下页操作
+			$.each(['nav', 'arrows', 'keys','swipe'], function(index, module) {
 				self.options[module] && self['init' + $._ucfirst(module)]();
 			});
 
-			//  Add swipe support
-			if(jQuery.event.special.swipe && self.options.swipe) {
-				self.initSwipe();
-			}
+	    	self.options.autoplay && self.start();
 
-			//  If autoplay is set to true, call self.start()
-			//  to start calling our timeouts
-			self.options.autoplay && self.start();
+	    	//计算轮播元素的个数 并且 设置元素样式
+	    	self.calculateSlides();
 
-			//  We should be able to recalculate slides at will
-			self.calculateSlides();
+	    	//返回self, 说不定哪天就需要链式调用
+	    	return self.animate(self.options.index || self.current, 'init');
+	    };
 
-			//  Listen to a ready event
-			self.$context.trigger(self._ + '.ready');
+	    self.setup = function(){
 
-			//  Everyday I'm chainin'
-			return self.animate(self.options.index || self.current, 'init');
-		};
-
-		self.setup = function() {
-			//  Add a CSS hook to the main element
-			self.$context.addClass(self.prefix + self.options.animation).wrap('<div class="' + self._ + '" />');
-			self.$parent = self.$context.parent('.' + self._);
-
-			//  We need to manually check if the container is absolutely
-			//  or relatively positioned
+	    	self.$context.addClass(self.prefix + self.options.animation).wrap('<div class="' + self._ + '" />');
+	    	self.$parent = self.$context.parent('.' + self._);
+	    	
+	    	//  self.$context(内容容器)必须是 absolute或者relative，不是的话自动设置成relative
 			var position = self.$context.css('position');
-
-			//  If we don't already have a position set, we'll
-			//  automatically set it ourselves
 			if(position === 'static') {
 				self.$context.css('position', 'relative');
 			}
 
 			self.$context.css('overflow', 'hidden');
-		};
 
-		//  Set up the slide widths to animate with
-		//  so the box doesn't float over
-		self.calculateSlides = function() {
-			// update slides before recalculating the total
-			self.$slides = self.$container.children(self.options.selectors.slides);
+			return self;
+	    };
+	    self.calculateSlides = function(){
+	    	self.$slides = self.$container.children(self.options.selectors.slides);
 
-			self.total = self.$slides.length;
+	    	self.total = self.$slides.length;
 
-			//  Set the total width
-			if(self.options.animation !== 'fade') {
-				var prop = 'width';
+	    	var prop = 'width';
 
-				if(self.options.animation === 'vertical') {
-					prop = 'height';
-				}
-
-				self.$container.css(prop, (self.total * 100) + '%').addClass(self.prefix + 'carousel');
-				self.$slides.css(prop, (100 / self.total) + '%');
+			if(self.options.animation === 'vertical') {
+				prop = 'height';
 			}
-		};
 
-
-		//  Start our autoplay
+			self.$container.css(prop, (self.total * 100) + '%').addClass(self.prefix + 'carousel');
+			self.$slides.css(prop, (100 / self.total) + '%');
+	    }
+	    //  Start our autoplay
 		self.start = function() {
 			self.interval = setTimeout(function() {
 				//  Move on to the next slide
@@ -227,15 +210,13 @@
 
 			return self;
 		};
-
-
-		//  Set up our navigation
-		self.initNav = function() {
-			var $nav = $('<nav class="' + self.prefix + 'nav"><ol /></nav>');
+	    self.initNav = function(){
+	    	var $nav = $('<nav class="' + self.prefix + 'nav"><ol /></nav>');
 
 			//  Build our click navigation item-by-item
 			self.$slides.each(function(key) {
-				//  圆点导航的值可以优先获取在轮播元素上设置了data-nav
+				//  If we've already set a label, let's use that
+				//  instead of generating one
 				var label = this.getAttribute('data-nav') || key + 1;
 
 				//  Listen to any callback functions
@@ -252,7 +233,7 @@
 
 			//  Now our nav is built, let's add it to the slider and bind
 			//  for any click events on the generated links
-			self.$nav.find('li').on('click' + self.eventSuffix, function() {
+			self.$nav.find('li').on('mouseenter' + self.eventSuffix, function() {
 				//  Cache our link and set it to be active
 				var $me = $(this).addClass(self.options.activeClass);
 
@@ -262,27 +243,20 @@
 				//  Move the slide
 				self.animate($me.attr('data-slide'));
 			});
-		};
+	    };
+	    self.initArrows = function(){
+	    	if(self.options.arrows){
+	    		self.options.arrows = self.defaults.arrows;
+	    	}
 
-
-		//  Set up our left-right arrow navigation
-		//  (Not keyboard arrows, prev/next buttons)
-		self.initArrows = function() {
-			if(self.options.arrows === true) {
-				self.options.arrows = self.defaults.arrows;
-			}
-
-			//  Loop our options object and bind our events
-			$.each(self.options.arrows, function(key, val) {
-				//  Add our arrow HTML and bind it
+	    	$.each(self.options.arrows, function(key, val) {
 				self.$arrows.push(
 					$(val).insertAfter(self.$context).on('click' + self.eventSuffix, self[key])
 				);
 			});
-		};
 
-
-		//  Set up our keyboad navigation
+	    };
+	    //  Set up our keyboad navigation
 		//  Allow binding to multiple keycodes
 		self.initKeys = function() {
 			if(self.options.keys === true) {
@@ -342,34 +316,6 @@
 			}
 		};
 
-		//  Infinite scrolling is a massive pain in the arse
-		//  so we need to create a whole bloody function to set
-		//  it up. Argh.
-		self.initInfinite = function() {
-			var pos = ['first', 'last'];
-
-			$.each(pos, function(index, item) {
-				self.$slides.push.apply(
-					self.$slides,
-
-					//  Exclude all cloned slides and call .first() or .last()
-					//  depending on what `item` is.
-					self.$slides.filter(':not(".' + self._ + '-clone")')[item]()
-
-					//  Make a copy of it and identify it as a clone
-					.clone().addClass(self._ + '-clone')
-
-					//  Either insert before or after depending on whether we're
-					//  the first or last clone
-					['insert' + (index === 0 ? 'After' : 'Before')](
-						//  Return the other element in the position array
-						//  if item = first, return "last"
-						self.$slides[pos[~~!index]]()
-					)
-				);
-			});
-		};
-
 		//  Remove any trace of arrows
 		//  Loop our array of arrows and use jQuery to remove
 		//  It'll unbind any event handlers for us
@@ -391,8 +337,8 @@
 			//  Remove the event handler
 			$(document).off('keyup' + self.eventSuffix);
 		};
-
-		self.setIndex = function(to) {
+	    //根据目标参数 设置 当前slide和nav的样式
+	    self.setIndex = function(to) {
 			if(to < 0) {
 				to = self.total - 1;
 			}
@@ -407,10 +353,7 @@
 
 			return self;
 		};
-
-		//  Despite the name, this doesn't do any animation - since there's
-		//  now three different types of animation, we let this method delegate
-		//  to the right type, keeping the name for backwards compat.
+	    // to是目标元素标示, dir表示从哪个函数调用, 比如init、next、prev
 		self.animate = function(to, dir) {
 			//  Animation shortcuts
 			//  Instead of passing a number index, we can now
@@ -429,25 +372,18 @@
 				self.stop().start();
 			}
 
+			//根据目标参数 设置 当前slide和nav的样式
 			self.setIndex(to);
 
-			//  Add a callback method to do stuff with
-			self.$context.trigger(self._ + '.change', [to, self.$slides.eq(to)]);
-
-			//  Delegate the right method - everything's named consistently
-			//  so we can assume it'll be called "animate" +
+			// 声明调用哪种动画类型
 			var fn = 'animate' + $._ucfirst(self.options.animation);
 
-			//  Make sure it's a valid animation method, otherwise we'll get
-			//  a load of bug reports that'll be really hard to report
 			if($.isFunction(self[fn])) {
 				self[fn](self.current, dir);
 			}
 
 			return self;
 		};
-
-
 		//  Shortcuts for animating if we don't know what the current
 		//  index is (i.e back/forward)
 		//  For moving forward we need to make sure we don't overshoot.
@@ -469,86 +405,31 @@
 		};
 
 
-		//  Our default animation method, the old-school left-to-right
-		//  horizontal animation
+		//  基本横向动画样式设置
 		self.animateHorizontal = function(to) {
 			var prop = 'left';
 
-			//  Add RTL support, slide the slider
-			//  the other way if the site is right-to-left
+			//  支持rtl反向取元素
 			if(self.$context.attr('dir') === 'rtl') {
 				prop = 'right';
-			}
-
-			if(self.options.infinite) {
-				//  So then we need to hide the first slide
-				self.$container.css('margin-' + prop, '-100%');
 			}
 
 			return self.slide(prop, to);
 		};
 
-		//  The same animation methods, but vertical support
-		//  RTL doesn't affect the vertical direction so we
-		//  can just call as is
+		//  垂直动画样式设置 不支持rtl反向取元素
 		self.animateVertical = function(to) {
 			self.options.animateHeight = true;
-
-			//  Normal infinite CSS fix doesn't work for
-			//  vertical animation so we need to manually set it
-			//  with pixels. Ah well.
-			if(self.options.infinite) {
-				self.$container.css('margin-top', -self.$slides.outerHeight());
-			}
 
 			return self.slide('top', to);
 		};
 
-		//  Actually move the slide now
-		//  We have to pass a property to animate as there's
-		//  a few different directions it can now move, but it's
-		//  otherwise unchanged from before.
+		//  移动元素到to
 		self.slide = function(prop, to) {
 			//  If we want to change the height of the slider
 			//  to match the current slide, you can set
 			//  {animateHeight: true}
 			self.animateHeight(to);
-
-			//  For infinite sliding we add a dummy slide at the end and start
-			//  of each slider to give the appearance of being infinite
-			if(self.options.infinite) {
-				var dummy;
-
-				//  Going backwards to last slide
-				if(to === self.total - 1) {
-					//  We're setting a dummy position and an actual one
-					//  the dummy is what the index looks like
-					//  (and what we'll silently update to afterwards),
-					//  and the actual is what makes it not go backwards
-					dummy = self.total - 3;
-					to = -1;
-				}
-
-				//  Going forwards to first slide
-				if(to === self.total - 2) {
-					dummy = 0;
-					to = self.total - 2;
-				}
-
-				//  If it's a number we can safely set it
-				if(typeof dummy === 'number') {
-					self.setIndex(dummy);
-
-					//  Listen for when the slide's finished transitioning so
-					//  we can silently move it into the right place and clear
-					//  this whole mess up.
-					self.$context.on(self._ + '.moved', function() {
-						if(self.current === dummy) {
-							self.$container.css(prop, -(100 * dummy) + '%').off(self._ + '.moved');
-						}
-					});
-				}
-			}
 
 			//  We need to create an object to store our property in
 			//  since we don't know what it'll be.
@@ -561,22 +442,7 @@
 			return self._move(self.$container, obj);
 		};
 
-
-		//  Fade between slides rather than, uh, sliding it
-        self.animateFade = function(to) {
-			//  If we want to change the height of the slider
-			//  to match the current slide, you can set
-			//  {animateHeight: true}
-			self.animateHeight(to);
-
-			var $active = self.$slides.eq(to).addClass(self.options.activeClass);
-
-			//  Toggle our classes
-			self._move($active.siblings().removeClass(self.options.activeClass), {opacity: 0});
-			self._move($active, {opacity: 1}, false);
-		};
-
-		// Animate height of slider
+		//Animate height of slider
 		self.animateHeight = function(to) {
 			//  If we want to change the height of the slider
 			//  to match the current slide, you can set
@@ -595,8 +461,8 @@
 
 			return $el._move(obj, speed || self.options.speed, self.options.easing, callback);
 		};
+	    
 
-		//  Allow daisy-chaining of methods
 		return self.init(options);
 	};
 
@@ -604,13 +470,10 @@
 	//  They're both just helpful types of shorthand for
 	//  anything that might take too long to write out or
 	//  something that might be used more than once.
-	$.fn._active = function(className) {console.log(1,this);
+	$.fn._active = function(className) {
 		return this.addClass(className).siblings().removeClass(className);
 	};
-
-	//  The equivalent to PHP's ucfirst(). Take the first
-	//  character of a string and make it uppercase.
-	//  Simples.
+	//首字符大写
 	$._ucfirst = function(str) {
 		//  Take our variable, run a regex on the first letter
 		return (str + '').toLowerCase().replace(/^./, function(match) {
@@ -618,33 +481,45 @@
 			return match.toUpperCase();
 		});
 	};
-
+	//调用velocity动画插件 或者 jquery的animate方法
 	$.fn._move = function() {
 		this.stop(true, true);
+		//如果有加载velocity动画插件则调用velocity
 		return $.fn[$.fn.velocity ? 'velocity' : 'animate'].apply(this, arguments);
 	};
 
-	//  And set up our jQuery plugin
-	$.fn.unslider = function(opts) {
+	//封装jQuery插件
+	$.fn.slider = function(opts) {
 		return this.each(function() {
 			var $this = $(this);
 
-			//  Allow usage of .unslider('function_name')
-			//  as well as using .data('unslider') to access the
-			//  main Unslider object
-			if(typeof opts === 'string' && $this.data('unslider')) {
-				opts = opts.split(':');
-
-				var call = $this.data('unslider')[opts[0]];
-
-				//  Do we have arguments to pass to the string-function?
-				if($.isFunction(call)) {
-					return call.apply($this, opts[1] ? opts[1].split(',') : null);
-				}
-			}
-
-			return $this.data('unslider', new $.Unslider($this, opts));
+			return $this.data('slider', new $.Slider($this, opts));
 		});
 	};
 
 }));
+
+
+var slider = $('.banner').slider();
+
+
+//console.log(slider.data('slider').$slides.outerHeight());
+
+// function xx(){
+// 	var self = this;
+// 	self.start=function(){
+// 		console.log('start!');
+// 		return self;
+// 	}
+// 	self.end=function(){
+// 		console.log('end!');
+// 	}
+// }
+
+// var x = new xx();
+// x.start().end();
+
+</script>
+
+	</body>
+</html>

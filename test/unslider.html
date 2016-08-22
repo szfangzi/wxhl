@@ -10,25 +10,29 @@
 
 .unslider{overflow:auto;margin:0;padding:0}
 .unslider-wrap{position:relative}
-.unslider-wrap>li{float:left}
+.unslider-wrap.unslider-carousel>li{float:left}
 .unslider-vertical>ul{height:100%}
 .unslider-vertical li{float:none;width:100%}
 .unslider li,.unslider ol,.unslider ul{list-style:none;margin:0;padding:0;border:none}
 .unslider-arrow{position:absolute;left:20px;z-index:2;cursor:pointer}
 .unslider-arrow.next{left:auto;right:20px}
 
+.banner{max-height: 300px;}
 	</style>
+
 
 <div class="banner">
     <ul>
-        <li>This is a slide.</li>
-        <li>This is another slide.</li>
-        <li>This is a final slide.</li>
+        <li><img src="images/1.jpg"></li>
+        <li><img src="images/2.jpg"></li>
+        <li><img src="images/3.jpg"></li>
     </ul>
 </div>
+
 <script type="text/javascript" src="js/slider.js"></script>
 <script type="text/javascript">
-$('.banner').unslider();
+var test = $('.banner').unslider();
+console.log(test.unslider['start']);
 </script>
 
 

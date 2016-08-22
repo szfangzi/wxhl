@@ -2,8 +2,22 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/nav.css">
+		<link rel="stylesheet" type="text/css" href="../css/base.css">
+		<script type="text/javascript" src="../js/hack.js"></script>
 		<!--<script type="text/javascript" src="js/jquery.js"></script>-->
+		<style type="text/css">
+/*style by zns*/
+body { /*background: url(../images/bodyBg.jpg) center top no-repeat #000;*/background-color: #000; }
+/*nav*/
+.nav { width: 1000px; height: 96px; margin: 0 auto;}
+.logo { width: 220px; float: left; overflow: hidden; padding-left: 36px; /*padding-top: 8px;*/ }
+.navTxt { height: 77px; padding-top: 3px;padding-left:20px; width: 720px; margin: 0 auto; text-align: center; background: url(../images/navBg.png) left top no-repeat; /*margin-top: 26px;*/ margin-top:15px; position: relative; z-index: 2; font-family: Verdana; }
+.navTxt .hover { background: url(../images/navA_hover.png) left top no-repeat; position: absolute; left: 0; top: -2px; width: 98px; height: 78px; margin-left: -4px; }
+.navTxt a { font-size: 14px; /*text-shadow: 1px 1px 1px #000;*/ -webkit-transition: 0.4s all ease; -moz-transition: 0.4s all ease; -ms-transition: 0.4s all ease; -o-transition: 0.4s all ease; transition: 0.4s all ease; display: inline-block; text-align: center; line-height: 60px; /*width: 108px;*/ width:90px; height: 77px; position: relative; z-index: 31; color: #FFF; }
+.navTxt a:hover { color: #63B1FF;color:#000;/* text-shadow: 1px 1px 1px #000; */}
+.navTxt span { display: inline-block; width: 1px; height: 14px; overflow: hidden; background: #FFF; box-shadow: 1px 1px 0 #000; margin: 0 4px; vertical-align: top; margin-top: 24px; }
+
+		</style>
 	</head>
 	<body id="body">
 
@@ -27,7 +41,7 @@ var $navTxt = $('navTxt'),
 var timer = null;
 var startHover = 0;
 for(var i in $links){
-	if($links[i].className == 'on'){
+	if(hasClass($links[i], 'on')){
 		startHover = parseInt($links[i].getAttribute('hover'));
 		$hover.style.left = startHover + 'px';
 	}
@@ -85,14 +99,7 @@ function hoverMove(target){
 
 	},30);
 }
-// $links
-function getCss(el, css){
-	if(window.getComputedStyle){
-		return window.getComputedStyle(el, null)[css];
-	}else{
-		return el.currentStyle[css];
-	}
-}
+
 function $(id){
 	return document.getElementById(id);
 }

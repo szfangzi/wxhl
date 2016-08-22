@@ -1,0 +1,24 @@
+[ 2016-08-19T19:35:42+08:00 ] 127.0.0.1 /index.php/Admin/Posts/index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\works\wxhl\thinkphp\ThinkPHP\Lib\Core\Dispatcher.class.php 第 132 行.
+
+[ 2016-08-19T19:35:45+08:00 ] 127.0.0.1 /index.php/Admin/Posts/post
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\works\wxhl\thinkphp\ThinkPHP\Lib\Core\Dispatcher.class.php 第 132 行.
+
+[ 2016-08-19T19:35:46+08:00 ] 127.0.0.1 /index.php/Admin/Login/index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\works\wxhl\thinkphp\ThinkPHP\Lib\Core\Dispatcher.class.php 第 132 行.
+
+[ 2016-08-19T19:35:46+08:00 ] 127.0.0.1 /index.php/Admin/Login/verify
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\works\wxhl\thinkphp\ThinkPHP\Lib\Core\Dispatcher.class.php 第 132 行.
+
