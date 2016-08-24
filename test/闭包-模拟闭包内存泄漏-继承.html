@@ -177,10 +177,9 @@ function largeClosures() {
 
 function smallClosures() {
     stopInterval();
-        intervalId = setInterval(function () {
+    intervalId = setInterval(function () {
         closures.push(createSmallClosure());
     }, 20);
-
 }
 
 function evalClosures() {
@@ -208,13 +207,14 @@ function stopAndClear(){
 
 //evalClosures();
 
-//============================================构造函数的继承==================================================
+//============================================构造函数的继承(优先使用5和4,使用prototype节省内存)==================================================
 
 // 1、构造函数绑定
 //第一种方法也是最简单的方法，使用call或apply方法，将父对象的构造函数绑定在子对象上，即在子对象构造函数中加一行：
 
 // function Animal(){
 // 　　this.species = "动物";
+// 	this.test = new Array(1000000).join('x');//循环new Cat 循环new这个超长的XXX字符串，然后全部cat加到新数组里面, 很快就内存泄漏了
 // }
 // function Cat(name,color){
 // 　　Animal.apply(this, arguments);
@@ -265,6 +265,7 @@ function stopAndClear(){
 
 // function Animal(){}
 // Animal.prototype.species = '动物';
+// Animal.prototype.test = new Array(1000000).join('x');//prototype继承只new一次数组，节省内存
 // function Cat(name,color){
 // 　　this.name = name;
 // 　　this.color = color;
@@ -294,8 +295,11 @@ function stopAndClear(){
 // 5、 拷贝继承
 // 上面是采用prototype对象，实现继承。我们也可以换一种思路，纯粹采用"拷贝"方法实现继承。简单说，如果把父对象的所有属性和方法，拷贝进子对象，不也能够实现继承吗？这样我们就有了第五种方法。
 // 首先，还是把Animal的所有不变属性，都放到它的prototype对象上。
-// function Animal(){}
+// function Animal(){
+// 	this.ss=111;
+// }
 // Animal.prototype.species = "动物";
+// Animal.prototype.test = new Array(1000000).join('x');//prototype继承只new一次数组，节省内存
 // function Cat(name,color){
 // 　　this.name = name;
 // 　　this.color = color;
@@ -315,7 +319,7 @@ function stopAndClear(){
 
 
 
-//============================================非构造函数的继承(对象继承)==================================================
+//============================================非构造函数的继承(对象继承, 跟prototype一样省内存)==================================================
 
 var Chinese = {
 　　nation:'中国',
@@ -354,30 +358,36 @@ var Chinese = {
 
 // 4、深拷贝
 // 所谓"深拷贝"，就是能够实现真正意义上的数组和对象的拷贝。它的实现并不难，只要递归调用"浅拷贝"就行了。
-function deepCopy(p, c) {
-　　var c = c || {};
-　　for (var i in p) {
-　　　　if (typeof p[i] === 'object') {
-　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
-　　　　　　deepCopy(p[i], c[i]);
-　　　　} else {
-　　　　　　　c[i] = p[i];
-　　　　}
-　　}
-　　return c;
-}
-Chinese.birthPlaces = {a:1,b:2};
-var Doctor = deepCopy(Chinese);
-
+// function deepCopy(p, c) {
+// 　　var c = c || {};
+// 　　for (var i in p) {
+// 　　　　if (typeof p[i] === 'object') {
+// 　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
+// 　　　　　　deepCopy(p[i], c[i]);
+// 　　　　} else {
+// 　　　　　　　c[i] = p[i];
+// 　　　　}
+// 　　}
+// 　　return c;
+// }
+// Chinese.birthPlaces = {a:1,b:2};
+// var Doctor = deepCopy(Chinese);
 
 //目前，jQuery库使用的就是这种继承方法。
 
-
-
-//console.log(cat1.species); // 动物
 // setInterval(function(){
-// 	closures.push(extendCopy(Chinese));
+	
+// 	closures.push(new Cat("大毛","黄色"));
 // },20);
+
+// function createEvalClosure() {
+//     var smallStr = 'x';
+//     var largeStr = new Array(1000000).join('x');
+//     return function eC() {
+        
+//         return smallStr;
+//     };
+// }
 
 
 </script>

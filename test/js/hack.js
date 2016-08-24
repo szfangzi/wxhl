@@ -106,3 +106,27 @@ function hasClass(el, className){
 	return (" " + el.className + " ").replace(classReg, " ").indexOf( className ) >= 0;
 }
 /* ie未验证 end*/
+
+
+//构造函数继承
+Object.prototype.extend = function(parent){
+    var c = this.prototype;
+    var p = parent.prototype;
+    for (var k in p) {
+        c[k] = p[k];
+    };
+    c.uber = p;
+}
+//对象继承
+Object.prototype.deepCopy = function(p) {
+　　var c = this || {};
+　　for (var i in p) {
+　　　　if (typeof p[i] === 'object') {
+　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
+　　　　　　deepCopy(p[i], c[i]);
+　　　　} else {
+　　　　　　　c[i] = p[i];
+　　　　}
+　　}
+　　return c;
+}

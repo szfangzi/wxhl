@@ -4,7 +4,7 @@ class PostsAction extends CommonAction{
 	
 	public function index(){
 
-		$sql = 'select * from hd_posts as p LEFT JOIN hd_user as u ON u.id = p.post_author';
+		$sql = 'select p.id,p.post_title,u.username,p.post_date from hd_posts as p LEFT JOIN hd_user as u ON u.id = p.post_author';
 		$posts = M('posts')->query($sql);
 		$this->assign('posts', $posts)->display();
 	}
@@ -71,7 +71,7 @@ class PostsAction extends CommonAction{
 	public function post100(){
 		$post = M('posts');
 		for ($i=0; $i < 100; $i++) { 
-			$now = time()+mt_rand(1,1000000);
+			$now = time()-mt_rand(1,1000000);
 			$data = array(
 				'post_author'=>session('uid'),
 				'post_title'=>'asdasda'.mt_rand(1,1000000),
