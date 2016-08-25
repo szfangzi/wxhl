@@ -116,7 +116,6 @@ header .top .tel{
 header .top ul{}
 header .top ul li{
     display: inline-block;
-    background-color: red;
 }
 header .top ul li + li{
     border-left: 1px solid #999;
@@ -134,12 +133,23 @@ header .main .brand{
     float: left;
     padding: 1rem 1.5rem;
 }
-header .main ul{}
+header .main ul{
+    line-height: 60px;
+}
 header .main ul li{
     display: inline-block;
+    font-size: 1.5em;
 }
-header .main ul li a{}
-
+header .main ul li a{
+    display: inline-block;
+    padding: 0 3rem;
+}
+header .main ul li a:hover,
+header .main ul li a:active{
+    color: #ffb300;
+    background-color: #f8f6f1;
+    text-decoration: none;
+}
 
 /************
  * 网站主要内容
@@ -149,11 +159,151 @@ header .main ul li a{}
     width: 100%;
 }
 
-/************
- * 网站尾部
- ************/
+/*交易信息*/
+.transaction{
+    width: 100%;
+    background-color: #7c7365;
+}
+.trans-content{
+    max-width: 90%;
+    margin: 0 auto;
+    font-size: 1.5rem;
+}
+.trans-data{
+    float: left;
+    padding: 1rem;
+    text-align: left;
+}
+.trans-data span{
+    display: inline-block;
+    line-height: 3rem;
+    color: #fff;
+}
+.trans-data span.trans-money{
+    font-size: 2.2rem;
+    color: #ff9900;
+    letter-spacing: 3px;
+    margin:0 1rem;
+    padding: 0 1rem;
+    border-radius: 3px;
+    background-color: rgba(255,255,255,0.9);/* rgba背景透明, 内容不透明, opacity会导致全部透明 */
+    box-shadow: 1px 2px 1px #333 inset;
+}
+.trans-report{
+    text-align: right;
+}
+.trans-report a{
+    display: inline-block;
+    padding: 1rem;
+    line-height: 3rem;
+    color: #fff;
+}
+
+/*交易信息*/
+.ad{
+    display: none;
+}
+
+
+/*平台特点*/
+
+.feature{
+    width: 90%;
+    margin: 2rem auto;
+    font-size: 0;
+}
+.feature .item{
+    display: inline-block;
+    width: calc(33.3333333333333% - 3rem);
+    padding: 1rem;
+    font-size: 1.4rem;
+    background-color: #fff;
+    box-shadow: 0 0 4px #ccc;
+}
+.feature .item + .item{
+    margin-left: 1.5rem;
+}
+.feature .item h3{
+    display: inline-block;
+    width: 40%;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    font-size: 3.3rem;
+    text-align: center;
+    color: #ff9900;
+}
+.feature .item p{
+    display: inline-block;
+    width: 55%;
+    margin: 0;
+    padding: 0;
+    color: #999999;
+}
+
+
+/*最新公告*/
+
+.notice{
+    width: 90%;
+    margin: 2rem auto;
+    font-size: 1.4rem;
+    line-height: 36px;
+    background-color: #ffffff;
+    box-shadow: 0 0 4px #ccc;
+}
+.notice a{
+    float: left;
+    display: inline-block;
+    width: 70%;
+    margin-left: 2rem;
+    text-decoration: none;
+}
+.notice a:first-child{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.notice a:first-child:before{
+    content: '最新公告：\00a0\00a0';/*\00a0是空格, 不支持nbsp*/
+    color: #aaaaaa;
+}
+.notice a.more{
+    width: auto;
+    float: right;
+    margin-right: 15px;
+}
+.notice a span{
+    color: #999999;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
 
 footer{
     width: 100%;
+    padding: 3rem 0 5rem;
+    background-color: #ededed;
 }
+/*footer ul li{}*/
+/*footer ul li .icon{*/
+    /*display: inline-block;*/
+    /*text-indent: -999rem;*/
+    /*margin-right: 1.5rem;*/
+    /*/!*background: url(../img/cert1.png) no-repeat 0 0;*!/*/
+/*}*/
+/*footer ul li .icon icon-zfywxk{*/
+    /*width: 38px;*/
+    /*height: 27px;*/
+    /*/!*background-position: -369px -45px;*!/*/
+/*}*/
+/*footer ul li .icon icon-pcirk{}*/
+/*footer ul li .icon icon-visayz{}*/
+/*footer ul li .icon icon-vsjmfw{}*/
+/*footer ul li .icon icon-wlgs{}*/
+/*footer ul li .icon icon-rzcx{}*/
+/*footer ul li .icon icon-bjgs{}*/
 
+footer p{
+    text-align: center;
+    color:#999;
+}
