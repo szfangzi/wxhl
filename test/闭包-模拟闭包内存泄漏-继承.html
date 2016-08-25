@@ -221,6 +221,11 @@ function stopAndClear(){
 // 　　this.name = name;
 // 　　this.color = color;
 // }
+// setInterval(function(){ 测试内存泄漏
+    
+//     closures.push(new Cat("大毛","黄色"));
+// },20);
+
 // var cat1 = new Cat("大毛","黄色");
 // console.log(cat1.species); // 动物
 
@@ -375,19 +380,9 @@ var Chinese = {
 
 //目前，jQuery库使用的就是这种继承方法。
 
-// setInterval(function(){
-	
-// 	closures.push(new Cat("大毛","黄色"));
-// },20);
 
-// function createEvalClosure() {
-//     var smallStr = 'x';
-//     var largeStr = new Array(1000000).join('x');
-//     return function eC() {
-        
-//         return smallStr;
-//     };
-// }
+
+
 
 
 </script>

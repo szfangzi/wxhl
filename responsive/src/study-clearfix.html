@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh"> <!--谷歌翻译会自动切换成lang指定的语言-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge"> <!--ie=edge 强制使用IE最新版本渲染(IE11已被弃用)-->
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css">
+    <style>
+        .container{
+            /*float: left;清楚浮动的第三种方法*/
+            /*overflow: auto;清楚浮动的第二种方法*/
+            background-color: #ccc;
+            margin: 10px 0;
+        }
+        h1,p{
+            float: left;
+        }
+        p{
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        /*清楚浮动的第四种方法(最主流的方法)*/
+        .clearfix:before,
+        .clearfix:after{
+            content:" ";
+            display: table;
+        }
+        .clearfix:after{
+            clear: both;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container clearfix">
+    <h1>asdasda</h1>
+    <p>asdasd asd sa das d asdasdas das d asd as dasdasdasdasd asd sa das d asdasdas das d asd as dasdasdasdasd asd sa
+        das d asdasdas das d asd as dasdasdasdasd asd sa das d asdasdas das d asd as dasdasdasdasd asd sa das d asdasdas
+        das d asd as dasdasdasdasd asd sa das d asdasdas das d asd as dasdasd</p>
+    <p>asdasd asd sa das d asdasdas das d asd as dasdasdasdasd asd sa das d asdasdas das d asd as dasdasdasdasd asd sa
+        das d asdasdas das d asd as dasdasdasdasd asd sa das d asdasdas das d asd as dasdasdasdasd asd sa das d asdasdas
+        das d asd as dasdasdasdasd asd sa das d asdasdas das d asd as dasdasd</p>
+    <!--<div style="clear:both"></div> 清楚浮动的第一种方法-->
+</div>
+
+
+
+</body>
+</html>

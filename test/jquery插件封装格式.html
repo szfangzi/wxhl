@@ -492,7 +492,7 @@
 	$.fn.slider = function(opts) {
 		return this.each(function() {
 			var $this = $(this);
-
+			//一个页面多个slider，这样可以循环绑定self
 			return $this.data('slider', new $.Slider($this, opts));
 		});
 	};
@@ -503,7 +503,7 @@
 var slider = $('.banner').slider();
 
 
-//console.log(slider.data('slider').$slides.outerHeight());
+console.log(slider.$slides.outerHeight());
 
 // function xx(){
 // 	var self = this;

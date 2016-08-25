@@ -1,0 +1,159 @@
+/*em 相对的长度单位*/
+/*1. em相对父元素的font-size*/
+/*2. em具有继承的特点*/
+/*3. 如果所有父元素都没有设置font-size, em默认值为16px*/
+/*缺点：容易混乱*/
+
+/*rem相对参照物为根元素html, 参照物不变, 比较好计算*/
+/*当没有font-size, 浏览器会有一个默认的rem*/
+/*1rem=16px, 这点与em是一致*/
+
+/************
+ * 基本默认值
+ ************/
+
+html{
+    font-size: 62.5%;
+    color:#222;/*为了文字看起来不会那么费眼，一般不用纯黑，color最深为#222*/
+}
+::selection{
+    background-color: #b3dfc;
+    text-shadow:none;
+}
+ul{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+
+/************
+ * 工具样式
+ ************/
+
+.center-block{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+.pull-right{
+    float: right!important;
+}
+.pull-left{
+    float: left!important;
+}
+.text-right{
+    text-align: right!important;
+}
+.text-left{
+    text-align: left!important;
+}
+.text-center{
+    text-align: center!important;
+}
+.hide{
+    display: none!important;
+}
+.show{
+    display: block!important;
+}
+.invisible{
+    visibility: hidden;
+}
+/*隐藏图片文本*/
+.text-hide{
+    font:0/0 a;
+    color:transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border:0;
+}
+.clearfix:before,
+.clearfix:after{
+    content:" ";
+    display: table;
+}
+.clearfix:after{
+    clear: both;
+}
+
+/************
+ * 自定义页面样式
+ ************/
+
+body{
+    font-size: 1.2rem;
+    line-height: 1.5;
+    background-color: #f7f7f7;
+}
+a{
+    color: #666;
+    text-decoration: none;
+}
+a:hover, a:active{
+    color: #0ae;
+    text-decoration: underline;
+}
+
+/************
+ * 网站头部
+ ************/
+
+header{
+    width: 100%;
+}
+header .top{
+    line-height: 36px;/*中文chrome字体大小有个最低下限12px，line-height的3rem会变成36px，所以line-height建议使用px*/
+    padding: 0 1.5rem;
+    color: #fff;
+    background: #555;
+    border-bottom: 1px solid #ecc000;
+}
+header .top .tel{
+    float: left;
+}
+header .top ul{}
+header .top ul li{
+    display: inline-block;
+    background-color: red;
+}
+header .top ul li + li{
+    border-left: 1px solid #999;
+    margin-left: -6px;
+}
+header .top ul li a{
+    display: inline-block;
+    padding: 0 1.5rem;
+    color: #fff;
+}
+header .main{
+    padding: 0;
+}
+header .main .brand{
+    float: left;
+    padding: 1rem 1.5rem;
+}
+header .main ul{}
+header .main ul li{
+    display: inline-block;
+}
+header .main ul li a{}
+
+
+/************
+ * 网站主要内容
+ ************/
+
+.container{
+    width: 100%;
+}
+
+/************
+ * 网站尾部
+ ************/
+
+footer{
+    width: 100%;
+}
+
