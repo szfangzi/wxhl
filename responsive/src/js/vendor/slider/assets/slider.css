@@ -1,0 +1,12 @@
+.slider{margin:0;padding:0;position: relative}
+.slider-wrap{position:relative;}
+.slider-wrap>li{float:left}
+.slider-vertical>ul{height:100%}
+.slider-vertical li{float:none;width:100%;}
+.slider li,.slider ol,.slider ul{list-style:none;margin:0;padding:0;border:none}
+.slider-arrow{position:absolute;left:20px;z-index:2;cursor:pointer}
+.slider-arrow.next{left:auto;right:20px}
+.slider-nav{position: absolute;left: 0;right: 0;bottom: 20px;}
+.slider-nav ol{text-align: center;}
+.slider-nav ol li{display: inline-block;width: 10px;height: 10px;margin: 0 4px;text-indent: -999em;border: 2px solid #fff;border-radius: 6px;cursor: pointer;opacity: .4;-webkit-transition: background .5s, opacity .5s;-moz-transition: background .5s, opacity .5s;transition: background .5s, opacity .5s;}
+.slider-nav ol li.slider-active{background: #fff;opacity: 1;}
