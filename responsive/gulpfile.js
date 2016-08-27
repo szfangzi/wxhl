@@ -8,8 +8,10 @@ var uglify = require('gulp-uglify');//压缩js
 var csso = require('gulp-csso');//压缩css
 var watch = require('gulp-watch');//代码修改监听
 var batch = require('gulp-batch');
-var postcss = require('gulp-postcss');
-var autoprefixer = require('autoprefixer');
+var postcss = require('gulp-postcss');//css处理
+var autoprefixer = require('autoprefixer');//css处理里面的自动加前缀
+var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
 
 //命令行执行gulp 默认执行default任务
 gulp.task('default', function () {
@@ -46,5 +48,16 @@ gulp.task('watch', function () {
     watch('src/**/*.*', batch(function (events, done) {
         gulp.start('build', done);
     }));
+});
+
+//concat sourcemaps测试  合并文件后sourcemaps可以在chrome调试的时候把合并的文件分解开来断点
+gulp.task('concat', function () {
+
+    gulp.src(['src/**/jquery.min.js', 'src/js/main.js', 'src/**/*.js'])
+        .pipe(sourcemaps.init())
+        .pipe(concat('js/all.js'))
+        .pipe(uglify())
+        .pipe(sourcemaps.write('js'))
+        .pipe(gulp.dest('dist'));
 });
 
