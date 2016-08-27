@@ -3,5 +3,4 @@ $(function () {
         arrows:false,
         autoplay:true
     });
-//alert($(window).width());
 });
