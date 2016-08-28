@@ -4,22 +4,114 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge"> <!--ie=edge 强制使用IE最新版本渲染(IE11已被弃用)-->
     <title>慕课网2015学习情况</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
     <!-- build:css css/combined.css -->
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/H5ComponentBase.css">
     <!-- endbuild -->
+    <style>
+        .iphone{
+            width: 100%;
+            height: 540px;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -270px 0 0 -170px;
+        }
+    </style>
 </head>
 <body>
 <!--[if lte IE 8]>
 您的浏览器太老，请升级浏览器！！！！
 <![endif]-->
+<!--<div id="h5">-->
+    <!--<div class="page section" id="page-1">-->
+        <!--<img src="img/1.jpg" alt=""/>-->
+        <!--<div class="component">1</div>-->
+    <!--</div>-->
+    <!--<div class="page section" id="page-2">-->
+        <!--<div class="component">彩</div>-->
+    <!--</div>-->
+    <!--<div class="page section" id="page-3">-->
+        <!--<div class="component">玲</div>-->
+    <!--</div>-->
+    <!--<div class="page section" id="page-4">-->
+        <!--<div class="component">最</div>-->
+    <!--</div>-->
+    <!--<div class="page section" id="page-5">-->
+        <!--<div class="component">漂</div>-->
+    <!--</div>-->
+    <!--<div class="page section" id="page-6">-->
+        <!--<div class="component">亮</div>-->
+    <!--</div>-->
+    <!--<div class="page section" id="page-7">-->
+        <!--<div class="component">7</div>-->
+    <!--</div>-->
+    <!--<div class="page section" id="page-8">-->
+        <!--<div class="component">8</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="iphone">
 
-
+</div>
 <!-- build:js js/combined.js -->
 <script src="js/vendor/jquery.min.js"></script>
 <script src="js/vendor/jquery-ui.min.js"></script>
 <script src="js/vendor/jquery.fullPage.js"></script>
+<script src="js/H5ComponentBase.js"></script>
 <!-- endbuild -->
+<script>
+
+    var text1 = new H5ComponentBase({
+        type:'base',
+        css:{
+            backgroundImage:"url('img/p1_people.png')",
+            bottom:0,
+            opacity:0,
+        },
+        animateIn:{
+            opacity:1,
+            bottom:80
+        },
+        animateOut:{
+            opacity:0,
+            bottom:0
+        },
+        width:"90%",
+        height:152,
+        center:false
+    });
+    $('.iphone').append( text1.$container );
+    var leave = true;
+    $('body').click(function (){
+        leave = !leave;
+        $('.h5-component').trigger( leave ? 'onLeave' : 'onLoad' )
+    });
+    $('body').click();
+//    $('#h5').fullpage({
+//        'sectionsColor':['#ff9900','blue','green','pink', 'red', 'purple'],
+//        onLeave:function(index, nextIndex, direction){
+//            $(this).find('.component').trigger('onLeave');
+//        },
+//        afterLoad:function(anchorLink ,index){
+//            $(this).find('.component').trigger('afterLoad');
+//        }
+//    });
+//
+//    $('.page').on('onLeave', function (e) {
+//        console.log(1,$(this).attr('id'));
+//    }).on('afterLoad', function (e) {
+//        console.log(2,$(this).attr('id'));
+//    });
+//
+//    $('.component').on('onLeave', function (e) {
+//        $(this).fadeOut();
+//    }).on('afterLoad', function (e) {
+//        $(this).fadeIn();
+//    });
+
+
+</script>
 </body>
 </html>
