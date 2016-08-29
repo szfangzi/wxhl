@@ -1,6 +1,6 @@
 /* 基本图文组件对象 */
 
-function H5ComponentBase(options){
+var H5ComponentBase = function(options){
     var self = this;
     self._ = 'h5-component';
     self.defaults = {

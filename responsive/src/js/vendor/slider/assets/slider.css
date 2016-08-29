@@ -1,5 +1,4 @@
-.slider{margin:0;padding:0;position: relative;
-    transform: rotate(45deg);}
+.slider{margin:0;padding:0;position: relative;}
 .slider-wrap{position:relative;}
 .slider-wrap>li{float:left}
 .slider-vertical>ul{height:100%}

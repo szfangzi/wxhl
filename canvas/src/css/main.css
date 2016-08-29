@@ -95,3 +95,110 @@ li{
     /*color: #0ae;*/
     /*text-decoration: underline;*/
 /*}*/
+
+.page{
+    position: relative;
+    background: url('../img/page-bg.png') 0 0;
+}
+.page .title{
+    background: url('../img/page-caption_bg.png') 0 0 no-repeat;
+    margin-top: 0;
+    width: 52%;
+    padding: 0.8rem 0 3rem 26%;
+    background-size: 100%;
+    opacity: 0;
+}
+.page.page-load .title{
+    margin-top: 20%;
+    opacity: 1;
+    animation: title-in 1s 1;
+}
+@keyframes title-in{
+    from {margin-top:0px;opacity: 0}
+    to {margin-top:20%;opacity: 1}
+}
+.page .title span{
+    font-size: 3rem;
+    color: #fff;
+}
+
+/*首页样式*/
+.page.index{
+    background-image: url('../img/face-bg.png');
+}
+.page.index .logo{
+    width: 70%;
+    margin-top:0;
+    opacity: 0;
+}
+.page.index.page-load .logo{
+    margin-top:24%;
+    opacity: 1;
+    animation: index-logo-in 1s 1;
+}
+.page.index .logo img{
+    width: 100%;
+}
+@keyframes index-logo-in{
+    from {margin-top:0px;opacity: 0}
+    to {margin-top:24%;opacity: 1}
+}
+.page.index .slogan{
+    width: 60%;
+    margin-top:0;
+    opacity: 0;
+}
+.page.index.page-load .slogan{
+    margin-top:10%;
+    opacity: 1;
+    animation: index-slogan-in 1s 1;
+}
+.page.index .slogan img{
+    width: 100%;
+}
+@keyframes index-slogan-in{
+    from {margin-top:0px;opacity: 0}
+    to {margin-top:10%;opacity: 1}
+}
+.page.index .lbox{
+    position: absolute;
+    bottom: -78%;
+    left: 58%;
+    width: 58%;
+    opacity: 0;
+}
+.page.index.page-load .lbox{
+    bottom: -1%;
+    left: 0;
+    opacity: 1;
+    animation: index-lbox-in 1s 1;
+}
+.page.index .lbox img{
+    width: 100%;
+}
+@keyframes index-lbox-in{
+    from {left:-58%;bottom:-78%;opacity: 0}
+    to {left:0px;bottom:-1%;opacity: 1}
+}
+.page.index .rbox{
+    position: absolute;
+    bottom: -70%;
+    right: -42%;
+    width: 42%;
+    opacity: 0;
+}
+.page.index.page-load .rbox{
+    bottom: -1%;
+    right: 0;
+    opacity: 1;
+    animation: index-rbox-in 1s 1;
+}
+.page.index .rbox img{
+    width: 100%;
+}
+@keyframes index-rbox-in{
+    from {right:-42%;bottom:-70%;opacity: 0}
+    to {right:0px;bottom:-1%;opacity: 1}
+}
+
+/*核心理念*/
