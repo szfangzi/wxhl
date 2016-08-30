@@ -15,17 +15,38 @@
 </head>
 <body id="body">
 
-<input type="tel" name="" id="">
-<input type="url" name="" id="">
-<input type="color" name="" id="">
 
-<video controls>
-    <source src="media/movie.mp4" />
-    <track label="English subtitles" kind="subtitles" srclang="en" src="webvtt/test.vtt" default>
-</video>
 
 <script>
-
+    var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
+            w = 640,
+            h = 640;
+    canvas.width = ctx.width = w;
+    canvas.height = ctx.height = h;
+    //水平网格线
+    var step = 10;
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    //ctx.strokeStyle = 'red';
+    window.ctx = ctx;
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'red';
+    ctx.moveTo(0, 0);
+    ctx.lineTo(w, 0);
+    ctx.stroke();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'red';
+    ctx.moveTo(0, 20);
+    ctx.lineTo(w, 20);
+    ctx.stroke();
+    ctx.moveTo(0, 40);
+    ctx.lineTo(w, 40);
+    ctx.stroke();
+    ctx.moveTo(0, 60);
+    ctx.lineTo(w, 60);
+    ctx.stroke();
+    $('body').append(canvas);
 </script>
 </body>
 </html>
