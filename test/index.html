@@ -19,12 +19,13 @@
 <input type="url" name="" id="">
 <input type="color" name="" id="">
 
+<video controls>
+    <source src="media/movie.mp4" />
+    <track label="English subtitles" kind="subtitles" srclang="en" src="webvtt/test.vtt" default>
+</video>
 
 <script>
-var lis = document.getElementById('ul').children;
-    for(var k = 0;k<lis.length;k++){
-        console.log(k, lis[k].dataset.value);
-    }
+
 </script>
 </body>
 </html>

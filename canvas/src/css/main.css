@@ -95,7 +95,9 @@ li{
     /*color: #0ae;*/
     /*text-decoration: underline;*/
 /*}*/
-
+#wrapper{
+    max-width: 640px;
+}
 .page{
     position: relative;
     background: url('../img/page-bg.png') 0 0;
@@ -103,8 +105,8 @@ li{
 .page .title{
     background: url('../img/page-caption_bg.png') 0 0 no-repeat;
     margin-top: 0;
-    width: 52%;
-    padding: 0.8rem 0 3rem 26%;
+    width: 78%;
+    height: 11%;
     background-size: 100%;
     opacity: 0;
 }
@@ -119,6 +121,9 @@ li{
 }
 .page .title span{
     font-size: 3rem;
+    margin-left: 17%;
+    display: inline-block;
+    line-height: 10rem;
     color: #fff;
 }
 
