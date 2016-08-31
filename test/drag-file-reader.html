@@ -16,76 +16,76 @@
 <body id="body">
 
 <!--file read image-->
-<!--<input type="file" name="files[]" id="sel" multiple >-->
+<input type="file" name="files[]" id="sel" multiple >
 
-<!--<script>-->
-<!--var img = document.querySelector('#img');-->
-<!--var sel = document.querySelector('#sel');-->
-<!--var frList = [];-->
-<!--sel.addEventListener('change', function (e) {-->
-   <!--if(this.files.length){-->
-       <!--var openfiles = this.files;-->
-       <!--for (var i = 0; i < openfiles.length; i++) {-->
-           <!--var file = openfiles[i];-->
-           <!--frList.push(new FileReader());-->
-           <!--frList[i].addEventListener('load', function (e) {-->
-               <!--$('<img src="'+this.result+'" class="img" width="100" height="100" alt="">').appendTo('body');-->
-           <!--});-->
-           <!--if(/image\/\w+/.test(file.type)){-->
-               <!--frList[i].readAsDataURL(file);-->
-           <!--}else{-->
-               <!--console.log(openfiles,frList[i]);-->
-           <!--}-->
-       <!--}-->
-       <!-- -->
-   <!--}else{-->
+<script>
+var img = document.querySelector('#img');
+var sel = document.querySelector('#sel');
+var frList = [];
+sel.addEventListener('change', function (e) {
+   if(this.files.length){
+       var openfiles = this.files;
+       for (var i = 0; i < openfiles.length; i++) {
+           var file = openfiles[i];
+           frList.push(new FileReader());
+           frList[i].addEventListener('load', function (e) {
+               $('<img src="'+this.result+'" class="img" width="100" height="100" alt="">').appendTo('body');
+           });
+           if(/image\/\w+/.test(file.type)){
+               frList[i].readAsDataURL(file);
+           }else{
+               console.log(openfiles,frList[i]);
+           }
+       }
 
-   <!--}-->
-<!--});
+   }else{
 
-</script>-->
+   }
+});
+
+</script>
 <div id="box" style="width: 400px;height: 400px;background-color: #036663"></div>
 <img src="images/second.png" alt="" id="dragImg">
 <script>
-    var dragImg = document.querySelector('#dragImg');
-    var box = document.querySelector('#box');
+//    var dragImg = document.querySelector('#dragImg');
+//    var box = document.querySelector('#box');
 
 //    页面内拖拽
-    dragImg.addEventListener('dragstart', function (e) {
-        e.dataTransfer.setData('Text', this.id);
-        console.log('start!');
-    });
-    dragImg.addEventListener('dragend', function (e) {
-        console.log('end!');
-    });
-
-    box.addEventListener('drop', function (e) {
+//    dragImg.addEventListener('dragstart', function (e) {
+//        e.dataTransfer.setData('Text', this.id);
+//        console.log('start!');
+//    });
+//    dragImg.addEventListener('dragend', function (e) {
+//        console.log('end!');
+//    });
+//
+//    box.addEventListener('drop', function (e) {
         //    页面内拖拽
 //        var imgId = e.dataTransfer.getData('Text');
 //        console.log('drop!', e.dataTransfer.getData('Text'));
 //        this.appendChild(document.querySelector('#dragImg'));
 
 //        页面外把图片拖拽到页面内
-        e.preventDefault();
-        var fileList = e.dataTransfer.files;
-        var frList = [];
-        for (var i = 0; i < fileList.length; i++) {
-            var file = fileList[i];
-            frList.push(new FileReader());
-            frList[i].addEventListener('load', function (e) {
-                $('<img src="'+this.result+'" class="img" width="100" height="100" alt="">').appendTo(box);
-            });
-            if(/image\/\w+/.test(file.type)){
-                frList[i].readAsDataURL(file);
-            }
-
-        }
-
-    });
-    box.addEventListener('dragover', function (e) {
-        e.preventDefault();
-       // console.log('over!', e.dataTransfer.getData('Text'));
-    });
+//        e.preventDefault();
+//        var fileList = e.dataTransfer.files;
+//        var frList = [];
+//        for (var i = 0; i < fileList.length; i++) {
+//            var file = fileList[i];
+//            frList.push(new FileReader());
+//            frList[i].addEventListener('load', function (e) {
+//                $('<img src="'+this.result+'" class="img" width="100" height="100" alt="">').appendTo(box);
+//            });
+//            if(/image\/\w+/.test(file.type)){
+//                frList[i].readAsDataURL(file);
+//            }
+//
+//        }
+//
+//    });
+//    box.addEventListener('dragover', function (e) {
+//        e.preventDefault();
+//       // console.log('over!', e.dataTransfer.getData('Text'));
+//    });
 
 
 
