@@ -47,23 +47,23 @@ sel.addEventListener('change', function (e) {
 <div id="box" style="width: 400px;height: 400px;background-color: #036663"></div>
 <img src="images/second.png" alt="" id="dragImg">
 <script>
-//    var dragImg = document.querySelector('#dragImg');
-//    var box = document.querySelector('#box');
+    var dragImg = document.querySelector('#dragImg');
+    var box = document.querySelector('#box');
 
 //    页面内拖拽
-//    dragImg.addEventListener('dragstart', function (e) {
-//        e.dataTransfer.setData('Text', this.id);
-//        console.log('start!');
-//    });
-//    dragImg.addEventListener('dragend', function (e) {
-//        console.log('end!');
-//    });
-//
-//    box.addEventListener('drop', function (e) {
-        //    页面内拖拽
-//        var imgId = e.dataTransfer.getData('Text');
-//        console.log('drop!', e.dataTransfer.getData('Text'));
-//        this.appendChild(document.querySelector('#dragImg'));
+    dragImg.addEventListener('dragstart', function (e) {
+        e.dataTransfer.setData('Text', this.id);
+        console.log('start!');
+    });
+    dragImg.addEventListener('dragend', function (e) {
+        console.log('end!');
+    });
+
+    box.addEventListener('drop', function (e) {
+           // 页面内拖拽
+        var imgId = e.dataTransfer.getData('Text');
+        console.log('drop!', e.dataTransfer.getData('Text'));
+        this.appendChild(document.querySelector('#dragImg'));
 
 //        页面外把图片拖拽到页面内
 //        e.preventDefault();
@@ -80,12 +80,12 @@ sel.addEventListener('change', function (e) {
 //            }
 //
 //        }
-//
-//    });
-//    box.addEventListener('dragover', function (e) {
-//        e.preventDefault();
-//       // console.log('over!', e.dataTransfer.getData('Text'));
-//    });
+
+    });
+    box.addEventListener('dragover', function (e) {
+        e.preventDefault();
+       // console.log('over!', e.dataTransfer.getData('Text'));
+    });
 
 
 
