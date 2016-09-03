@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge"> <!--ie=edge 强制使用IE最新版本渲染(IE11已被弃用)-->
+    <title>Angular</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <!-- build:css css/combined.css -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endbuild -->
+</head>
+<body>
+<!--[if lte IE 8]>
+您的浏览器太老，请升级浏览器！！！！
+<![endif]-->
+
+<div ng-controller="EventController1">
+  Root scope
+  <tt>MyEvent</tt>count:{{count}}
+  <ul>
+    <li ng-repeat="i in [1]" ng-controller="EventController">
+      <button ng-click="$emit('MyEvent')">
+        $emit('MyEvent')
+      </button>
+      <button ng-click="fn()">
+        $broadcast('MyEvent')
+      </button>
+      <br>
+      Middle scope
+      <tt>MyEvent</tt>count:{{count}}
+      <ul>
+        <li ng-repeat="item in [1,2]" ng-controller="EventController">
+          Leaf scope
+          <tt>MyEvent</tt>count:{{count}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<!-- build:js js/combined.js -->
+<script type="text/javascript" src="js/lib/angular/angular.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<!-- endbuild -->
+</body>
+</html>
