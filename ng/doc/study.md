@@ -1,3 +1,5 @@
+对于AngularJs，一切都是从Module开始的
+
 # MVC
 AngularJs的MVC是借助通过$scope实现的
 

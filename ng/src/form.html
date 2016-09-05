@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge"> <!--ie=edge 强制使用IE最新版本渲染(IE11已被弃用)-->
+    <title>Angular</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <!-- build:css css/combined.css -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endbuild -->
+</head>
+<body>
+<!--[if lte IE 8]>
+您的浏览器太老，请升级浏览器！！！！
+<![endif]-->
+<style>
+  .text-red{
+    color:red;
+  }
+  .text-green{
+    color:green;
+  }
+  .warning{
+    background-color: yellow;
+  }
+  .error{
+    background-color: red;
+  }
+</style>
+<form ng-controller="UserInfoCtrl">
+  <input type="text" ng-model="color" >
+  <span ng-class="{'text-red':isRed,'text-green':isGreen}" class="text-{{color}}">sdasdasd</span>
+  <button ng-click="setGreen()">green</button>
+  <button ng-click="setRed()">red</button>
+  <div ng-class="{error:isError,warning:isWarning}">{{msg}}</div>
+  <button ng-click="showError()">error</button>
+  <button ng-click="showWarning()">warning</button>
+</form>
+
+<!-- build:js js/combined.js -->
+<script type="text/javascript" src="js/lib/angular/angular.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<!-- endbuild -->
+</body>
+</html>
