@@ -1,7 +1,22 @@
 <?php
 
 class ListAction extends Action{
+	public function api(){
+		import('@.Util.Page');
+        $count = M('posts')->count();
+        $page = new Page($count,10);
 
+        $limit = $page->firstRow.','.$page->listRows;
+        $posts = M('posts')->order('post_modified DESC')->limit($limit)->select();
+        $this->posts = $posts;
+
+        if($posts){
+        	$info = array('posts'=>$posts, 'page'=>$page);
+            $this->ajaxReturn($info);
+        }else{
+        	halt('no posts!');
+        }
+	}
 	public function index(){
 
 		import('@.Util.Page');

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>responsive table</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.event.move.js"></script>
+    <script type="text/javascript" src="js/jquery.event.swipe.js"></script>-->
+    <style type="text/css">
+        .c0 {
+            width: 600px;
+            height: 500px;
+            display: flex;
+            background-color:#036663;
+            /*模式1 水平模式 垂直模式*/
+            /*flex-direction: column;*/
+            /*模式2 水平模式 垂直模式*/
+            flex-flow:row;
+            /*水平模式-水平居中 垂直模式-垂直居中*/
+            justify-content: center;
+            /*垂直模式-水平居中 水平模式-垂直居中*/
+            align-items:center;
+
+            /*拖动改变大小*/
+            overflow:auto;
+            resize: both;
+        }
+        .c0 .item{
+            width: 100px;
+            height: 100px;
+
+        }
+        .c1{
+            background-color: yellow;
+            /*-webkit-box-flex: 1;*/
+            order: 2;
+            /*flex:2;*/
+        }
+        .c2{
+            background-color: red;
+            /*-webkit-box-flex: 1;*/
+            order: 3;
+            /*flex:1;*/
+        }
+        .c3{
+            background-color: blue;
+            /*-webkit-box-flex: 4.5;*/
+            order: 1;
+            /*flex:1;*/
+        }
+        .c4{
+            margin: 0 auto;
+            width: 400px;
+            -webkit-box-align: center;
+            display: -webkit-box;
+        }
+    </style>
+</head>
+<body id="body">
+
+<div class="c0">
+    <!--<div class="c4">-->
+        <div class="item c1">
+            1
+        </div>
+
+        <div class="item c2">
+            2
+        </div>
+
+        <div class="item c3">3</div>
+    <!--</div>-->
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

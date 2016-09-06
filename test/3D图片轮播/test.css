@@ -1,0 +1,18 @@
+.wrap {
+  position: relative;
+  float: left;
+  margin-left: 200px;
+  margin-top: 200px;
+  /*perspective: 100px;*/
+  transform-style: preserve-3d;
+  transition: all 10s linear;
+}
+.wrap:hover {
+  transform: rotate3d(0, 90, 0, 360deg);
+}
+.wrap img {
+  width: 100px;
+  height: 100px;
+  opacity: 0.3;
+  position: absolute;
+}
