@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>responsive table</title>
-    <link rel="stylesheet" href="css/test.css">
     <script type="text/javascript" src="js/jquery.js"></script>
     <!--<script type="text/javascript" src="js/jquery.event.move.js"></script>
     <script type="text/javascript" src="js/jquery.event.swipe.js"></script>-->
     <style type="text/css">
-
 
     </style>
 </head>
@@ -27,7 +25,27 @@
 
 <script>
 //    $('#img1Wrapper').addClass('broken');
-
+var Singleton = (function() {
+    var instantiated;
+    function init() {
+        return {
+            publicMethod: function() {
+                alert('hello word');
+            },
+            publicPrototype: "test"
+        };
+    }
+    return {
+        getinstance: function() {
+            if (!instantiated) {
+                instantiated = new init();
+            }
+            return instantiated;
+        }
+    }
+})();
+var test = Singleton.getinstance();
+//Singleton.getinstance().publicMethod();
 
 </script>
 </body>

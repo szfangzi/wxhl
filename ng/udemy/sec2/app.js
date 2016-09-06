@@ -13,14 +13,32 @@ angularApp.config(function ($routeProvider) {
     controller:'secondController'
   });
 });
+
+angularApp.service('serviceName', function () {
+  var self = this;
+  self.name = 'john';
+  self.nameLength = function () {
+    return self.name.length;
+  }
+
+});
+
 // CONTROLLERS
-angularApp.controller('mainController', ['$scope', '$timeout', '$http', '$location', '$route', '$routeParams', function ($scope, $timeout, $http, $location, $route, $routeParams) {
-
-  $scope.name = $routeParams.num;
+angularApp.controller('mainController', ['$scope', function ($scope) {
+  $scope.arr = [{a:1},{a:1},{a:1}];
+  $scope.obj={name:'ken111',age:5};
+  $scope.name = 'ken';
 }]);
 
-angularApp.controller('secondController', ['$scope', '$timeout', '$http', '$routeParams', function ($scope, $timeout, $http, $routeParams) {
-  console.log($routeParams.num);
-  $scope.name = $routeParams.num || 1;
+angularApp.controller('secondController', ['$scope', function ($scope) {
+  $scope.name = 'ann';
 }]);
 
+angularApp.directive('searchResult', function () {
+  return{
+    restrict:'CM',
+    templateUrl:'../../src/tmpl/tmpl.html',
+    replace:true,
+    scope:{obj:'='}
+  }
+});
