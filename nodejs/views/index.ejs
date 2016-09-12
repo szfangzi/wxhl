@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title><%=title%></title>
+  <link rel="stylesheet" href="/public/stylesheets/style.css">
+</head>
+<body>
+
+</body>
+<script src="/public/javascripts/jquery.js"></script>
+<script>
+  $.ajax({
+    type:'post',
+    url:'http://localhost:3000/test',
+    dateType:'json',
+    contentType:'application/json',
+    data:JSON.stringify({a:1,b:{c:3}}),
+    success: function (data) {
+      console.log(1,data);
+    }
+  });
+</script>
+</html>
