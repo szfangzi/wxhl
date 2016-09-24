@@ -3,8 +3,8 @@
  ************/
 
 html{
-    font-size: 62.5%;
-    color:#222;/*为了文字看起来不会那么费眼，一般不用纯黑，color最深为#222*/
+    font-size: 100%;
+    color:#333;/*为了文字看起来不会那么费眼，一般不用纯黑，color最深为#222*/
 }
 ::selection{
     background-color: #b3dfcc;
@@ -73,7 +73,7 @@ li{
  ************/
 
 body{
-    font-size: 1.2rem;
+    font-size: .75rem;
     line-height: 1.5;
     background-color: #f7f7f7;
 }
@@ -86,10 +86,11 @@ a:hover, a:active{
     text-decoration: underline;
 }
 
-
-@media only screen and (max-width: 50em) {}
-@media only screen and (min-width: 30.0625em) and (max-width: 50em) {}
 @media only screen and (max-width: 30em) {}
+@media only screen and (min-width: 30.0625em) and (max-width: 50em) {}
+@media only screen and (max-width: 50em) {}
+
+
 
 /************
  * 打印样式

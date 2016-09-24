@@ -7,41 +7,60 @@
     <title>responsive table</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/ejs.min.js"></script>
+    <script type="text/javascript" src="js/handlebars.runtime.min.js"></script>
+    <script type="text/javascript" src="js/director.js"></script>
     <!--<script type="text/javascript" src="js/jquery.event.move.js"></script>
     <script type="text/javascript" src="js/jquery.event.swipe.js"></script>-->
-    <style type="text/css">
-        img{width: 25%;}
-    </style>
+    <script>
+        $('document').ready(function () {
+//
+// create some functions to be executed when
+// the correct route is issued by the user.
+//
+            var showAuthorInfo = function () {
+                console.log("showAuthorInfo");
+            };
+            var listBooks = function () {
+                console.log("listBooks");
+            };
+
+            var allroutes = function () {
+                var route = window.location.hash.slice(2);
+                console.log(1,route);
+                var sections = $('section');
+                var section;
+
+                section = sections.filter('[data-route=' + route + ']');
+
+                if (section.length) {
+                    sections.hide(250);
+                    section.show(250);
+                }
+            };
+
+
+            var router = new Router().init();
+
+            router.on('/author', showAuthorInfo);
+            router.on('/books', listBooks);
+//
+// a global configuration setting.
+//
+            router.configure({
+                on: allroutes
+            });
+
+        });
+    </script>
 </head>
-<body id="body">
-<div class="container-fluid">
 
-</div>
-<script>
-//    作用域链-词法环境决定x的值
-// 1.
-    function b() {
-        console.log(x);
-    }
-    function a() {
-        var x = 2;
-        b();
-
-    }
-    var x = 1;
-    a();
-//2.
-
-function a() {
-    var x = 2;
-    b();
-    function b() {
-        console.log(x);
-    }
-}
-var x = 1;
-a();
-</script>
-
+<body>
+<section data-route="author">Author Name</section>
+<section data-route="books">Book1, Book2, Book3</section>
+<ul>
+    <li><a href="#/author">#/author</a></li>
+    <li><a href="#/books">#/books</a></li>
+</ul>
 </body>
 </html>

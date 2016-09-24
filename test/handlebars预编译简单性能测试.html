@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>responsive table</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/ejs.min.js"></script>
+    <script type="text/javascript" src="js/handlebars.js"></script>
+    <script type="text/javascript" src="js/director.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.event.move.js"></script>
+    <script type="text/javascript" src="js/jquery.event.swipe.js"></script>-->
+    <style type="text/css">
+
+    </style>
+</head>
+<body id="body">
+<button>ok</button>
+<div class="container">
+
+</div>
+
+<script id="entry-template" type="text/x-handlebars-template">
+    <div class="entry">
+        <h1>{{title}}</h1>
+        <div class="body">
+            {{body}}
+        </div>
+        <ul class="list">
+            {{#each list}}
+            <li>{{name}},{{age}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+<script id="ejs" type="text/template">
+    <div class="entry">
+        <h1><%=title%></h1>
+        <div class="body">
+            <%=body%>
+        </div>
+        <ul class="list">
+            <% list.forEach(function(item,index){ %>
+            <li><%=item.name%>,<%=item.age%></li>
+            <% }); %>
+        </ul>
+    </div>
+</script>
+<script>
+    var list = [];
+    for (var i = 0; i < 1; i++) {
+        list.push({name:'ann', age:27});
+    }
+    var data = {title: "My New Post", body: "This is my first post!",
+        list:list};
+    var tmpl = Handlebars.compile($("#entry-template").html());
+//handlebars预编译简单性能测试，比ejs快一倍
+
+
+
+
+
+    $('button').click(function (e) {
+
+//
+        for (var i = 0; i < 100; i++) {
+//            var tmpl = $('#ejs').html();
+//            var html = ejs.render(tmpl, data);
+            var html = tmpl(data);
+            $('.container').html(html);
+        }
+
+    });
+</script>
+
+</body>
+</html>

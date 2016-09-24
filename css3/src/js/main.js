@@ -10,10 +10,10 @@ $(function () {
         afterLoad: function (anchorLink, index) {
             $(this).trigger('afterLoad');
         },
-        afterRender: function(a,b,c) {
+        afterRender: function (a, b, c) {
             $(".fp-tableCell").addClass('clearfix');
 
-            $.fn.fullpage.moveTo( 4 );
+            $.fn.fullpage.moveTo(4);
             $(this).find('.page.4').addClass(prefix + 'load');
         }
     });
@@ -41,18 +41,17 @@ $(function () {
         ctx.lineWidth = 10;
         ctx.strokeStyle = '#aaa';
         for (var i = 0; i < step; i++) {
-            var y = (h/step)*i;
+            var y = h / step * i;
             ctx.moveTo(0, y);
             ctx.lineTo(w, y);
             ctx.stroke();
         }
         for (var i = 0; i < step; i++) {
-            var x = (w/step)*i;
+            var x = w / step * i;
             ctx.moveTo(x, 0);
             ctx.lineTo(x, h);
             ctx.stroke();
         }
-
 
         //canvas.id = 'canvas';
         $polyLine.appendChild(canvas);
