@@ -46,6 +46,7 @@ sel.addEventListener('change', function (e) {
 </script>
 <div id="box" style="width: 400px;height: 400px;background-color: #036663"></div>
 <img src="images/second.png" alt="" id="dragImg">
+<div style="width: 100px;height: 100px;background-color: #0074d9;">sdsad</div>
 <script>
     var dragImg = document.querySelector('#dragImg');
     var box = document.querySelector('#box');
@@ -61,7 +62,7 @@ sel.addEventListener('change', function (e) {
 
     box.addEventListener('drop', function (e) {
            // 页面内拖拽
-        var imgId = e.dataTransfer.getData('Text');
+        var imgId = e.dataTransfer.setData('Text',1);
         console.log('drop!', e.dataTransfer.getData('Text'));
         this.appendChild(document.querySelector('#dragImg'));
 
